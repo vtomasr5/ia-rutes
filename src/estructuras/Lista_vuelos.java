@@ -125,18 +125,19 @@ public class Lista_vuelos {
     public void imprimir() {
         Vuelo tmp = new Vuelo();
         tmp = Cap;
-        System.out.print("Lista:  ");
+        System.out.print("--- LLISTA ---\n");
         while (tmp != null) {
-            System.out.print("Compañia: \n");
+            System.out.print("     Companyia: ");
             System.out.print(recuperar_compañia(tmp) + "\n");
-            System.out.print("Código: \n");
+            System.out.print("     Códi: ");
             System.out.print(recuperar_cod(tmp) + "\n");
-            System.out.print("Precio: \n");
+            System.out.print("     Preu: ");
             System.out.print(recuperar_precio(tmp) + "\n");
-            System.out.print("Hora de salida: \n");
+            System.out.print("     Hora sortida: ");
             System.out.print(recuperar_hora_salida(tmp) + "\n");
-            System.out.print("Hora de llegada: \n");
+            System.out.print("     Hora arribada: ");
             System.out.print(recuperar_hora_llegada(tmp) + "\n");
+            System.out.print("-----------------------------\n");
             tmp = tmp.get_sig();
         }
         System.out.println("");

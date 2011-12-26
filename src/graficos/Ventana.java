@@ -117,7 +117,7 @@ public class Ventana extends javax.swing.JFrame {
 //    private void muestra_vuelos() {
 //        for (int i = 0; i < ciudades_creadas; i++) {
 //            for (int j = 0; j < ciudades_creadas; j++) {
-//                matriz[i][j].imprimir();
+//                listaVuelos[i][j].imprimir();
 //            }
 //        }
 //    }
@@ -139,7 +139,7 @@ public class Ventana extends javax.swing.JFrame {
         }
     }
 
-    int posicion_ciudad2(String nombre_ciudad) {
+    private int posicion_ciudad2(String nombre_ciudad) {
         boolean encontrada = false;
         int posicion = 0;
         while (encontrada == false && posicion <= ciudades_creadas) {
@@ -156,7 +156,7 @@ public class Ventana extends javax.swing.JFrame {
         }
     }
 
-    int posicion_ciudad(String nombre_ciudad) {
+    private int posicion_ciudad(String nombre_ciudad) {
         boolean encontrada = false;
         int posicion = 0;
         if (nombre_ciudad.equals("1")) {
@@ -411,7 +411,7 @@ public class Ventana extends javax.swing.JFrame {
             int numCiu = 0;
             while (vuelo_elegido.get_vuelos()[i] != null) {
                 print("Codi: " + vuelo_elegido.get_vuelos()[i].get_codigo() + "\n"
-                        + "Hora sortida: " + vuelo_elegido.get_vuelos()[i].get_horasal() + " \nHora arribada: "
+                        + "Hora sortida: " + vuelo_elegido.get_vuelos()[i].get_horasal() + "\nHora arribada: "
                         + vuelo_elegido.get_vuelos()[i].get_horalleg() + "\n");
                 ResultadosCoste.setValueAt(vuelo_elegido.get_vuelos()[i].get_horasal(), i - 1, 2);
                 ResultadosCoste.setValueAt(vuelo_elegido.get_vuelos()[i].get_horalleg(), i - 1, 3);
@@ -2928,7 +2928,7 @@ public class Ventana extends javax.swing.JFrame {
         DvueloComboBox.removeAllItems();
         JComboBox combo = (JComboBox) evt.getSource();
         String nombre = (String) combo.getSelectedItem();
-        print(nombre);
+//        print(nombre);
         origen = nombre;
         for (int i = 0; i < ciudades_creadas; i++) {
             if (!ciudades[i].getnombre().equals(nombre)) {
@@ -2998,7 +2998,7 @@ public class Ventana extends javax.swing.JFrame {
                             String año = formato3.format(fechaActual);
                             int posicion_x = posicion_ciudad("1"); //origen
                             int posicion_y = posicion_ciudad("2"); //destino
-                            print("Posició origen: " + posicion_x + " Posició desti: " + posicion_y);
+//                            print("Posició origen: " + posicion_x + " Posició desti: " + posicion_y);
                             dia = Integer.toString(Integer.parseInt(dia) + 1);
                             dia2 = dia;
                             String hora_lleg = HoraLlegada.getText();
@@ -3013,7 +3013,7 @@ public class Ventana extends javax.swing.JFrame {
                                 int posoy = ciudades[posicion_x].getcy();
                                 int posdx = ciudades[posicion_y].getcx();
                                 int posdy = ciudades[posicion_y].getcy();
-                                print("O: " + ciudades[posicion_x].getnombre() + " D: " + ciudades[posicion_y].getnombre());
+//                                print("O: " + ciudades[posicion_x].getnombre() + " D: " + ciudades[posicion_y].getnombre());
                                 for (int i = 0; i < 6; i++) {
                                     listaVuelos[posicion_x][posicion_y].insertarnuevo(codigo, nombre_compañia.getText(), Float.parseFloat(PrecioVuelo.getText()), fecha_salida, fecha_llegada, posox, posoy, posdx, posdy);
                                     dia = Integer.toString(Integer.valueOf(dia) + 1);
@@ -3140,11 +3140,32 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void MenuItemVerVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemVerVuelosActionPerformed
-//        for (int i = 0; i < ciudades_creadas; i++) {
-//            for (int j = 0; j < ciudades_creadas; j++) {
-//                Vuelo v = listaVuelos[i][j].obtener_vuelo(i);   
-//            }
-//        }
+        Vuelo v = new Vuelo();
+        int codi;
+        String comp;
+        Date Hllegada, Hsalida;
+        float preu;
+        
+        for (int i = 0; i < ciudades_creadas; i++) {
+            for (int j = 0; j < ciudades_creadas; j++) {
+                codi = listaVuelos[i][j].recuperar_cod(v);
+                comp = listaVuelos[i][j].recuperar_compañia(v);
+                Hllegada = listaVuelos[i][j].recuperar_hora_llegada(v);
+                Hsalida = listaVuelos[i][j].recuperar_hora_salida(v);
+                preu = listaVuelos[i][j].recuperar_precio(v);
+                
+                for (int k = 0; k < 1; k++) {
+                    TablaVuelos.setValueAt(codi, k, 0);
+                    TablaVuelos.setValueAt(comp, k, 1); 
+                    TablaVuelos.setValueAt(Hsalida.toString(), k, 2); 
+                    TablaVuelos.setValueAt(Hllegada.toString(), k, 3); 
+//                    TablaVuelos.setValueAt(origen, k, 4); 
+//                    TablaVuelos.setValueAt(desti, k, 5); 
+                    TablaVuelos.setValueAt(preu, k, 6); 
+                    
+                }
+            }
+        }
         
         DVeureVols = new JDialog(this);
         DVeureVols.setTitle("Vols creats");
