@@ -18,7 +18,11 @@
                           <Component id="todos_con_todos" max="32767" attributes="1"/>
                           <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="CreaGenAle" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btGenAleCancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="CreaGenAle" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="label_ciugen" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -54,7 +58,10 @@
                       <Component id="todos_con_todos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="CreaGenAle" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="CreaGenAle" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btGenAleCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -101,9 +108,18 @@
         <Component class="javax.swing.JButton" name="CreaGenAle">
           <Properties>
             <Property name="text" type="java.lang.String" value="Generar"/>
+            <Property name="selected" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreaGenAleActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btGenAleCancelar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancel&#xb7;lar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btGenAleCancelarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -116,8 +132,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Paneldatoscoste" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="1" pref="776" max="32767" attributes="0"/>
+                      <Component id="Paneldatoscoste" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" alignment="0" pref="776" max="32767" attributes="0"/>
+                      <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -130,7 +147,9 @@
                   <Component id="jScrollPane2" min="-2" pref="181" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="Paneldatoscoste" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -150,7 +169,7 @@
                     <Column editable="false" title="Origen" type="java.lang.String"/>
                     <Column editable="false" title="Dest&#xed;" type="java.lang.String"/>
                     <Column editable="false" title="Hora sortida" type="java.lang.String"/>
-                    <Column editable="true" title="Hora arribada" type="java.lang.String"/>
+                    <Column editable="false" title="Hora arribada" type="java.lang.String"/>
                     <Column editable="false" title="Preu" type="java.lang.Integer"/>
                   </Table>
                 </Property>
@@ -202,7 +221,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labelTiempoeje" min="-2" max="-2" attributes="0"/>
@@ -321,6 +340,14 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sortir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.ButtonGroup" name="tipo_busqueda">
@@ -330,7 +357,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label_coordenadas" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -349,12 +376,12 @@
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="coordenaday" pref="122" max="32767" attributes="1"/>
                       </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btCrearCiutatCancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="CreaCiudad" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="206" max="32767" attributes="0"/>
-                  <Component id="CreaCiudad" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -377,7 +404,10 @@
                       <Component id="label_y" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="CreaCiudad" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="CreaCiudad" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btCrearCiutatCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -391,7 +421,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="label_coordenadas">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Coordenades"/>
+            <Property name="text" type="java.lang.String" value="Coordenades:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="label_nombre_ciudad">
@@ -422,9 +452,18 @@
         <Component class="javax.swing.JButton" name="CreaCiudad">
           <Properties>
             <Property name="text" type="java.lang.String" value="Crear ciutat"/>
+            <Property name="selected" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CreaCiudadActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btCrearCiutatCancelar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancel&#xb7;lar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrearCiutatCancelarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -469,7 +508,11 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="BotonCreavuelo" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btCreaVueloCancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="BotonCreavuelo" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -505,7 +548,10 @@
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="BotonCreavuelo" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="BotonCreavuelo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btCreaVueloCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -589,6 +635,7 @@
         <Component class="javax.swing.JButton" name="BotonCreavuelo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Crear vol"/>
+            <Property name="selected" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonCreavueloActionPerformed"/>
@@ -599,6 +646,14 @@
             <Property name="text" type="java.lang.String" value="Hora sortida:"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="btCreaVueloCancelar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancel&#xb7;lar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCreaVueloCancelarActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.ButtonGroup" name="Criterio">
@@ -608,10 +663,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="Paneldatostiempo" max="32767" attributes="0"/>
-              </Group>
+              <Component id="Paneldatostiempo" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -627,13 +679,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Component id="btPanelSalidaTiempoSortir" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="labelNodogen1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelNodoexp1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNodoexp1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="campoNodovisTi" max="32767" attributes="1"/>
                                   <Component id="campoNodoexTi" alignment="1" pref="88" max="32767" attributes="1"/>
@@ -647,13 +701,13 @@
                                   <Component id="labelTiempototalTi" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelpretoti" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="campoPretoti" pref="125" max="32767" attributes="1"/>
-                                  <Component id="campoTiempotoTi" alignment="1" pref="125" max="32767" attributes="1"/>
+                                  <Component id="campoPretoti" pref="136" max="32767" attributes="1"/>
+                                  <Component id="campoTiempotoTi" alignment="1" pref="136" max="32767" attributes="1"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane3" alignment="0" pref="689" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="0" pref="694" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -661,10 +715,10 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane3" pref="200" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="campoPretoti" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
@@ -686,7 +740,9 @@
                               <Component id="labelTiempototalTi" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btPanelSalidaTiempoSortir" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -820,6 +876,14 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btPanelSalidaTiempoSortir">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sortir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPanelSalidaTiempoSortirActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -857,6 +921,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextField4" pref="296" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="btAboutSortir" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -889,6 +954,8 @@
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btAboutSortir" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -950,6 +1017,15 @@
             <Property name="text" type="java.lang.String" value="Intelig&#xe8;ncia Artificial. UIB 2011/12"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="btAboutSortir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sortir"/>
+            <Property name="selected" type="boolean" value="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAboutSortirActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="PanelVuelos">
@@ -957,9 +1033,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane4" pref="765" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="btPanellVolsSortir" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane4" alignment="1" pref="765" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -968,8 +1047,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane4" pref="261" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane4" min="-2" pref="242" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btPanellVolsSortir" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -999,6 +1080,15 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="btPanellVolsSortir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sortir"/>
+            <Property name="selected" type="boolean" value="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPanellVolsSortirActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
@@ -1416,9 +1506,8 @@
     </Container>
     <Container class="javax.swing.JScrollPane" name="ScrollMundo">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="d6" green="a1" red="3a" type="rgb"/>
-        </Property>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
         <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder/>

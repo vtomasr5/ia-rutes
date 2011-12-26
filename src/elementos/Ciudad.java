@@ -40,6 +40,8 @@ public class Ciudad {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.red);
         g2d.fillOval(coord_x, coord_y, 7, 7);
+        g2d.setColor(Color.black);
+        g2d.drawString(this.nombre, coord_x - (this.nombre.length() / 2), coord_y - 2);
     }
 
     public void set_nombre(String nombre_ciudad) {

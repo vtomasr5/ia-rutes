@@ -58,7 +58,7 @@ public class Ventana extends javax.swing.JFrame {
     private JDialog DCreaVuelo;
     private JDialog DCreaCiudad;
     private JDialog DAbout;
-    private JDialog DSalidaCoste;
+    private JDialog DSalidaCosteTiempo;
     private JDialog DGenAle;
     private JDialog DVeureVols;
     
@@ -96,6 +96,10 @@ public class Ventana extends javax.swing.JFrame {
             mostrarMissatgeError(null, e);
         }
     }    
+    
+    private void print(String str) {
+        TextoSalida.append(str);
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -237,31 +241,31 @@ public class Ventana extends javax.swing.JFrame {
 //            i = i + 1;
 //            pos = posicion_ciudad(ciudad_predecesora[pos]);
 //        }
-//        TextoSalida.append("La lista de las ciudades es: ");
+//        print("La lista de las ciudades es: ");
 //        for (i = 99; i >= 0; i--) {
 //            if (!lista_ciudades[i].equals("")) {
-//                TextoSalida.append(lista_ciudades[i] + "\n");
+//                print(lista_ciudades[i] + "\n");
 //            }
 //        }
-//        TextoSalida.append("La lista de los vuelos es: " + "\n");
+//        print("La lista de los vuelos es: " + "\n");
 //        for (i = 99; i >= 0; i--) {
 //            if (lista_codigos_vuelo[i] != null) {
-//                TextoSalida.append("Vuelo: ");
-//                TextoSalida.append(lista_codigos_vuelo[i].get_codigo() + " con hora de salida: "
+//                print("Vuelo: ");
+//                print(lista_codigos_vuelo[i].get_codigo() + " con hora de salida: "
 //                        + lista_codigos_vuelo[i].get_horasal() + " y hora de llegada: " + lista_codigos_vuelo[i].get_horalleg() + "\n");
 //            }
 //        }
-//        TextoSalida.append("\n");
+//        print("\n");
 //    }
 
 //    public void mostrar_ciudades() {
 ////       for (int i=0; i<ciudades_creadas; i++){
-////            TextoSalida.append(ciudades [i].getnombre() + "\n");
-////            TextoSalida.append(ciudades [i].getcx() + "\n");
-////            TextoSalida.append(ciudades [i].getcy() + "\n");
+////            print(ciudades [i].getnombre() + "\n");
+////            print(ciudades [i].getcx() + "\n");
+////            print(ciudades [i].getcy() + "\n");
 ////        }
 //        for (int i = 0; i < ciudades_creadas; i++) {
-//            TextoSalida.append(ciudades[i].getnombre() + "\n"
+//            print(ciudades[i].getnombre() + "\n"
 //                    + ciudades[i].getcx() + "\n"
 //                    + ciudades[i].getcy() + "\n");
 //        }
@@ -355,12 +359,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("\nCERCA EN PROFUNDITAT\n");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
-        TextoSalida.append("Nodes visitats: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodes expandits: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA EN PROFUNDITAT\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -368,14 +372,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("\nNodes visitats: " + campo.toString() + " , ");
+        print("\nNodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodes expandits: " + campo.toString() + " , ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Temps d'execució: " + campod.toString() + "\n");
+        print("Temps d'execució: " + campod.toString() + "\n");
         if (tipus == 0) {
             elegir_mejor_alternativa_coste(vuelos_candidatos);
         } else {
@@ -387,26 +391,26 @@ public class Ventana extends javax.swing.JFrame {
     private void elegir_mejor_alternativa_coste(Elemento vuelos_candidatos) {
         Elemento vuelo_elegido = vuelos_candidatos;
         if (vuelo_elegido != null) {
-            TextoSalida.append(vuelo_elegido.get_precio() + "\n");
-            TextoSalida.append("Preu total: " + vuelo_elegido.get_precio() + "\n");
-            TextoSalida.append("MINIM COST" + "\n");
-            TextoSalida.append("La ruta a seguir es: " + "\n");
+            print(vuelo_elegido.get_precio() + "\n");
+            print("Preu total: " + vuelo_elegido.get_precio() + "\n");
+            print("MINIM COST" + "\n");
+            print("La ruta a seguir es: " + "\n");
             int i = 0;
             while (!vuelo_elegido.get_ciudades()[i].equals("")) {
-                TextoSalida.append(vuelo_elegido.get_ciudades()[i] + "\n");
-                TextoSalida.append(vuelo_elegido.get_ciudades()[i]);
+                print(vuelo_elegido.get_ciudades()[i] + "\n");
+                print(vuelo_elegido.get_ciudades()[i]);
                 if (!vuelo_elegido.get_ciudades()[i + 1].equals("")) {
-                    TextoSalida.append(" + ");
+                    print(" + ");
                     ResultadosCoste.setValueAt(vuelo_elegido.get_ciudades()[i], i, 0);
                     ResultadosCoste.setValueAt(vuelo_elegido.get_ciudades()[i + 1], i, 1);
                 }
                 i++;
             }
             i = 1;
-            TextoSalida.append("La llista de vols a escollir es: " + "\n");
+            print("La llista de vols a escollir es: " + "\n");
             int numCiu = 0;
             while (vuelo_elegido.get_vuelos()[i] != null) {
-                TextoSalida.append("Codi: " + vuelo_elegido.get_vuelos()[i].get_codigo() + "\n"
+                print("Codi: " + vuelo_elegido.get_vuelos()[i].get_codigo() + "\n"
                         + "Hora sortida: " + vuelo_elegido.get_vuelos()[i].get_horasal() + " \nHora arribada: "
                         + vuelo_elegido.get_vuelos()[i].get_horalleg() + "\n");
                 ResultadosCoste.setValueAt(vuelo_elegido.get_vuelos()[i].get_horasal(), i - 1, 2);
@@ -423,37 +427,37 @@ public class Ventana extends javax.swing.JFrame {
             vuelos = vuelo_elegido.get_vuelos();
             repaint();
         }
-        TextoSalida.append("\n");
+        print("\n");
     }
 
     private void elegir_mejor_alternativa_tiempo_nueva(Elemento vuelos_candidatos) throws ParseException {
         Elemento vuelo_elegido = vuelos_candidatos;
         if (vuelo_elegido != null) {
-            TextoSalida.append(vuelo_elegido.get_precio() + "\n");
-            TextoSalida.append("MINIM TEMPS" + "\n");
-            TextoSalida.append("La duració del viatje es: ");
+            print(vuelo_elegido.get_precio() + "\n");
+            print("MINIM TEMPS" + "\n");
+            print("La duració del viatje es: ");
             Long tie = (vuelo_elegido.get_horalleg().getTime() - vuelo_elegido.get_primer_vuelo().getTime()) / 3600000;
             campoTiempotoTi.setText(tie.toString());
-            TextoSalida.append("Preu total: " + vuelo_elegido.get_precio() + "\n");
-            TextoSalida.append("Temps total: " + tie.toString() + "\n");
-            TextoSalida.append((vuelo_elegido.get_horalleg().getTime() - vuelo_elegido.get_primer_vuelo().getTime()) / 3600000 + " hores." + "\n");
-            TextoSalida.append("La ruta a seguir es: " + "\n");
+            print("Preu total: " + vuelo_elegido.get_precio() + "\n");
+            print("Temps total: " + tie.toString() + "\n");
+            print((vuelo_elegido.get_horalleg().getTime() - vuelo_elegido.get_primer_vuelo().getTime()) / 3600000 + " hores." + "\n");
+            print("La ruta a seguir es: " + "\n");
             int i = 0;
             while (!vuelo_elegido.get_ciudades()[i].equals("")) {
-                TextoSalida.append(vuelo_elegido.get_ciudades()[i] + "\n");
-                TextoSalida.append(vuelo_elegido.get_ciudades()[i]);
+                print(vuelo_elegido.get_ciudades()[i] + "\n");
+                print(vuelo_elegido.get_ciudades()[i]);
                 if (!vuelo_elegido.get_ciudades()[i + 1].equals("")) {
                     ResultadosTiempo.setValueAt(vuelo_elegido.get_ciudades()[i], i, 0);
                     ResultadosTiempo.setValueAt(vuelo_elegido.get_ciudades()[i + 1], i, 1);
-                    TextoSalida.append(" + ");
+                    print(" + ");
                 }
                 i++;
             }
             i = 1;
-            TextoSalida.append("La llista de vols a escollir es: " + "\n");
+            print("La llista de vols a escollir es: " + "\n");
             int numCiu = 0;
             while (vuelo_elegido.get_vuelos()[i] != null) {
-                TextoSalida.append("Codi: " + vuelo_elegido.get_vuelos()[i].get_codigo() + "\n"
+                print("Codi: " + vuelo_elegido.get_vuelos()[i].get_codigo() + "\n"
                         + "Hora sortida: " + vuelo_elegido.get_vuelos()[i].get_horasal() + "\nHora arribada: "
                         + vuelo_elegido.get_vuelos()[i].get_horalleg() + "\n");
                 ResultadosTiempo.setValueAt(vuelo_elegido.get_vuelos()[i].get_horasal(), i - 1, 2);
@@ -472,7 +476,7 @@ public class Ventana extends javax.swing.JFrame {
             vuelos = vuelo_elegido.get_vuelos();
             repaint();
         }
-        TextoSalida.append("\n");
+        print("\n");
     }
 
     private void busqueda_prof_poda_coste(String ciudad_origen, String ciudad_destino) throws ParseException {
@@ -549,12 +553,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("\nCERCA EN PROFUNDITAT AMB PODA" + "\n");
-        TextoSalida.append("iteracions"+String.valueOf(iteraciones)+"\n");
-        TextoSalida.append("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
-        TextoSalida.append("Nodes visitats: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodes expandits: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA EN PROFUNDITAT AMB PODA" + "\n");
+        print("iteracions"+String.valueOf(iteraciones)+"\n");
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -562,14 +566,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("\nNodes visitats: " + campo.toString() + " , ");
+        print("\nNodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodes expandits: " + campo.toString() + " , ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Temps execució: " + campod.toString() + "\n");
+        print("Temps execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_coste(vuelos_candidatos);
     }
 
@@ -660,12 +664,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("\nCERCA EN PROFUNDITAT AMB PODA" + "\n");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
-        TextoSalida.append("Nodes visitats: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodes expandits: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA EN PROFUNDITAT AMB PODA" + "\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -673,14 +677,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("\nNodes visitats: " + campo.toString() + " , ");
+        print("\nNodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodes expandits: " + campo.toString() + " , ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Temps d'execució: " + campod.toString() + "\n");
+        print("Temps d'execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_tiempo_nueva(vuelos_candidatos);
     }
 
@@ -757,12 +761,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("\nCERCA DE COST UNIFORME\n");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
-        TextoSalida.append("Nodes visitats: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodes expandits: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA DE COST UNIFORME\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -770,14 +774,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("\nNodes visitats: " + campo.toString() + " , ");
+        print("\nNodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodes expandits: " + campo.toString() + " , ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Temps d'execució: " + campod.toString() + "\n");
+        print("Temps d'execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_coste(vuelos_candidatos);
     }
 
@@ -857,12 +861,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("\nCERCA DE COST UNIFORME" + "\n");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
-        TextoSalida.append("Nodes visitats: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodes expandits: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA DE COST UNIFORME" + "\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -870,14 +874,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("\nNodes visitats: " + campo.toString() + " , ");
+        print("\nNodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodes expandits: " + campo.toString() + " , ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Temps execució: " + campod.toString() + "\n");
+        print("Temps execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_tiempo_nueva(vuelos_candidatos);
     }
 
@@ -979,13 +983,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("BÚSQUEDA DEL VECINO MÁS PRÓXIMO" + "\n");
-        TextoSalida.append("Búsqueda del vecino más próximo:          ");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Tiempo invertido: " + (tiempo3 / Math.pow(10, 9)) + " segundos." + "\n");
-        TextoSalida.append("Nodos visitados: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodos expandidos: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínimo coste para ir de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA DEL VEÍ MÉS PRÒXIM\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -993,14 +996,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("Nodos visitados: " + campo.toString() + "  *  ");
+        print("\nNodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodos expandidos: " + campo.toString() + "  *  ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Tiempo ejecución: " + campod.toString() + "  *  ");
+        print("Temps execució: " + campod.toString() + "\n");
         if (tipus == 0) {
             elegir_mejor_alternativa_coste(vuelos_candidatos);
         } else {
@@ -1085,13 +1088,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("BÚSQUEDA DE A ESTRELLA 1" + "\n");
-        TextoSalida.append("Búsqueda A*. 1ª Heurística:                     ");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Tiempo invertido: " + (tiempo3 / Math.pow(10, 9)) + " segundos." + "\n");
-        TextoSalida.append("Nodos visitados: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodos expandidos: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínimo coste para ir de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA DE A* 1º HEURISTICA" + "\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -1099,14 +1101,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("Nodos visitados: " + campo.toString() + "  *  ");
+        print("Nodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodos expandidos: " + campo.toString() + "  *  ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Tiempo ejecución: " + campod.toString() + "  *  ");
+        print("Temps execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_coste(vuelos_candidatos);
     }
 
@@ -1187,13 +1189,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("BÚSQUEDA DE A ESTRELLA 1" + "\n");
-        TextoSalida.append("Búsqueda A*. 1ª Heurística:                     ");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Tiempo invertido: " + (tiempo3 / Math.pow(10, 9)) + " segundos." + "\n");
-        TextoSalida.append("Nodos visitados: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodos expandidos: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínimo coste para ir de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA EN A* 1º HEURISTICA\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -1201,14 +1202,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("Nodos visitados: " + campo.toString() + "  *  ");
+        print("Nodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodos expandidos: " + campo.toString() + "  *  ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Tiempo ejecución: " + campod.toString() + "  *  ");
+        print("Temps execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_tiempo_nueva(vuelos_candidatos);
     }
 
@@ -1284,13 +1285,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("BÚSQUEDA DE A ESTRELLA 2" + "\n");
-        TextoSalida.append("Búsqueda A*. 2ª Heurística:                     ");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Tiempo invertido: " + (tiempo3 / Math.pow(10, 9)) + " segundos." + "\n");
-        TextoSalida.append("Nodos visitados: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodos expandidos: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínimo coste para ir de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA EN A* 2º HEURISTICA\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -1298,14 +1298,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("Nodos visitados: " + campo.toString() + "  *  ");
+        print("Nodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodos expandidos: " + campo.toString() + "  *  ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Tiempo ejecución: " + campod.toString() + "  *  ");
+        print("Temps execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_coste(vuelos_candidatos);
     }
 
@@ -1386,13 +1386,12 @@ public class Ventana extends javax.swing.JFrame {
         }
         tiempo2 = System.nanoTime();
         tiempo3 = (tiempo2 - tiempo);
-        TextoSalida.append("BÚSQUEDA DE A ESTRELLA 2" + "\n");
-        TextoSalida.append("Búsqueda A*. 2ª Heurística:                     ");
-        TextoSalida.append(String.valueOf(iteraciones));
-        TextoSalida.append("Tiempo invertido: " + (tiempo3 / Math.pow(10, 9)) + " segundos." + "\n");
-        TextoSalida.append("Nodos visitados: " + nodos_visitados + "\n");
-        TextoSalida.append("Nodos expandidos: " + nodos_expandidos + "\n");
-        TextoSalida.append("El mínimo coste para ir de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
+        print("\nCERCA EN A* 2º HEURISTICA" + "\n");
+        print(String.valueOf(iteraciones));
+        print("Temps invertit: " + (tiempo3 / Math.pow(10, 9)) + " segons." + "\n");
+        print("Nodes visitats: " + nodos_visitados + "\n");
+        print("Nodes expandits: " + nodos_expandidos + "\n");
+        print("El mínim cost per anar de: " + ciudad_origen + " a " + ciudad_destino + " es: ");
         Double t = tiempo3 / Math.pow(10, 9);
         Integer campo;
         Float campod;
@@ -1400,14 +1399,14 @@ public class Ventana extends javax.swing.JFrame {
         campo = nodos_visitados;
         campoNodovis.setText(campo.toString());
         campoNodovisTi.setText(campo.toString());
-        TextoSalida.append("Nodos visitados: " + campo.toString() + "  *  ");
+        print("Nodes visitats: " + campo.toString() + " , ");
         campo = nodos_expandidos;
         campoNodoexp.setText(campo.toString());
         campoNodoexTi.setText(campo.toString());
-        TextoSalida.append("Nodos expandidos: " + campo.toString() + "  *  ");
+        print("Nodes expandits: " + campo.toString() + " , ");
         campoTiempoeje.setText(campod.toString());
         campoTiempoejeTi.setText(campod.toString());
-        TextoSalida.append("Tiempo ejecución: " + campod.toString() + "  *  ");
+        print("Temps execució: " + campod.toString() + "\n");
         elegir_mejor_alternativa_tiempo_nueva(vuelos_candidatos);
     }
     
@@ -1587,6 +1586,7 @@ public class Ventana extends javax.swing.JFrame {
         todos_con_todos = new javax.swing.JRadioButton();
         texto_numvuelos = new javax.swing.JTextField();
         CreaGenAle = new javax.swing.JButton();
+        btGenAleCancelar = new javax.swing.JButton();
         PanelSalidaCoste = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ResultadosCoste = new javax.swing.JTable();
@@ -1599,6 +1599,7 @@ public class Ventana extends javax.swing.JFrame {
         campoNodoexp = new javax.swing.JTextField();
         campoCostetotal = new javax.swing.JTextField();
         labelCosteTotal = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         tipo_busqueda = new javax.swing.ButtonGroup();
         PanelCreaCiudad = new javax.swing.JPanel();
         label_x = new javax.swing.JLabel();
@@ -1609,6 +1610,7 @@ public class Ventana extends javax.swing.JFrame {
         coordenadax = new javax.swing.JTextField();
         coordenaday = new javax.swing.JTextField();
         CreaCiudad = new javax.swing.JButton();
+        btCrearCiutatCancelar = new javax.swing.JButton();
         PanelCreaVuelo = new javax.swing.JPanel();
         DvueloComboBox = new javax.swing.JComboBox();
         HoraLlegada = new javax.swing.JTextField();
@@ -1624,6 +1626,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         BotonCreavuelo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btCreaVueloCancelar = new javax.swing.JButton();
         Criterio = new javax.swing.ButtonGroup();
         PanelSalidaTiempo = new javax.swing.JPanel();
         Paneldatostiempo = new javax.swing.JPanel();
@@ -1639,6 +1642,7 @@ public class Ventana extends javax.swing.JFrame {
         campoPretoti = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         ResultadosTiempo = new javax.swing.JTable();
+        btPanelSalidaTiempoSortir = new javax.swing.JButton();
         PanelAbout = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1650,9 +1654,11 @@ public class Ventana extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
+        btAboutSortir = new javax.swing.JButton();
         PanelVuelos = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaVuelos = new javax.swing.JTable();
+        btPanellVolsSortir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextoSalida = new javax.swing.JTextArea();
         PanelBusquedas = new javax.swing.JPanel();
@@ -1705,9 +1711,17 @@ public class Ventana extends javax.swing.JFrame {
         texto_numvuelos.setText("1");
 
         CreaGenAle.setText("Generar");
+        CreaGenAle.setSelected(true);
         CreaGenAle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreaGenAleActionPerformed(evt);
+            }
+        });
+
+        btGenAleCancelar.setText("Cancel·lar");
+        btGenAleCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGenAleCancelarActionPerformed(evt);
             }
         });
 
@@ -1723,7 +1737,10 @@ public class Ventana extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(todos_con_todos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(102, 102, 102))
-                    .addComponent(CreaGenAle, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelGenAleLayout.createSequentialGroup()
+                        .addComponent(btGenAleCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CreaGenAle))
                     .addGroup(PanelGenAleLayout.createSequentialGroup()
                         .addGroup(PanelGenAleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label_ciugen)
@@ -1750,7 +1767,9 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(personalizado)
                     .addComponent(todos_con_todos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CreaGenAle)
+                .addGroup(PanelGenAleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CreaGenAle)
+                    .addComponent(btGenAleCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1787,7 +1806,7 @@ public class Ventana extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1880,6 +1899,13 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Sortir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelSalidaCosteLayout = new javax.swing.GroupLayout(PanelSalidaCoste);
         PanelSalidaCoste.setLayout(PanelSalidaCosteLayout);
         PanelSalidaCosteLayout.setHorizontalGroup(
@@ -1888,7 +1914,8 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelSalidaCosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Paneldatoscoste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         PanelSalidaCosteLayout.setVerticalGroup(
@@ -1898,12 +1925,14 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Paneldatoscoste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         label_x.setText("X:");
 
-        label_coordenadas.setText("Coordenades");
+        label_coordenadas.setText("Coordenades:");
 
         label_nombre_ciudad.setText("Nom ciutat:");
 
@@ -1916,9 +1945,17 @@ public class Ventana extends javax.swing.JFrame {
         coordenaday.setColumns(4);
 
         CreaCiudad.setText("Crear ciutat");
+        CreaCiudad.setSelected(true);
         CreaCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreaCiudadActionPerformed(evt);
+            }
+        });
+
+        btCrearCiutatCancelar.setText("Cancel·lar");
+        btCrearCiutatCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearCiutatCancelarActionPerformed(evt);
             }
         });
 
@@ -1942,11 +1979,11 @@ public class Ventana extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label_y)
                         .addGap(8, 8, 8)
-                        .addComponent(coordenaday, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCreaCiudadLayout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
-                .addComponent(CreaCiudad)
+                        .addComponent(coordenaday, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCreaCiudadLayout.createSequentialGroup()
+                        .addComponent(btCrearCiutatCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CreaCiudad)))
                 .addContainerGap())
         );
         PanelCreaCiudadLayout.setVerticalGroup(
@@ -1965,7 +2002,9 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(coordenadax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_y))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CreaCiudad)
+                .addGroup(PanelCreaCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CreaCiudad)
+                    .addComponent(btCrearCiutatCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2005,6 +2044,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel11.setText("Nom companyia:");
 
         BotonCreavuelo.setText("Crear vol");
+        BotonCreavuelo.setSelected(true);
         BotonCreavuelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonCreavueloActionPerformed(evt);
@@ -2012,6 +2052,13 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Hora sortida:");
+
+        btCreaVueloCancelar.setText("Cancel·lar");
+        btCreaVueloCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCreaVueloCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelCreaVueloLayout = new javax.swing.GroupLayout(PanelCreaVuelo);
         PanelCreaVuelo.setLayout(PanelCreaVueloLayout);
@@ -2046,7 +2093,10 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(PrecioVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4))
-                    .addComponent(BotonCreavuelo, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCreaVueloLayout.createSequentialGroup()
+                        .addComponent(btCreaVueloCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BotonCreavuelo)))
                 .addContainerGap())
         );
         PanelCreaVueloLayout.setVerticalGroup(
@@ -2074,7 +2124,9 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BotonCreavuelo)
+                .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonCreavuelo)
+                    .addComponent(btCreaVueloCancelar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2163,17 +2215,26 @@ public class Ventana extends javax.swing.JFrame {
         ResultadosTiempo.getColumnModel().getColumn(1).setResizable(false);
         ResultadosTiempo.getColumnModel().getColumn(4).setResizable(false);
 
+        btPanelSalidaTiempoSortir.setText("Sortir");
+        btPanelSalidaTiempoSortir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPanelSalidaTiempoSortirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PaneldatostiempoLayout = new javax.swing.GroupLayout(Paneldatostiempo);
         Paneldatostiempo.setLayout(PaneldatostiempoLayout);
         PaneldatostiempoLayout.setHorizontalGroup(
             PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaneldatostiempoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PaneldatostiempoLayout.createSequentialGroup()
+                    .addComponent(btPanelSalidaTiempoSortir, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaneldatostiempoLayout.createSequentialGroup()
                         .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelNodogen1)
                             .addComponent(labelNodoexp1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(campoNodovisTi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(campoNodoexTi, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
@@ -2185,16 +2246,16 @@ public class Ventana extends javax.swing.JFrame {
                         .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelTiempototalTi)
                             .addComponent(labelpretoti))
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(campoPretoti, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE))
+                            .addComponent(campoPretoti, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PaneldatostiempoLayout.setVerticalGroup(
             PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PaneldatostiempoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaneldatostiempoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -2214,16 +2275,16 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(campoTiempotoTi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(labelTiempototalTi)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btPanelSalidaTiempoSortir)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout PanelSalidaTiempoLayout = new javax.swing.GroupLayout(PanelSalidaTiempo);
         PanelSalidaTiempo.setLayout(PanelSalidaTiempoLayout);
         PanelSalidaTiempoLayout.setHorizontalGroup(
             PanelSalidaTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelSalidaTiempoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Paneldatostiempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(Paneldatostiempo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PanelSalidaTiempoLayout.setVerticalGroup(
             PanelSalidaTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2256,6 +2317,14 @@ public class Ventana extends javax.swing.JFrame {
         jTextField4.setEditable(false);
         jTextField4.setText("Inteligència Artificial. UIB 2011/12");
 
+        btAboutSortir.setText("Sortir");
+        btAboutSortir.setSelected(true);
+        btAboutSortir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAboutSortirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelAboutLayout = new javax.swing.GroupLayout(PanelAbout);
         PanelAbout.setLayout(PanelAboutLayout);
         PanelAboutLayout.setHorizontalGroup(
@@ -2280,7 +2349,8 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(PanelAboutLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)))
+                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                    .addComponent(btAboutSortir, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         PanelAboutLayout.setVerticalGroup(
@@ -2306,6 +2376,8 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(PanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btAboutSortir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2383,21 +2455,33 @@ public class Ventana extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(TablaVuelos);
 
+        btPanellVolsSortir.setText("Sortir");
+        btPanellVolsSortir.setSelected(true);
+        btPanellVolsSortir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPanellVolsSortirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelVuelosLayout = new javax.swing.GroupLayout(PanelVuelos);
         PanelVuelos.setLayout(PanelVuelosLayout);
         PanelVuelosLayout.setHorizontalGroup(
             PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelVuelosLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVuelosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
+                .addGroup(PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btPanellVolsSortir)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelVuelosLayout.setVerticalGroup(
             PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVuelosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btPanellVolsSortir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -2538,7 +2622,8 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ScrollMundo.setBackground(new java.awt.Color(58, 161, 214));
+        ScrollMundo.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        ScrollMundo.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
         ScrollMundo.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         BotonBuscar.setText("Iniciar cerca");
@@ -2783,19 +2868,19 @@ public class Ventana extends javax.swing.JFrame {
                     }
 
                 }
-                DSalidaCoste = new JDialog();
-                DSalidaCoste.setModal(true);
+                DSalidaCosteTiempo = new JDialog();
+                DSalidaCosteTiempo.setModal(true);
                 if (coste) {
-                    DSalidaCoste.setSize(PanelSalidaCoste.getPreferredSize());
-                    DSalidaCoste.add(PanelSalidaCoste);
+                    DSalidaCosteTiempo.setSize(PanelSalidaCoste.getPreferredSize());
+                    DSalidaCosteTiempo.add(PanelSalidaCoste);
                 } else {
-                    DSalidaCoste.setSize(PanelSalidaTiempo.getPreferredSize());
-                    DSalidaCoste.add(PanelSalidaTiempo);
+                    DSalidaCosteTiempo.setSize(PanelSalidaTiempo.getPreferredSize());
+                    DSalidaCosteTiempo.add(PanelSalidaTiempo);
                 }
-                DSalidaCoste.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                DSalidaCoste.setLocationByPlatform(true);
-                DSalidaCoste.pack();
-                DSalidaCoste.setVisible(true);
+                DSalidaCosteTiempo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                DSalidaCosteTiempo.setLocationByPlatform(true);
+                DSalidaCosteTiempo.pack();
+                DSalidaCosteTiempo.setVisible(true);
             }
         }
 
@@ -2803,13 +2888,13 @@ public class Ventana extends javax.swing.JFrame {
 
     private void CreaCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreaCiudadActionPerformed
         if (nombre_ciudad.getText().equals("") || coordenadax.getText().equals("") || coordenaday.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Falten dades per omplir.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(DCreaCiudad, "Falten dades per omplir.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             if ((Integer.parseInt(coordenadax.getText()) < 0) || (Integer.parseInt(coordenaday.getText()) < 0)) {
-                JOptionPane.showMessageDialog(this, "Els valors de X i Y no poden ser negatius.", "Alerta", JOptionPane.WARNING_MESSAGE);    
+                JOptionPane.showMessageDialog(DCreaCiudad, "Els valors de X i Y no poden ser negatius.", "Alerta", JOptionPane.WARNING_MESSAGE);    
             } else {
                 if ((Integer.parseInt(coordenadax.getText()) > 795) || (Integer.parseInt(coordenaday.getText()) > 430)) {
-                    JOptionPane.showMessageDialog(this, "Els valors de X i Y no poden sortir del mapa. Maxim: X:795 i Y:430", "Alerta", JOptionPane.WARNING_MESSAGE);    
+                    JOptionPane.showMessageDialog(DCreaCiudad, "Els valors de X i Y no poden sortir del mapa. Maxim: X:795 i Y:430", "Alerta", JOptionPane.WARNING_MESSAGE);    
                 } else {
                     Integer x = Integer.parseInt(coordenadax.getText());
                     Integer y = Integer.parseInt(coordenaday.getText());
@@ -2826,10 +2911,11 @@ public class Ventana extends javax.swing.JFrame {
                         DestinoComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
                     }
                     nombre_ciudad.setText("");
+                    DCreaCiudad.dispose();
                 }
             }
         }
-        DCreaCiudad.setVisible(true);
+//        DCreaCiudad.setVisible(true);
     }//GEN-LAST:event_CreaCiudadActionPerformed
 
     private void DestinoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinoComboBoxActionPerformed
@@ -2842,7 +2928,7 @@ public class Ventana extends javax.swing.JFrame {
         DvueloComboBox.removeAllItems();
         JComboBox combo = (JComboBox) evt.getSource();
         String nombre = (String) combo.getSelectedItem();
-        TextoSalida.append(nombre);
+        print(nombre);
         origen = nombre;
         for (int i = 0; i < ciudades_creadas; i++) {
             if (!ciudades[i].getnombre().equals(nombre)) {
@@ -2855,6 +2941,7 @@ public class Ventana extends javax.swing.JFrame {
         DCreaVuelo = new JDialog();
         DCreaVuelo.setTitle("Crea nou vol");
         DCreaVuelo.setModal(true);
+        DCreaVuelo.getRootPane().setDefaultButton(BotonCreavuelo);
         DCreaVuelo.setSize(PanelCreaVuelo.getPreferredSize());
         DCreaVuelo.setLocationByPlatform(true);
         if (DvueloComboBox.getSelectedIndex() == -1) {
@@ -2874,6 +2961,7 @@ public class Ventana extends javax.swing.JFrame {
         DCreaCiudad.setTitle("Crear nova ciutat");
         DCreaCiudad.setSize(400, 200);
         DCreaCiudad.setModal(true);
+        DCreaCiudad.getRootPane().setDefaultButton(CreaCiudad);
         DCreaCiudad.setLocationByPlatform(true);
         DCreaCiudad.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         DCreaCiudad.add(PanelCreaCiudad);
@@ -2883,16 +2971,16 @@ public class Ventana extends javax.swing.JFrame {
 
     private void BotonCreavueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCreavueloActionPerformed
         if (HoraSalida.getText().equals("") || HoraLlegada.getText().equals("") || PrecioVuelo.getText().equals("") || nombre_compañia.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Faltes dades per omplir.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(DCreaVuelo, "Faltes dades per omplir.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             if (DvueloComboBox.getItemCount() == 0 || OvueloComboBox.getItemCount() == 0) {
-                JOptionPane.showMessageDialog(this, "No hi ha ciutats creades. No se poden crear vols.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(DCreaVuelo, "No hi ha ciutats creades. No se poden crear vols.", "Alerta", JOptionPane.WARNING_MESSAGE);
             } else {
                 if (DvueloComboBox.getSelectedItem().toString().equals(OvueloComboBox.getSelectedItem().toString())) {
-                    JOptionPane.showMessageDialog(this, "No se pot crear un vol a la mateixa ciutat.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(DCreaVuelo, "No se pot crear un vol a la mateixa ciutat.", "Alerta", JOptionPane.WARNING_MESSAGE);
                 } else {
                     if (Integer.parseInt(PrecioVuelo.getText()) < 0) {
-                        JOptionPane.showMessageDialog(this, "El preu d'un vol no pot ser negatiu.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(DCreaVuelo, "El preu d'un vol no pot ser negatiu.", "Alerta", JOptionPane.WARNING_MESSAGE);
                     } else {            
                         try {
                             DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -2910,7 +2998,7 @@ public class Ventana extends javax.swing.JFrame {
                             String año = formato3.format(fechaActual);
                             int posicion_x = posicion_ciudad("1"); //origen
                             int posicion_y = posicion_ciudad("2"); //destino
-                            TextoSalida.append("Posicion origen: " + posicion_x + " Posicion destino: " + posicion_y);
+                            print("Posició origen: " + posicion_x + " Posició desti: " + posicion_y);
                             dia = Integer.toString(Integer.parseInt(dia) + 1);
                             dia2 = dia;
                             String hora_lleg = HoraLlegada.getText();
@@ -2925,7 +3013,7 @@ public class Ventana extends javax.swing.JFrame {
                                 int posoy = ciudades[posicion_x].getcy();
                                 int posdx = ciudades[posicion_y].getcx();
                                 int posdy = ciudades[posicion_y].getcy();
-                                TextoSalida.append("O: " + ciudades[posicion_x].getnombre() + " D: " + ciudades[posicion_y].getnombre());
+                                print("O: " + ciudades[posicion_x].getnombre() + " D: " + ciudades[posicion_y].getnombre());
                                 for (int i = 0; i < 6; i++) {
                                     listaVuelos[posicion_x][posicion_y].insertarnuevo(codigo, nombre_compañia.getText(), Float.parseFloat(PrecioVuelo.getText()), fecha_salida, fecha_llegada, posox, posoy, posdx, posdy);
                                     dia = Integer.toString(Integer.valueOf(dia) + 1);
@@ -2936,6 +3024,7 @@ public class Ventana extends javax.swing.JFrame {
                                 codigo++;
                                 repaint();
                             }
+                            DCreaVuelo.dispose();
                         } catch (Exception ex) {
                             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -2943,7 +3032,7 @@ public class Ventana extends javax.swing.JFrame {
                 }
             }
         }
-        DCreaVuelo.setVisible(true);
+//        DCreaVuelo.setVisible(true);
     }//GEN-LAST:event_BotonCreavueloActionPerformed
 
     private void DvueloComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DvueloComboBoxActionPerformed
@@ -2982,7 +3071,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void CreaGenAleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreaGenAleActionPerformed
         if (Integer.parseInt(CiuGen.getText()) < 2 || Integer.parseInt(texto_numvuelos.getText()) < 1) {
-            JOptionPane.showMessageDialog(this, "Has d'introduir almenys dues ciutats i un vol", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(DGenAle, "Has d'introduir almenys dues ciutats i un vol", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             añadir_ciudad_auto(Integer.parseInt(CiuGen.getText()));
             actualizar_matriz_distancias();
@@ -2999,8 +3088,9 @@ public class Ventana extends javax.swing.JFrame {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            DGenAle.dispose();
         }
-        DGenAle.setVisible(true);
+//        DGenAle.setVisible(true);
     }//GEN-LAST:event_CreaGenAleActionPerformed
 
     private void MenuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuNuevoActionPerformed
@@ -3042,7 +3132,7 @@ public class Ventana extends javax.swing.JFrame {
         DAbout.setTitle("Sobre...");
         DAbout.setModal(true);
         DAbout.setLocationByPlatform(true);
-        DAbout.setPreferredSize(new Dimension(400, 240));
+        DAbout.setPreferredSize(new Dimension(430, 290));
         DAbout.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         DAbout.add(PanelAbout);
         DAbout.pack();
@@ -3050,12 +3140,11 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void MenuItemVerVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemVerVuelosActionPerformed
-        for (int i = 0; i < ciudades_creadas; i++) {
-            for (int j = 0; j < ciudades_creadas; j++) {
-                Vuelo v = listaVuelos[i][j].obtener_vuelo(i);
-                
-            }
-        }
+//        for (int i = 0; i < ciudades_creadas; i++) {
+//            for (int j = 0; j < ciudades_creadas; j++) {
+//                Vuelo v = listaVuelos[i][j].obtener_vuelo(i);   
+//            }
+//        }
         
         DVeureVols = new JDialog(this);
         DVeureVols.setTitle("Vols creats");
@@ -3068,6 +3157,34 @@ public class Ventana extends javax.swing.JFrame {
         DVeureVols.setVisible(true);        
     }//GEN-LAST:event_MenuItemVerVuelosActionPerformed
 
+    private void btGenAleCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGenAleCancelarActionPerformed
+        DGenAle.dispose();
+    }//GEN-LAST:event_btGenAleCancelarActionPerformed
+
+    private void btCrearCiutatCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearCiutatCancelarActionPerformed
+        DCreaCiudad.dispose();
+    }//GEN-LAST:event_btCrearCiutatCancelarActionPerformed
+
+    private void btCreaVueloCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCreaVueloCancelarActionPerformed
+        DCreaVuelo.dispose();
+    }//GEN-LAST:event_btCreaVueloCancelarActionPerformed
+
+    private void btAboutSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAboutSortirActionPerformed
+        DAbout.dispose();
+    }//GEN-LAST:event_btAboutSortirActionPerformed
+
+    private void btPanellVolsSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanellVolsSortirActionPerformed
+        DVeureVols.dispose();
+    }//GEN-LAST:event_btPanellVolsSortirActionPerformed
+
+    private void btPanelSalidaTiempoSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanelSalidaTiempoSortirActionPerformed
+        DSalidaCosteTiempo.dispose();
+    }//GEN-LAST:event_btPanelSalidaTiempoSortirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DSalidaCosteTiempo.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3076,7 +3193,7 @@ public class Ventana extends javax.swing.JFrame {
 
             @Override
             public void run() {
-                System.setProperty("apple.laf.useScreenMenuBar", "true");
+//                System.setProperty("apple.laf.useScreenMenuBar", "true");
                 new Ventana().setVisible(true);
             }
         });
@@ -3126,6 +3243,12 @@ public class Ventana extends javax.swing.JFrame {
     public static javax.swing.JTextArea TextoSalida;
     private javax.swing.JRadioButton a_estrella;
     private javax.swing.JRadioButton a_estrella2;
+    private javax.swing.JButton btAboutSortir;
+    private javax.swing.JButton btCreaVueloCancelar;
+    private javax.swing.JButton btCrearCiutatCancelar;
+    private javax.swing.JButton btGenAleCancelar;
+    private javax.swing.JButton btPanelSalidaTiempoSortir;
+    private javax.swing.JButton btPanellVolsSortir;
     private javax.swing.JLabel busqueda_tipo;
     private javax.swing.JTextField campoCostetotal;
     public static javax.swing.JTextField campoNodoexTi;
@@ -3140,6 +3263,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField coordenaday;
     private javax.swing.JRadioButton coste_uniforme;
     private javax.swing.JLabel criterio_busqueda;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
