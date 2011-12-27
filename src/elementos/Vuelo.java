@@ -114,7 +114,7 @@ public final class Vuelo extends JLabel {
 
     public void pintaVuelo(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.black);
+        g2d.setColor(Color.darkGray);
 //        g2d.drawLine(o_x, o_y, d_x, d_y);
         drawArrow(g2d, o_x, o_y, d_x, d_y);
     }
@@ -122,13 +122,15 @@ public final class Vuelo extends JLabel {
     public void pintaRuta(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.green);
-        g2d.drawLine(o_x, o_y, d_x, d_y);
+//        g2d.drawLine(o_x, o_y, d_x, d_y);
+        drawArrow(g2d, o_x, o_y, d_x, d_y);
     }
 
     public void pintaSeleccionada(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.magenta);
-        g2d.drawLine(o_x, o_y, d_x, d_y);
+//        g2d.drawLine(o_x, o_y, d_x, d_y);
+        drawArrow(g2d, o_x, o_y, d_x, d_y);
     }
 
     public void set_codigo(int cod) {

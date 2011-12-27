@@ -47,7 +47,7 @@ public class Ventana extends javax.swing.JFrame {
    
     private String origen, destino = "";
     private int codigo = 1;
-    private int max_ciudades = 100;
+    private static final int max_ciudades = 100;
     private int ciudades_creadas = 0;
     private Ciudad[] ciudades = new Ciudad[max_ciudades];
     private Vuelo[] vuelos;
@@ -1420,8 +1420,8 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void añadir_ciudad_auto(int numero_ciudades_crear) {
-        int max_coord_x = 800;
-        int max_coord_y = 436;
+        int max_coord_x = 790;
+        int max_coord_y = 425;
         int coord_x;
         int coord_y;
         for (int j = 0; j < numero_ciudades_crear; j++) {
@@ -1827,6 +1827,7 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        ResultadosCoste.setShowGrid(true);
         ResultadosCoste.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ResultadosCosteMouseClicked(evt);
@@ -2207,6 +2208,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         ResultadosTiempo.setMinimumSize(new java.awt.Dimension(75, 72));
+        ResultadosTiempo.setShowGrid(true);
         ResultadosTiempo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ResultadosTiempoMouseClicked(evt);
@@ -2463,6 +2465,7 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaVuelos.setShowGrid(true);
         jScrollPane4.setViewportView(TablaVuelos);
 
         btPanellVolsSortir.setText("Sortir");
@@ -2769,128 +2772,145 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_OrigenComboBoxActionPerformed
 
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
-        if (DestinoComboBox.getItemCount() == 0 || OrigenComboBox.getItemCount() == 0) {
-            JOptionPane.showMessageDialog(this, "No hi ha cap ciutat d'alta.", "Alerta", JOptionPane.WARNING_MESSAGE);
-        } else {
-            int elemd = DestinoComboBox.getSelectedIndex();
-            String lugard = (String) DestinoComboBox.getItemAt(elemd);
-            int elemo = OrigenComboBox.getSelectedIndex();
-            boolean coste = true;
-            String lugaro = (String) OrigenComboBox.getItemAt(elemo);
-            pinta_mapa();
-            reiniciarTabla();
-            if (elemd != -1) {
-                if (profundidad.isSelected()) {
-                    if (precio_minimo.isSelected()) {
-                        try {
+        if (OrigenComboBox.getItemCount() == 0 || DestinoComboBox.getItemCount() == 0) {
+            JOptionPane.showMessageDialog(this, "No hi ha ciutats suficients d'alta.", "Alerta", JOptionPane.WARNING_MESSAGE);
+        } else {    
+            if (listaVuelos[0][0].Vacia()) {
+                JOptionPane.showMessageDialog(this, "No hi ha cap vol d'alta. No se pot cercar.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            } else {
+                int elemd = DestinoComboBox.getSelectedIndex();
+                String lugard = (String) DestinoComboBox.getItemAt(elemd);
+                int elemo = OrigenComboBox.getSelectedIndex();
+                boolean coste = true;
+                String lugaro = (String) OrigenComboBox.getItemAt(elemo);
+                pinta_mapa();
+                reiniciarTabla();
+                if (elemd != -1) {
+                    if (profundidad.isSelected()) {
+                        if (precio_minimo.isSelected()) {
+                            try {
+                                coste = true;
+                                busqueda_prof(lugaro, lugard, 0);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                coste = false;
+                                busqueda_prof(lugaro, lugard, 1);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }//tiempo minimo
+                    } else if (profundidad_poda.isSelected()) {
+                        if (precio_minimo.isSelected()) {
+                            try {
+                                coste = true;
+                                busqueda_prof_poda_coste(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                coste = false;
+                                busqueda_prof_poda_tiempo(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    } else if (coste_uniforme.isSelected()) {
+                        if (precio_minimo.isSelected()) {
+                            try {
+                                coste = true;
+                                busqueda_costo_uniforme_coste(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                coste = false;
+                                busqueda_costo_uniforme_tiempo(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    } else if (vecino_proximo.isSelected()) {
+                        if (precio_minimo.isSelected()) {
+                            try {
+                                coste = true;
+                                busqueda_vecino_mas_proximo(lugaro, lugard, 0);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            try {
+                                coste = false;
+                                busqueda_vecino_mas_proximo(lugaro, lugard, 1);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    } else if (a_estrella.isSelected()) {          //A estrella
+                        if (precio_minimo.isSelected()) {
                             coste = true;
-                            busqueda_prof(lugaro, lugard, 0);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            try {
+                                busqueda_a_estrella_cost(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
+                            coste = false;
+                            try {
+                                busqueda_a_estrella_temps(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     } else {
-                        try {
-                            coste = false;
-                            busqueda_prof(lugaro, lugard, 1);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }//tiempo minimo
-                } else if (profundidad_poda.isSelected()) {
-                    if (precio_minimo.isSelected()) {
-                        try {
+                        if (precio_minimo.isSelected()) {
                             coste = true;
-                            busqueda_prof_poda_coste(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        try {
+                            try {
+                                busqueda_a_estrella2_cost(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        } else {
                             coste = false;
-                            busqueda_prof_poda_tiempo(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            try {
+                                busqueda_a_estrella2_temps(lugaro, lugard);
+                            } catch (Exception ex) {
+                                mostrarMissatgeError(null, ex);
+                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
-                    }
-                } else if (coste_uniforme.isSelected()) {
-                    if (precio_minimo.isSelected()) {
-                        try {
-                            coste = true;
-                            busqueda_costo_uniforme_coste(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        try {
-                            coste = false;
-                            busqueda_costo_uniforme_tiempo(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                } else if (vecino_proximo.isSelected()) {
-                    if (precio_minimo.isSelected()) {
-                        try {
-                            coste = true;
-                            busqueda_vecino_mas_proximo(lugaro, lugard, 0);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        try {
-                            coste = false;
-                            busqueda_vecino_mas_proximo(lugaro, lugard, 1);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                } else if (a_estrella.isSelected()) {          //A estrella
-                    if (precio_minimo.isSelected()) {
-                        coste = true;
-                        try {
-                            busqueda_a_estrella_cost(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        coste = false;
-                        try {
-                            busqueda_a_estrella_temps(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                } else {
-                    if (precio_minimo.isSelected()) {
-                        coste = true;
-                        try {
-                            busqueda_a_estrella2_cost(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    } else {
-                        coste = false;
-                        try {
-                            busqueda_a_estrella2_temps(lugaro, lugard);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
 
+                    }
+                    DSalidaCosteTiempo = new JDialog();
+                    DSalidaCosteTiempo.setModal(true);
+                    DSalidaCosteTiempo.setTitle("Resultats");
+                    if (coste) {
+                        DSalidaCosteTiempo.setSize(PanelSalidaCoste.getPreferredSize());
+                        DSalidaCosteTiempo.add(PanelSalidaCoste);
+                    } else {
+                        DSalidaCosteTiempo.setSize(PanelSalidaTiempo.getPreferredSize());
+                        DSalidaCosteTiempo.add(PanelSalidaTiempo);
+                    }
+                    DSalidaCosteTiempo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    DSalidaCosteTiempo.setLocationByPlatform(true);
+                    DSalidaCosteTiempo.pack();
+                    DSalidaCosteTiempo.setVisible(true);
                 }
-                DSalidaCosteTiempo = new JDialog();
-                DSalidaCosteTiempo.setModal(true);
-                if (coste) {
-                    DSalidaCosteTiempo.setSize(PanelSalidaCoste.getPreferredSize());
-                    DSalidaCosteTiempo.add(PanelSalidaCoste);
-                } else {
-                    DSalidaCosteTiempo.setSize(PanelSalidaTiempo.getPreferredSize());
-                    DSalidaCosteTiempo.add(PanelSalidaTiempo);
-                }
-                DSalidaCosteTiempo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                DSalidaCosteTiempo.setLocationByPlatform(true);
-                DSalidaCosteTiempo.pack();
-                DSalidaCosteTiempo.setVisible(true);
             }
         }
 
@@ -2925,7 +2945,6 @@ public class Ventana extends javax.swing.JFrame {
                 }
             }
         }
-//        DCreaCiudad.setVisible(true);
     }//GEN-LAST:event_CreaCiudadActionPerformed
 
     private void DestinoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DestinoComboBoxActionPerformed
@@ -2998,26 +3017,33 @@ public class Ventana extends javax.swing.JFrame {
                             Date fechaActual = new Date();
                             Date fecha_salida = null;
                             Date fecha_llegada = null;
+                            
                             String dia2 = null;
                             mundo.setModoRuta(0);
+                            
                             SimpleDateFormat formato = new SimpleDateFormat("dd");
                             String dia = formato.format(fechaActual);
                             SimpleDateFormat formato2 = new SimpleDateFormat("MM");
                             String mes = formato2.format(fechaActual);
                             SimpleDateFormat formato3 = new SimpleDateFormat("yyyy");
                             String año = formato3.format(fechaActual);
+                            
                             int posicion_x = posicion_ciudad("1"); //origen
                             int posicion_y = posicion_ciudad("2"); //desti
 //                            print("Posició origen: " + posicion_x + " Posició desti: " + posicion_y);
+                            
                             dia = Integer.toString(Integer.parseInt(dia) + 1);
                             dia2 = dia;
                             String hora_lleg = HoraLlegada.getText();
                             String hora_sal = HoraSalida.getText();
+                            
                             if (df2.parse(hora_sal).after(df2.parse(hora_lleg))) {
                                 dia = Integer.toString(Integer.valueOf(dia) + 1);
                             }
+
                             fecha_salida = df.parse(dia2 + "/" + mes + "/" + año + " " + hora_sal);
                             fecha_llegada = df.parse(dia + "/" + mes + "/" + año + " " + hora_lleg);
+                            
                             if (posicion_y != -1) {
                                 int posox = ciudades[posicion_x].getcx();
                                 int posoy = ciudades[posicion_x].getcy();
@@ -3036,13 +3062,13 @@ public class Ventana extends javax.swing.JFrame {
                             }
                             DCreaVuelo.dispose();
                         } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
                             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }
             }
         }
-//        DCreaVuelo.setVisible(true);
     }//GEN-LAST:event_BotonCreavueloActionPerformed
 
     private void DvueloComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DvueloComboBoxActionPerformed
@@ -3089,18 +3115,19 @@ public class Ventana extends javax.swing.JFrame {
                 try {
                     añadir_vuelo_auto(Integer.parseInt(texto_numvuelos.getText()));
                 } catch (ParseException ex) {
+                    mostrarMissatgeError(null, ex);
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
                 try {
                     conectar_todas_ciudades();
                 } catch (ParseException ex) {
+                    mostrarMissatgeError(null, ex);
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             DGenAle.dispose();
         }
-//        DGenAle.setVisible(true);
     }//GEN-LAST:event_CreaGenAleActionPerformed
 
     private void MenuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuNuevoActionPerformed
@@ -3108,7 +3135,7 @@ public class Ventana extends javax.swing.JFrame {
         DestinoComboBox.removeAllItems();
         OvueloComboBox.removeAllItems();
         DvueloComboBox.removeAllItems();
-        ciudades = new Ciudad[max_ciudades];
+        ciudades = new Ciudad[max_ciudades];        
         ciudades_creadas = 0;
         codigo = 1;
         TextoSalida.setText("");
@@ -3182,7 +3209,7 @@ public class Ventana extends javax.swing.JFrame {
         DVeureVols.setModal(true);
         DVeureVols.add(PanelVuelos);
         DVeureVols.setLocationByPlatform(true);
-        DVeureVols.setPreferredSize(new Dimension(770, 350));
+//        DVeureVols.setPreferredSize(new Dimension(770, 350));
         DVeureVols.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         DVeureVols.pack();
         DVeureVols.setVisible(true);        
@@ -3275,11 +3302,11 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel Paneldatoscoste;
     private javax.swing.JPanel Paneldatostiempo;
     private javax.swing.JTextField PrecioVuelo;
-    public static javax.swing.JTable ResultadosCoste;
-    public static javax.swing.JTable ResultadosTiempo;
+    private javax.swing.JTable ResultadosCoste;
+    private javax.swing.JTable ResultadosTiempo;
     private javax.swing.JScrollPane ScrollMundo;
     private javax.swing.JTable TablaVuelos;
-    public static javax.swing.JTextArea TextoSalida;
+    private javax.swing.JTextArea TextoSalida;
     private javax.swing.JRadioButton a_estrella;
     private javax.swing.JRadioButton a_estrella2;
     private javax.swing.JButton btAboutSortir;
@@ -3290,13 +3317,13 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btPanellVolsSortir;
     private javax.swing.JLabel busqueda_tipo;
     private javax.swing.JTextField campoCostetotal;
-    public static javax.swing.JTextField campoNodoexTi;
-    public static javax.swing.JTextField campoNodoexp;
-    public static javax.swing.JTextField campoNodovis;
-    public static javax.swing.JTextField campoNodovisTi;
+    private javax.swing.JTextField campoNodoexTi;
+    private javax.swing.JTextField campoNodoexp;
+    private javax.swing.JTextField campoNodovis;
+    private javax.swing.JTextField campoNodovisTi;
     private javax.swing.JTextField campoPretoti;
-    public static javax.swing.JTextField campoTiempoeje;
-    public static javax.swing.JTextField campoTiempoejeTi;
+    private javax.swing.JTextField campoTiempoeje;
+    private javax.swing.JTextField campoTiempoejeTi;
     private javax.swing.JTextField campoTiempotoTi;
     private javax.swing.JTextField coordenadax;
     private javax.swing.JTextField coordenaday;
