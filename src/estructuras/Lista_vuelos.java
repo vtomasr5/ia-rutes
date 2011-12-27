@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JLabel;
 
-public class Lista_vuelos {
+public class Lista_vuelos implements java.io.Serializable {
 
     private Vuelo Cap;
 

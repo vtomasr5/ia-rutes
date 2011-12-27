@@ -19,7 +19,7 @@ import java.awt.Graphics2D;
 import java.util.Date;
 import javax.swing.JLabel;
 
-public final class Vuelo extends JLabel {
+public final class Vuelo extends JLabel implements java.io.Serializable {
 
     int codigo_vuelo;
     String compañia;

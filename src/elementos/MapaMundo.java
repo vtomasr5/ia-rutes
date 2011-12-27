@@ -14,7 +14,6 @@
 package elementos;
 
 import estructuras.Lista_vuelos;
-import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,26 +21,27 @@ import javax.swing.JLabel;
 public class MapaMundo extends JLabel {
 
     Ciudad[] ciu;
-    Lista_vuelos[][] matriz;
+    Lista_vuelos[][] listaVuelos;
     Vuelo[] vuelos;
     int ciu_creadas = 0, ori = -1, des = -1, modoRuta = 0, numCiu = 0, seleccionado = 0;
     ImageIcon img;
 
     public MapaMundo(Ciudad[] ciu, Lista_vuelos[][] matriz) {
-        this.matriz = matriz;
+        this.listaVuelos = matriz;
         this.ciu = ciu;
-        img = new ImageIcon("src/imagenes/mapa.jpg");
+        img = new ImageIcon("mapa/mapa.jpg");
         this.setIcon(img);
+        this.repaint();
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(img.getImage(), 0, 0, this);
+        g.drawImage(img.getImage(), 0, 0, img.getImageObserver());
         for (int i = 0; i < ciu_creadas; i++) {
             for (int j = 0; j < ciu_creadas; j++) {
                 if (i != j) {
-                    if (matriz[i][j].primero() != null) {
-                        matriz[i][j].primero().pintaVuelo(g);
+                    if (listaVuelos[i][j].primero() != null) {
+                        listaVuelos[i][j].primero().pintaVuelo(g);
                     }
                 }
             }
@@ -60,7 +60,7 @@ public class MapaMundo extends JLabel {
     }
 
     public void setVuelos(Lista_vuelos[][] vuelos) {
-        this.matriz = vuelos;
+        this.listaVuelos = vuelos;
     }
 
     public void setCiudad(Ciudad[] ciudad) {

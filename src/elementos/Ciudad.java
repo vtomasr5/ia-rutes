@@ -17,7 +17,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Ciudad {
+public class Ciudad implements java.io.Serializable {
 
     String nombre;
     int coord_x;

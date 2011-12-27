@@ -28,8 +28,16 @@ import elementos.Elemento;
 import elementos.MapaMundo;
 import estructuras.Pila_ciudades;
 import elementos.Vuelo;
+import estructuras.Fichero;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -218,6 +226,41 @@ public class Ventana extends javax.swing.JFrame {
                 }
                 distancias[i][j] = distancia;
             }
+        }
+    }
+    
+    private void GuardarFichero() throws FileNotFoundException, IOException {
+        String nom = JOptionPane.showInputDialog(this, "Nom del fitxer (~.bin):", "Guardar", JOptionPane.QUESTION_MESSAGE);
+        if ((nom != null) && (nom.length() > 0)) {
+            if (!nom.endsWith(".bin")) {
+                nom = nom + ".bin";
+            }
+            FileOutputStream fos = new FileOutputStream(nom);
+            ObjectOutputStream out = new ObjectOutputStream(fos);
+            Fichero fi = new Fichero(ciudades, listaVuelos, ciudades_creadas);
+            out.writeObject(fi);
+        }
+    }
+
+    private void AbrirFichero() throws IOException, ClassNotFoundException {
+        JFileChooser FC = new JFileChooser();
+        FC.showOpenDialog(null);
+        File selFile = FC.getSelectedFile();
+        if (selFile != null) {
+            FileInputStream fis = new FileInputStream(selFile);
+            ObjectInputStream in = new ObjectInputStream(fis);
+            Fichero fi = (Fichero) in.readObject();
+            ciudades = fi.getCiudad();
+            listaVuelos = fi.getVuelos();
+            ciudades_creadas = fi.getCiudadescreadas();
+            mundo.setCiudad(ciudades);
+            mundo.setVuelos(listaVuelos);
+            mundo.setNumciudades(ciudades_creadas);
+            for (int i = 0; i < ciudades_creadas; i++) {
+                OrigenComboBox.addItem(ciudades[i].getnombre());
+                OvueloComboBox.addItem(ciudades[i].getnombre());
+            }
+            repaint();
         }
     }
 
@@ -1645,12 +1688,17 @@ public class Ventana extends javax.swing.JFrame {
         ScrollMundo = new javax.swing.JScrollPane();
         BotonBuscar = new javax.swing.JButton();
         toobar = new javax.swing.JToolBar();
+        tbObrir = new javax.swing.JButton();
+        tbGuardar = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
         btTbCrearCiutat = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Menubusquedas = new javax.swing.JMenu();
         MenuNuevo = new javax.swing.JMenuItem();
+        menuItemObrir = new javax.swing.JMenuItem();
+        menuItemGuardar = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         MenuSotirItem = new javax.swing.JMenuItem();
         Menucrear = new javax.swing.JMenu();
@@ -1708,9 +1756,9 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelGenAleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelGenAleLayout.createSequentialGroup()
-                        .addComponent(personalizado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(personalizado, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(todos_con_todos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(todos_con_todos, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                         .addGap(102, 102, 102))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelGenAleLayout.createSequentialGroup()
                         .addComponent(btGenAleCancelar)
@@ -1792,7 +1840,6 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        ResultadosCoste.setShowGrid(false);
         ResultadosCoste.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ResultadosCosteMouseClicked(evt);
@@ -1955,7 +2002,7 @@ public class Ventana extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label_y)
                         .addGap(8, 8, 8)
-                        .addComponent(coordenaday, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                        .addComponent(coordenaday, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCreaCiudadLayout.createSequentialGroup()
                         .addComponent(btCrearCiutatCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2045,12 +2092,12 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelCreaVueloLayout.createSequentialGroup()
                         .addComponent(CreaOrigen)
-                        .addGap(18, 18, 18)
-                        .addComponent(OvueloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(OvueloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CreaDestino)
-                        .addGap(12, 12, 12)
-                        .addComponent(DvueloComboBox, 0, 182, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DvueloComboBox, 0, 188, Short.MAX_VALUE))
                     .addGroup(PanelCreaVueloLayout.createSequentialGroup()
                         .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -2068,8 +2115,8 @@ public class Ventana extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)))
                         .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(HoraLlegada, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                            .addComponent(PrecioVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                            .addComponent(HoraLlegada, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                            .addComponent(PrecioVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCreaVueloLayout.createSequentialGroup()
@@ -2082,13 +2129,12 @@ public class Ventana extends javax.swing.JFrame {
             PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCreaVueloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(OvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                        .addComponent(CreaOrigen)
-                        .addComponent(CreaDestino)))
-                .addGap(18, 18, 18)
+                .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(OvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(CreaOrigen)
+                    .addComponent(CreaDestino)
+                    .addComponent(DvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(HoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2105,7 +2151,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonCreavuelo)
                     .addComponent(btCreaVueloCancelar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         campoNodovisTi.setPreferredSize(new java.awt.Dimension(70, 27));
@@ -2175,7 +2221,6 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         ResultadosTiempo.setMinimumSize(new java.awt.Dimension(75, 72));
-        ResultadosTiempo.setShowGrid(false);
         ResultadosTiempo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ResultadosTiempoMouseClicked(evt);
@@ -2432,7 +2477,6 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TablaVuelos.setShowGrid(false);
         jScrollPane4.setViewportView(TablaVuelos);
 
         btPanellVolsSortir.setText("Sortir");
@@ -2612,6 +2656,29 @@ public class Ventana extends javax.swing.JFrame {
         toobar.setFloatable(false);
         toobar.setRollover(true);
 
+        tbObrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/open.png"))); // NOI18N
+        tbObrir.setText("Obrir");
+        tbObrir.setFocusable(false);
+        tbObrir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        tbObrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemObrirActionPerformed(evt);
+            }
+        });
+        toobar.add(tbObrir);
+
+        tbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/save.png"))); // NOI18N
+        tbGuardar.setText("Guardar");
+        tbGuardar.setFocusable(false);
+        tbGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        tbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGuardarActionPerformed(evt);
+            }
+        });
+        toobar.add(tbGuardar);
+        toobar.add(jSeparator5);
+
         btTbCrearCiutat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ciutat.jpg"))); // NOI18N
         btTbCrearCiutat.setText("Crear ciutat");
         btTbCrearCiutat.setFocusable(false);
@@ -2658,6 +2725,24 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         Menubusquedas.add(MenuNuevo);
+
+        menuItemObrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemObrir.setText("Obrir...");
+        menuItemObrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemObrirActionPerformed(evt);
+            }
+        });
+        Menubusquedas.add(menuItemObrir);
+
+        menuItemGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemGuardar.setText("Guardar...");
+        menuItemGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGuardarActionPerformed(evt);
+            }
+        });
+        Menubusquedas.add(menuItemGuardar);
         Menubusquedas.add(jSeparator3);
 
         MenuSotirItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
@@ -2723,17 +2808,17 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(toobar, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
+            .addComponent(toobar, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PanelBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)))
+                        .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -2746,7 +2831,7 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(PanelBusquedas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BotonBuscar))
-                    .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
+                    .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -3212,6 +3297,30 @@ public class Ventana extends javax.swing.JFrame {
         texto_numvuelos.setEnabled(true);
     }//GEN-LAST:event_personalizadoActionPerformed
 
+    private void menuItemObrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemObrirActionPerformed
+        try {
+            AbrirFichero();
+        } catch (IOException ex) {
+            mostrarMissatgeError(null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            mostrarMissatgeError(null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemObrirActionPerformed
+
+    private void menuItemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGuardarActionPerformed
+        try {
+            GuardarFichero();
+        } catch (FileNotFoundException ex) {
+            mostrarMissatgeError(null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            mostrarMissatgeError(null, ex);
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuItemGuardarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3314,6 +3423,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -3333,12 +3443,16 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel label_x;
     private javax.swing.JLabel label_y;
     private javax.swing.JLabel labelpretoti;
+    private javax.swing.JMenuItem menuItemGuardar;
+    private javax.swing.JMenuItem menuItemObrir;
     private javax.swing.JTextField nombre_ciudad;
     private javax.swing.JTextField nombre_compañia;
     private javax.swing.JRadioButton personalizado;
     private javax.swing.JRadioButton precio_minimo;
     private javax.swing.JRadioButton profundidad;
     private javax.swing.JRadioButton profundidad_poda;
+    private javax.swing.JButton tbGuardar;
+    private javax.swing.JButton tbObrir;
     private javax.swing.JTextField texto_numvuelos;
     private javax.swing.JRadioButton tiempo_minimo;
     private javax.swing.ButtonGroup tipo_busqueda;

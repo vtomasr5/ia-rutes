@@ -13,9 +13,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="personalizado" max="32767" attributes="1"/>
+                          <Component id="personalizado" pref="111" max="32767" attributes="1"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="todos_con_todos" max="32767" attributes="1"/>
+                          <Component id="todos_con_todos" pref="117" max="32767" attributes="1"/>
                           <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -208,7 +208,6 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
-                <Property name="showGrid" type="boolean" value="false"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
@@ -369,7 +368,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="label_y" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Component id="coordenaday" pref="122" max="32767" attributes="1"/>
+                          <Component id="coordenaday" pref="129" max="32767" attributes="1"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btCrearCiutatCancelar" min="-2" max="-2" attributes="0"/>
@@ -471,14 +470,14 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="CreaOrigen" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="OvueloComboBox" min="-2" pref="165" max="-2" attributes="1"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="OvueloComboBox" min="-2" pref="177" max="-2" attributes="1"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="CreaDestino" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="DvueloComboBox" pref="182" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="DvueloComboBox" pref="188" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -492,7 +491,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                               </Group>
@@ -502,8 +501,8 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="HoraLlegada" pref="105" max="32767" attributes="1"/>
-                              <Component id="PrecioVuelo" alignment="0" pref="105" max="32767" attributes="1"/>
+                              <Component id="HoraLlegada" pref="116" max="32767" attributes="1"/>
+                              <Component id="PrecioVuelo" alignment="0" pref="116" max="32767" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -522,15 +521,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="DvueloComboBox" pref="27" max="32767" attributes="1"/>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="OvueloComboBox" alignment="3" pref="27" max="32767" attributes="1"/>
-                          <Component id="CreaOrigen" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="CreaDestino" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="OvueloComboBox" alignment="3" pref="27" max="32767" attributes="1"/>
+                      <Component id="CreaOrigen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CreaDestino" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="DvueloComboBox" alignment="3" pref="27" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="HoraSalida" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="HoraLlegada" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -550,7 +547,7 @@
                       <Component id="BotonCreavuelo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btCreaVueloCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -851,7 +848,6 @@
                     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[75, 72]"/>
                     </Property>
-                    <Property name="showGrid" type="boolean" value="false"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -1063,7 +1059,6 @@
                     <Column editable="false" title="Preu" type="java.lang.Float"/>
                   </Table>
                 </Property>
-                <Property name="showGrid" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -1103,6 +1098,28 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuNuevoActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemObrir">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+O"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Obrir..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemObrirActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemGuardar">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+S"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Guardar..."/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemGuardarActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
@@ -1213,18 +1230,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="toobar" alignment="0" pref="1048" max="32767" attributes="0"/>
+          <Component id="toobar" alignment="0" pref="1042" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="1008" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" pref="1030" max="32767" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="BotonBuscar" max="32767" attributes="1"/>
                           <Component id="PanelBusquedas" alignment="0" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ScrollMundo" pref="750" max="32767" attributes="1"/>
+                      <Component id="ScrollMundo" pref="804" max="32767" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -1242,7 +1259,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BotonBuscar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="ScrollMundo" pref="528" max="32767" attributes="1"/>
+                  <Component id="ScrollMundo" pref="490" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="123" max="-2" attributes="0"/>
@@ -1512,6 +1529,34 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
+        <Component class="javax.swing.JButton" name="tbObrir">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagenes/open.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Obrir"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="4"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemObrirActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="tbGuardar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagenes/save.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Guardar"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="4"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemGuardarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator5">
+        </Component>
         <Component class="javax.swing.JButton" name="btTbCrearCiutat">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
