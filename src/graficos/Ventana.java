@@ -1420,8 +1420,8 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void añadir_ciudad_auto(int numero_ciudades_crear) {
-        int max_coord_x = 1160;
-        int max_coord_y = 610;
+        int max_coord_x = 800;
+        int max_coord_y = 436;
         int coord_x;
         int coord_y;
         for (int j = 0; j < numero_ciudades_crear; j++) {
@@ -1704,9 +1704,19 @@ public class Ventana extends javax.swing.JFrame {
         CritVuelo.add(personalizado);
         personalizado.setSelected(true);
         personalizado.setText("Personalitzat");
+        personalizado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personalizadoActionPerformed(evt);
+            }
+        });
 
         CritVuelo.add(todos_con_todos);
         todos_con_todos.setText("Tots amb tots");
+        todos_con_todos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                todos_con_todosActionPerformed(evt);
+            }
+        });
 
         texto_numvuelos.setText("1");
 
@@ -2997,7 +3007,7 @@ public class Ventana extends javax.swing.JFrame {
                             SimpleDateFormat formato3 = new SimpleDateFormat("yyyy");
                             String año = formato3.format(fechaActual);
                             int posicion_x = posicion_ciudad("1"); //origen
-                            int posicion_y = posicion_ciudad("2"); //destino
+                            int posicion_y = posicion_ciudad("2"); //desti
 //                            print("Posició origen: " + posicion_x + " Posició desti: " + posicion_y);
                             dia = Integer.toString(Integer.parseInt(dia) + 1);
                             dia2 = dia;
@@ -3205,6 +3215,14 @@ public class Ventana extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DSalidaCosteTiempo.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void todos_con_todosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todos_con_todosActionPerformed
+        texto_numvuelos.setEnabled(false);
+    }//GEN-LAST:event_todos_con_todosActionPerformed
+
+    private void personalizadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalizadoActionPerformed
+        texto_numvuelos.setEnabled(true);
+    }//GEN-LAST:event_personalizadoActionPerformed
 
     /**
      * @param args the command line arguments
