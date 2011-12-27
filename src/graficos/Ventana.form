@@ -1210,18 +1210,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="toobar" alignment="0" pref="1140" max="32767" attributes="0"/>
+          <Component id="toobar" alignment="0" pref="1048" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="1100" max="32767" attributes="1"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PanelBusquedas" max="32767" attributes="0"/>
-                          <Component id="BotonBuscar" alignment="1" pref="294" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="1008" max="32767" attributes="1"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="BotonBuscar" max="32767" attributes="1"/>
+                          <Component id="PanelBusquedas" alignment="0" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ScrollMundo" pref="796" max="32767" attributes="1"/>
+                      <Component id="ScrollMundo" pref="750" max="32767" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -1234,7 +1234,7 @@
               <Component id="toobar" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="PanelBusquedas" min="-2" max="-2" attributes="1"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BotonBuscar" min="-2" max="-2" attributes="0"/>
@@ -1280,8 +1280,8 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jSeparator1" alignment="1" pref="250" max="32767" attributes="0"/>
-                      <Component id="jSeparator2" alignment="0" pref="250" max="32767" attributes="0"/>
+                      <Component id="jSeparator1" alignment="1" pref="204" max="32767" attributes="0"/>
+                      <Component id="jSeparator2" alignment="0" pref="204" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="Origen" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1289,13 +1289,13 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="OrigenComboBox" pref="199" max="32767" attributes="1"/>
-                              <Component id="DestinoComboBox" alignment="0" pref="199" max="32767" attributes="1"/>
+                              <Component id="OrigenComboBox" pref="153" max="32767" attributes="1"/>
+                              <Component id="DestinoComboBox" alignment="0" pref="153" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <Component id="Busqueda" alignment="0" pref="250" max="32767" attributes="0"/>
-                      <Component id="busqueda_tipo" alignment="0" pref="250" max="32767" attributes="0"/>
-                      <Component id="criterio_busqueda" alignment="0" pref="250" max="32767" attributes="0"/>
+                      <Component id="Busqueda" alignment="0" pref="204" max="32767" attributes="0"/>
+                      <Component id="busqueda_tipo" alignment="0" pref="204" max="32767" attributes="0"/>
+                      <Component id="criterio_busqueda" alignment="0" pref="204" max="32767" attributes="0"/>
                       <Component id="precio_minimo" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="tiempo_minimo" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="profundidad" alignment="0" min="-2" max="-2" attributes="0"/>
