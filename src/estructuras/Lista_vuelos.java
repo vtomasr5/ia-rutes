@@ -129,7 +129,7 @@ public class Lista_vuelos {
         while (tmp != null) {
             System.out.print("     Companyia: ");
             System.out.print(recuperar_compañia(tmp) + "\n");
-            System.out.print("     Códi: ");
+            System.out.print("     Codi: ");
             System.out.print(recuperar_cod(tmp) + "\n");
             System.out.print("     Preu: ");
             System.out.print(recuperar_precio(tmp) + "\n");

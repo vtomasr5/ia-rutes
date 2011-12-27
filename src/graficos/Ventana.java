@@ -2049,8 +2049,8 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(OvueloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CreaDestino)
-                        .addGap(11, 11, 11)
-                        .addComponent(DvueloComboBox, 0, 183, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(DvueloComboBox, 0, 182, Short.MAX_VALUE))
                     .addGroup(PanelCreaVueloLayout.createSequentialGroup()
                         .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -2060,10 +2060,13 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(nombre_compañia)
                             .addComponent(HoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(19, 19, 19)
+                        .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PanelCreaVueloLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(77, 77, 77))
+                            .addGroup(PanelCreaVueloLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)))
                         .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(HoraLlegada, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                             .addComponent(PrecioVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
@@ -2079,12 +2082,11 @@ public class Ventana extends javax.swing.JFrame {
             PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelCreaVueloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(OvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                        .addComponent(CreaOrigen))
-                    .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(DvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                        .addComponent(CreaOrigen)
                         .addComponent(CreaDestino)))
                 .addGap(18, 18, 18)
                 .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2310,7 +2312,6 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                     .addGroup(PanelAboutLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2327,7 +2328,8 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
-                    .addComponent(btAboutSortir, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(btAboutSortir, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelAboutLayout.setVerticalGroup(
@@ -2614,8 +2616,6 @@ public class Ventana extends javax.swing.JFrame {
         btTbCrearCiutat.setText("Crear ciutat");
         btTbCrearCiutat.setFocusable(false);
         btTbCrearCiutat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btTbCrearCiutat.setPreferredSize(new java.awt.Dimension(64, 64));
-        btTbCrearCiutat.setSize(new java.awt.Dimension(64, 64));
         btTbCrearCiutat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenucreaciudadActionPerformed(evt);
@@ -2887,7 +2887,6 @@ public class Ventana extends javax.swing.JFrame {
                             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-
                 }
                 DSalidaCosteTiempo = new JDialog();
                 DSalidaCosteTiempo.setModal(true);
@@ -2923,7 +2922,7 @@ public class Ventana extends javax.swing.JFrame {
                     mundo.setModoRuta(0);
                     if (nombre_ciudad.getText() != null) {
                         ciudades[ciudades_creadas] = new Ciudad(nombre_ciudad.getText(), x, y);
-                        ciudades_creadas = ciudades_creadas + 1;
+                        ciudades_creadas += 1;
                         mundo.setNumciudades(ciudades_creadas);
                         repaint();
                     }
@@ -2933,7 +2932,8 @@ public class Ventana extends javax.swing.JFrame {
                         DestinoComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
                     }
                     nombre_ciudad.setText("");
-                    DCreaCiudad.dispose();
+//                    DCreaCiudad.dispose();
+                    DCreaCiudad.setVisible(false);
                 }
             }
         }
@@ -2949,7 +2949,6 @@ public class Ventana extends javax.swing.JFrame {
         DvueloComboBox.removeAllItems();
         JComboBox combo = (JComboBox) evt.getSource();
         String nombre = (String) combo.getSelectedItem();
-//        print(nombre);
         origen = nombre;
         for (int i = 0; i < ciudades_creadas; i++) {
             if (!ciudades[i].getnombre().equals(nombre)) {
@@ -3052,7 +3051,8 @@ public class Ventana extends javax.swing.JFrame {
                                 codigo++;
                                 repaint();
                             }
-                            DCreaVuelo.dispose();
+//                            DCreaVuelo.dispose();
+                            DCreaVuelo.setVisible(false);
                         } catch (Exception ex) {
                             mostrarMissatgeError(null, ex);
                             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -3118,7 +3118,8 @@ public class Ventana extends javax.swing.JFrame {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            DGenAle.dispose();
+//            DGenAle.dispose();
+            DGenAle.setVisible(false);
         }
     }//GEN-LAST:event_CreaGenAleActionPerformed
 
@@ -3169,31 +3170,38 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     private void btGenAleCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGenAleCancelarActionPerformed
-        DGenAle.dispose();
+//        DGenAle.dispose();
+        DGenAle.setVisible(false);
     }//GEN-LAST:event_btGenAleCancelarActionPerformed
 
     private void btCrearCiutatCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearCiutatCancelarActionPerformed
-        DCreaCiudad.dispose();
+//        DCreaCiudad.dispose();
+        DCreaCiudad.setVisible(false);
     }//GEN-LAST:event_btCrearCiutatCancelarActionPerformed
 
     private void btCreaVueloCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCreaVueloCancelarActionPerformed
-        DCreaVuelo.dispose();
+//        DCreaVuelo.dispose();
+        DCreaVuelo.setVisible(false);
     }//GEN-LAST:event_btCreaVueloCancelarActionPerformed
 
     private void btAboutSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAboutSortirActionPerformed
-        DAbout.dispose();
+//        DAbout.dispose();
+        DAbout.setVisible(false);
     }//GEN-LAST:event_btAboutSortirActionPerformed
 
     private void btPanellVolsSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanellVolsSortirActionPerformed
-        DVeureVols.dispose();
+//        DVeureVols.dispose();
+        DVeureVols.setVisible(false);
     }//GEN-LAST:event_btPanellVolsSortirActionPerformed
 
     private void btPanelSalidaTiempoSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanelSalidaTiempoSortirActionPerformed
-        DSalidaCosteTiempo.dispose();
+//        DSalidaCosteTiempo.dispose();
+        DSalidaCosteTiempo.setVisible(false);
     }//GEN-LAST:event_btPanelSalidaTiempoSortirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DSalidaCosteTiempo.dispose();
+//        DSalidaCosteTiempo.dispose();
+        DSalidaCosteTiempo.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void todos_con_todosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todos_con_todosActionPerformed

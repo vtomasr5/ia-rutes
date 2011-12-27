@@ -339,7 +339,7 @@ public class Cola_ciudades {
     public void mostrar_cola_coste() {
         Elemento q = primero();
         while (q != null) {
-            System.out.print("Precio: " + q.get_precio() + "\n");
+            System.out.print("Preu: " + q.get_precio() + "\n");
             q = q.get_sig();
         }
     }
@@ -347,7 +347,7 @@ public class Cola_ciudades {
     public void mostrar_cola_tiempo() {
         Elemento q = primero();
         while (q != null) {
-            System.out.print("Tiempo: " + q.get_horalleg() + "\n");
+            System.out.print("Temps: " + q.get_horalleg() + "\n");
             q = q.get_sig();
         }
         System.out.print("\n");
