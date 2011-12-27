@@ -1549,6 +1549,7 @@ public class Ventana extends javax.swing.JFrame {
             coordenaday.setText(numy.toString());                  
             nombre_ciudad.setText("");
             DCreaCiudad = new JDialog();
+            SwingUtilities.updateComponentTreeUI(PanelCreaCiudad);
             DCreaCiudad.setModal(true);
             DCreaCiudad.setTitle("Crear nova ciutat");
             DCreaCiudad.setSize(400, 200);
@@ -2357,24 +2358,20 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                    .addGroup(PanelAboutLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
-                    .addGroup(PanelAboutLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
-                    .addGroup(PanelAboutLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
-                    .addGroup(PanelAboutLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
                     .addComponent(btAboutSortir, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                    .addGroup(PanelAboutLayout.createSequentialGroup()
+                        .addGroup(PanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         PanelAboutLayout.setVerticalGroup(
@@ -2974,6 +2971,8 @@ public class Ventana extends javax.swing.JFrame {
                     }
                 }
                 DSalidaCosteTiempo = new JDialog();
+                SwingUtilities.updateComponentTreeUI(PanelSalidaCoste);
+                SwingUtilities.updateComponentTreeUI(PanelSalidaTiempo);
                 DSalidaCosteTiempo.setModal(true);
                 DSalidaCosteTiempo.setTitle("Resultats");
                 if (coste) {
@@ -3044,6 +3043,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void MenucreavueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenucreavueloActionPerformed
         DCreaVuelo = new JDialog();
+        SwingUtilities.updateComponentTreeUI(PanelCreaVuelo);
         DCreaVuelo.setTitle("Crea nou vol");
         DCreaVuelo.setModal(true);
         DCreaVuelo.getRootPane().setDefaultButton(BotonCreavuelo);
@@ -3063,6 +3063,7 @@ public class Ventana extends javax.swing.JFrame {
     private void MenucreaciudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenucreaciudadActionPerformed
         nombre_ciudad.setText("");
         DCreaCiudad = new JDialog();
+        SwingUtilities.updateComponentTreeUI(PanelCreaCiudad);
         DCreaCiudad.setTitle("Crear nova ciutat");
         DCreaCiudad.setSize(400, 200);
         DCreaCiudad.setModal(true);
@@ -3173,6 +3174,7 @@ public class Ventana extends javax.swing.JFrame {
     private void MenugenaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenugenaleActionPerformed
         DGenAle = new JDialog();
         DGenAle.setSize(425, 200);
+        SwingUtilities.updateComponentTreeUI(PanelGenAle);
         DGenAle.setModal(true);
         DGenAle.setTitle("Generar aleatoris");
         DGenAle.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -3244,6 +3246,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         DAbout = new JDialog(this);
+        SwingUtilities.updateComponentTreeUI(PanelAbout);
         DAbout.setTitle("Sobre...");
         DAbout.setModal(true);
         DAbout.setLocationByPlatform(true);
