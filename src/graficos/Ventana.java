@@ -50,7 +50,7 @@ public class Ventana extends javax.swing.JFrame {
     private static final int max_ciudades = 100;
     private int ciudades_creadas = 0;
     private Ciudad[] ciudades = new Ciudad[max_ciudades];
-    private Vuelo[] vuelos;
+//    private Vuelo[] vuelos;
     private Lista_vuelos[][] listaVuelos = new Lista_vuelos[max_ciudades][max_ciudades];
     private MapaMundo mundo;
     private JPanel PanelMundo2;
@@ -221,44 +221,7 @@ public class Ventana extends javax.swing.JFrame {
         }
     }
 
-//    void mostrar_ruta(String ciudad_origen, String ciudad_destino, String[] ciudad_predecesora, Vuelo[] codigo_vuelo) {
-//        int pos = posicion_ciudad(ciudad_destino);
-//        String[] lista_ciudades = new String[100];
-//        Vuelo[] lista_codigos_vuelo = new Vuelo[100];
-//        for (int i = 0; i < 100; i++) {
-//            lista_codigos_vuelo[i] = null;
-//        }
-//        for (int i = 0; i < 100; i++) {
-//            lista_ciudades[i] = "";
-//        }
-//        int i = 0;
-//        lista_ciudades[i] = ciudad_destino;
-//        lista_codigos_vuelo[i] = codigo_vuelo[posicion_ciudad(ciudad_destino)];
-//        i = i + 1;
-//        while (!ciudad_predecesora[pos].equals("")) {
-//            lista_ciudades[i] = ciudad_predecesora[pos];
-//            lista_codigos_vuelo[i] = codigo_vuelo[posicion_ciudad(ciudad_predecesora[pos])];
-//            i = i + 1;
-//            pos = posicion_ciudad(ciudad_predecesora[pos]);
-//        }
-//        print("La lista de las ciudades es: ");
-//        for (i = 99; i >= 0; i--) {
-//            if (!lista_ciudades[i].equals("")) {
-//                print(lista_ciudades[i] + "\n");
-//            }
-//        }
-//        print("La lista de los vuelos es: " + "\n");
-//        for (i = 99; i >= 0; i--) {
-//            if (lista_codigos_vuelo[i] != null) {
-//                print("Vuelo: ");
-//                print(lista_codigos_vuelo[i].get_codigo() + " con hora de salida: "
-//                        + lista_codigos_vuelo[i].get_horasal() + " y hora de llegada: " + lista_codigos_vuelo[i].get_horalleg() + "\n");
-//            }
-//        }
-//        print("\n");
-//    }
-
-//    public void mostrar_ciudades() {
+//    private void mostrar_ciudades() {
 ////       for (int i=0; i<ciudades_creadas; i++){
 ////            print(ciudades [i].getnombre() + "\n");
 ////            print(ciudades [i].getcx() + "\n");
@@ -424,7 +387,7 @@ public class Ventana extends javax.swing.JFrame {
             campoCostetotal.setText(pre.toString());
             mundo.setVuelosRuta(vuelo_elegido.get_vuelos(), numCiu);
             mundo.setModoRuta(1);
-            vuelos = vuelo_elegido.get_vuelos();
+//            vuelos = vuelo_elegido.get_vuelos();
             repaint();
         }
         print("\n");
@@ -473,7 +436,7 @@ public class Ventana extends javax.swing.JFrame {
             Float pre;
             pre = vuelo_elegido.get_precio();
             campoPretoti.setText(pre.toString());
-            vuelos = vuelo_elegido.get_vuelos();
+//            vuelos = vuelo_elegido.get_vuelos();
             repaint();
         }
         print("\n");
@@ -1420,8 +1383,8 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void añadir_ciudad_auto(int numero_ciudades_crear) {
-        int max_coord_x = 790;
-        int max_coord_y = 425;
+        final int max_coord_x = 790;
+        final int max_coord_y = 425;
         int coord_x;
         int coord_y;
         for (int j = 0; j < numero_ciudades_crear; j++) {
@@ -1681,6 +1644,10 @@ public class Ventana extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         ScrollMundo = new javax.swing.JScrollPane();
         BotonBuscar = new javax.swing.JButton();
+        toobar = new javax.swing.JToolBar();
+        btTbCrearCiutat = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         Menubusquedas = new javax.swing.JMenu();
         MenuNuevo = new javax.swing.JMenuItem();
@@ -1690,8 +1657,6 @@ public class Ventana extends javax.swing.JFrame {
         Menucreaciudad = new javax.swing.JMenuItem();
         Menucreavuelo = new javax.swing.JMenuItem();
         Menugenale = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
-        MenuItemVerVuelos = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -1827,7 +1792,7 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        ResultadosCoste.setShowGrid(true);
+        ResultadosCoste.setShowGrid(false);
         ResultadosCoste.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ResultadosCosteMouseClicked(evt);
@@ -2081,8 +2046,8 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(PanelCreaVueloLayout.createSequentialGroup()
                         .addComponent(CreaOrigen)
                         .addGap(18, 18, 18)
-                        .addComponent(OvueloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(OvueloComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CreaDestino)
                         .addGap(11, 11, 11)
                         .addComponent(DvueloComboBox, 0, 183, Short.MAX_VALUE))
@@ -2116,10 +2081,10 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(OvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                        .addComponent(OvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                         .addComponent(CreaOrigen))
                     .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(DvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DvueloComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                         .addComponent(CreaDestino)))
                 .addGap(18, 18, 18)
                 .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2138,7 +2103,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(PanelCreaVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BotonCreavuelo)
                     .addComponent(btCreaVueloCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         campoNodovisTi.setPreferredSize(new java.awt.Dimension(70, 27));
@@ -2208,7 +2173,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         ResultadosTiempo.setMinimumSize(new java.awt.Dimension(75, 72));
-        ResultadosTiempo.setShowGrid(true);
+        ResultadosTiempo.setShowGrid(false);
         ResultadosTiempo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ResultadosTiempoMouseClicked(evt);
@@ -2307,7 +2272,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 18));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Cerques: Rutes Aèrees");
+        jLabel5.setText("Cerques: Rutes Aèries");
 
         jLabel6.setText("Autor:");
 
@@ -2451,7 +2416,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -2465,7 +2430,7 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TablaVuelos.setShowGrid(true);
+        TablaVuelos.setShowGrid(false);
         jScrollPane4.setViewportView(TablaVuelos);
 
         btPanellVolsSortir.setText("Sortir");
@@ -2498,7 +2463,7 @@ public class Ventana extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pràctica IA. UIB 2011/12. Rutes aerees.");
+        setTitle("Pràctica IA. UIB 2011/12. Rutes aèries.");
         setLocationByPlatform(true);
 
         TextoSalida.setColumns(20);
@@ -2572,19 +2537,19 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(PanelBusquedasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelBusquedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addGroup(PanelBusquedasLayout.createSequentialGroup()
                         .addGroup(PanelBusquedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Origen)
                             .addComponent(Destino))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelBusquedasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(OrigenComboBox, 0, 201, Short.MAX_VALUE)
-                            .addComponent(DestinoComboBox, 0, 201, Short.MAX_VALUE)))
-                    .addComponent(Busqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(busqueda_tipo, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(criterio_busqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                            .addComponent(OrigenComboBox, 0, 199, Short.MAX_VALUE)
+                            .addComponent(DestinoComboBox, 0, 199, Short.MAX_VALUE)))
+                    .addComponent(Busqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(busqueda_tipo, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(criterio_busqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(precio_minimo)
                     .addComponent(tiempo_minimo)
                     .addComponent(profundidad)
@@ -2635,10 +2600,6 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ScrollMundo.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        ScrollMundo.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        ScrollMundo.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         BotonBuscar.setText("Iniciar cerca");
         BotonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2646,6 +2607,47 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        toobar.setFloatable(false);
+        toobar.setRollover(true);
+
+        btTbCrearCiutat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ciutat.jpg"))); // NOI18N
+        btTbCrearCiutat.setText("Crear ciutat");
+        btTbCrearCiutat.setFocusable(false);
+        btTbCrearCiutat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btTbCrearCiutat.setPreferredSize(new java.awt.Dimension(64, 64));
+        btTbCrearCiutat.setSize(new java.awt.Dimension(64, 64));
+        btTbCrearCiutat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenucreaciudadActionPerformed(evt);
+            }
+        });
+        toobar.add(btTbCrearCiutat);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/vol.png"))); // NOI18N
+        jButton3.setText("Crear vol");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenucreavueloActionPerformed(evt);
+            }
+        });
+        toobar.add(jButton3);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/random.png"))); // NOI18N
+        jButton4.setText("Gen. Aleatoris");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenugenaleActionPerformed(evt);
+            }
+        });
+        toobar.add(jButton4);
+
+        jMenuBar1.setBackground(new java.awt.Color(238, 238, 238));
+
+        Menubusquedas.setBackground(new java.awt.Color(238, 238, 238));
         Menubusquedas.setText("Arxiu");
 
         MenuNuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
@@ -2669,6 +2671,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jMenuBar1.add(Menubusquedas);
 
+        Menucrear.setBackground(new java.awt.Color(238, 238, 238));
         Menucrear.setText("Accions");
 
         Menucreaciudad.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
@@ -2697,19 +2700,10 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         Menucrear.add(Menugenale);
-        Menucrear.add(jSeparator5);
-
-        MenuItemVerVuelos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        MenuItemVerVuelos.setText("Veure vols");
-        MenuItemVerVuelos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemVerVuelosActionPerformed(evt);
-            }
-        });
-        Menucrear.add(MenuItemVerVuelos);
 
         jMenuBar1.add(Menucrear);
 
+        jMenu1.setBackground(new java.awt.Color(238, 238, 238));
         jMenu1.setText("Ajuda");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
@@ -2729,22 +2723,24 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(toobar, javax.swing.GroupLayout.DEFAULT_SIZE, 1140, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1100, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(PanelBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BotonBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                            .addComponent(BotonBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)))
+                        .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(toobar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBusquedas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2773,144 +2769,140 @@ public class Ventana extends javax.swing.JFrame {
 
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
         if (OrigenComboBox.getItemCount() == 0 || DestinoComboBox.getItemCount() == 0) {
-            JOptionPane.showMessageDialog(this, "No hi ha ciutats suficients d'alta.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No hi ha ciutats suficients per cercar.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {    
-            if (listaVuelos[0][0].Vacia()) {
-                JOptionPane.showMessageDialog(this, "No hi ha cap vol d'alta. No se pot cercar.", "Alerta", JOptionPane.WARNING_MESSAGE);
-            } else {
-                int elemd = DestinoComboBox.getSelectedIndex();
-                String lugard = (String) DestinoComboBox.getItemAt(elemd);
-                int elemo = OrigenComboBox.getSelectedIndex();
-                boolean coste = true;
-                String lugaro = (String) OrigenComboBox.getItemAt(elemo);
-                pinta_mapa();
-                reiniciarTabla();
-                if (elemd != -1) {
-                    if (profundidad.isSelected()) {
-                        if (precio_minimo.isSelected()) {
-                            try {
-                                coste = true;
-                                busqueda_prof(lugaro, lugard, 0);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            try {
-                                coste = false;
-                                busqueda_prof(lugaro, lugard, 1);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }//tiempo minimo
-                    } else if (profundidad_poda.isSelected()) {
-                        if (precio_minimo.isSelected()) {
-                            try {
-                                coste = true;
-                                busqueda_prof_poda_coste(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            try {
-                                coste = false;
-                                busqueda_prof_poda_tiempo(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    } else if (coste_uniforme.isSelected()) {
-                        if (precio_minimo.isSelected()) {
-                            try {
-                                coste = true;
-                                busqueda_costo_uniforme_coste(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            try {
-                                coste = false;
-                                busqueda_costo_uniforme_tiempo(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    } else if (vecino_proximo.isSelected()) {
-                        if (precio_minimo.isSelected()) {
-                            try {
-                                coste = true;
-                                busqueda_vecino_mas_proximo(lugaro, lugard, 0);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            try {
-                                coste = false;
-                                busqueda_vecino_mas_proximo(lugaro, lugard, 1);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        }
-                    } else if (a_estrella.isSelected()) {          //A estrella
-                        if (precio_minimo.isSelected()) {
+            int elemd = DestinoComboBox.getSelectedIndex();
+            String lugard = (String) DestinoComboBox.getItemAt(elemd);
+            int elemo = OrigenComboBox.getSelectedIndex();
+            boolean coste = true;
+            String lugaro = (String) OrigenComboBox.getItemAt(elemo);
+            pinta_mapa();
+            reiniciarTabla();
+            if (elemd != -1) {
+                if (profundidad.isSelected()) {
+                    if (precio_minimo.isSelected()) {
+                        try {
                             coste = true;
-                            try {
-                                busqueda_a_estrella_cost(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
-                            coste = false;
-                            try {
-                                busqueda_a_estrella_temps(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            busqueda_prof(lugaro, lugard, 0);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
-                        if (precio_minimo.isSelected()) {
-                            coste = true;
-                            try {
-                                busqueda_a_estrella2_cost(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                        } else {
+                        try {
                             coste = false;
-                            try {
-                                busqueda_a_estrella2_temps(lugaro, lugard);
-                            } catch (Exception ex) {
-                                mostrarMissatgeError(null, ex);
-                                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            busqueda_prof(lugaro, lugard, 1);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    }//tiempo minimo
+                } else if (profundidad_poda.isSelected()) {
+                    if (precio_minimo.isSelected()) {
+                        try {
+                            coste = true;
+                            busqueda_prof_poda_coste(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        try {
+                            coste = false;
+                            busqueda_prof_poda_tiempo(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } else if (coste_uniforme.isSelected()) {
+                    if (precio_minimo.isSelected()) {
+                        try {
+                            coste = true;
+                            busqueda_costo_uniforme_coste(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        try {
+                            coste = false;
+                            busqueda_costo_uniforme_tiempo(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } else if (vecino_proximo.isSelected()) {
+                    if (precio_minimo.isSelected()) {
+                        try {
+                            coste = true;
+                            busqueda_vecino_mas_proximo(lugaro, lugard, 0);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        try {
+                            coste = false;
+                            busqueda_vecino_mas_proximo(lugaro, lugard, 1);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } else if (a_estrella.isSelected()) {          //A estrella
+                    if (precio_minimo.isSelected()) {
+                        coste = true;
+                        try {
+                            busqueda_a_estrella_cost(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        coste = false;
+                        try {
+                            busqueda_a_estrella_temps(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } else {
+                    if (precio_minimo.isSelected()) {
+                        coste = true;
+                        try {
+                            busqueda_a_estrella2_cost(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        coste = false;
+                        try {
+                            busqueda_a_estrella2_temps(lugaro, lugard);
+                        } catch (Exception ex) {
+                            mostrarMissatgeError(null, ex);
+                            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
 
-                    }
-                    DSalidaCosteTiempo = new JDialog();
-                    DSalidaCosteTiempo.setModal(true);
-                    DSalidaCosteTiempo.setTitle("Resultats");
-                    if (coste) {
-                        DSalidaCosteTiempo.setSize(PanelSalidaCoste.getPreferredSize());
-                        DSalidaCosteTiempo.add(PanelSalidaCoste);
-                    } else {
-                        DSalidaCosteTiempo.setSize(PanelSalidaTiempo.getPreferredSize());
-                        DSalidaCosteTiempo.add(PanelSalidaTiempo);
-                    }
-                    DSalidaCosteTiempo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                    DSalidaCosteTiempo.setLocationByPlatform(true);
-                    DSalidaCosteTiempo.pack();
-                    DSalidaCosteTiempo.setVisible(true);
                 }
+                DSalidaCosteTiempo = new JDialog();
+                DSalidaCosteTiempo.setModal(true);
+                DSalidaCosteTiempo.setTitle("Resultats");
+                if (coste) {
+                    DSalidaCosteTiempo.setSize(PanelSalidaCoste.getPreferredSize());
+                    DSalidaCosteTiempo.add(PanelSalidaCoste);
+                } else {
+                    DSalidaCosteTiempo.setSize(PanelSalidaTiempo.getPreferredSize());
+                    DSalidaCosteTiempo.add(PanelSalidaTiempo);
+                }
+                DSalidaCosteTiempo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                DSalidaCosteTiempo.setLocationByPlatform(true);
+                DSalidaCosteTiempo.pack();
+                DSalidaCosteTiempo.setVisible(true);
             }
         }
 
@@ -3175,46 +3167,7 @@ public class Ventana extends javax.swing.JFrame {
         DAbout.pack();
         DAbout.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void MenuItemVerVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemVerVuelosActionPerformed
-        Vuelo v = new Vuelo();
-        int codi;
-        String comp;
-        Date Hllegada, Hsalida;
-        float preu;
-        
-        for (int i = 0; i < ciudades_creadas; i++) {
-            for (int j = 0; j < ciudades_creadas; j++) {
-                codi = listaVuelos[i][j].recuperar_cod(v);
-                comp = listaVuelos[i][j].recuperar_compañia(v);
-                Hllegada = listaVuelos[i][j].recuperar_hora_llegada(v);
-                Hsalida = listaVuelos[i][j].recuperar_hora_salida(v);
-                preu = listaVuelos[i][j].recuperar_precio(v);
-                
-                for (int k = 0; k < 1; k++) {
-                    TablaVuelos.setValueAt(codi, k, 0);
-                    TablaVuelos.setValueAt(comp, k, 1); 
-                    TablaVuelos.setValueAt(Hsalida.toString(), k, 2); 
-                    TablaVuelos.setValueAt(Hllegada.toString(), k, 3); 
-//                    TablaVuelos.setValueAt(origen, k, 4); 
-//                    TablaVuelos.setValueAt(desti, k, 5); 
-                    TablaVuelos.setValueAt(preu, k, 6); 
-                    
-                }
-            }
-        }
-        
-        DVeureVols = new JDialog(this);
-        DVeureVols.setTitle("Vols creats");
-        DVeureVols.setModal(true);
-        DVeureVols.add(PanelVuelos);
-        DVeureVols.setLocationByPlatform(true);
-//        DVeureVols.setPreferredSize(new Dimension(770, 350));
-        DVeureVols.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        DVeureVols.pack();
-        DVeureVols.setVisible(true);        
-    }//GEN-LAST:event_MenuItemVerVuelosActionPerformed
-
+    
     private void btGenAleCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGenAleCancelarActionPerformed
         DGenAle.dispose();
     }//GEN-LAST:event_btGenAleCancelarActionPerformed
@@ -3280,7 +3233,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JComboBox DvueloComboBox;
     private javax.swing.JTextField HoraLlegada;
     private javax.swing.JTextField HoraSalida;
-    private javax.swing.JMenuItem MenuItemVerVuelos;
     private javax.swing.JMenuItem MenuNuevo;
     private javax.swing.JMenuItem MenuSotirItem;
     private javax.swing.JMenu Menubusquedas;
@@ -3315,6 +3267,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btGenAleCancelar;
     private javax.swing.JButton btPanelSalidaTiempoSortir;
     private javax.swing.JButton btPanellVolsSortir;
+    private javax.swing.JButton btTbCrearCiutat;
     private javax.swing.JLabel busqueda_tipo;
     private javax.swing.JTextField campoCostetotal;
     private javax.swing.JTextField campoNodoexTi;
@@ -3330,6 +3283,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JRadioButton coste_uniforme;
     private javax.swing.JLabel criterio_busqueda;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -3351,7 +3306,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -3381,6 +3335,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JRadioButton tiempo_minimo;
     private javax.swing.ButtonGroup tipo_busqueda;
     private javax.swing.JRadioButton todos_con_todos;
+    private javax.swing.JToolBar toobar;
     private javax.swing.JRadioButton vecino_proximo;
     // End of variables declaration//GEN-END:variables
 }
