@@ -29,7 +29,7 @@ public class MapaMundo extends JLabel {
     public MapaMundo(Ciudad[] ciu, Lista_vuelos[][] matriz) {
         this.listaVuelos = matriz;
         this.ciu = ciu;
-        img = new ImageIcon("mapa/mapa.jpg");
+        img = new ImageIcon("src/imagenes/mapa.jpg");
         this.setIcon(img);
         this.repaint();
     }

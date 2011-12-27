@@ -1426,8 +1426,8 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void añadir_ciudad_auto(int numero_ciudades_crear) {
-        final int max_coord_x = 790;
-        final int max_coord_y = 425;
+        final int max_coord_x = mundo.getIcon().getIconWidth() - 8;
+        final int max_coord_y = mundo.getIcon().getIconHeight() - 8;
         int coord_x;
         int coord_y;
         for (int j = 0; j < numero_ciudades_crear; j++) {
