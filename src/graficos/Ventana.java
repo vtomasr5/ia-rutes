@@ -48,6 +48,7 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
         initLookAndFeel();
         SwingUtilities.updateComponentTreeUI(this);
+        SwingUtilities.updateComponentTreeUI(popupMenu);
         inicializar_matriz_vuelos();
         init();
         inicializar_matriz_distancias();
@@ -1541,23 +1542,13 @@ public class Ventana extends javax.swing.JFrame {
             Integer numx = evt.getX();
             Integer numy = evt.getY();
             coordenadax.setText(numx.toString());
-            coordenaday.setText(numy.toString());      
+            coordenaday.setText(numy.toString());
+            popupMenu.show(PanelMundo2, evt.getX(), evt.getY());
         } else {
             Integer numx = evt.getX();
             Integer numy = evt.getY();
             coordenadax.setText(numx.toString());
-            coordenaday.setText(numy.toString());                  
-            nombre_ciudad.setText("");
-            DCreaCiudad = new JDialog();
-            SwingUtilities.updateComponentTreeUI(PanelCreaCiudad);
-            DCreaCiudad.setModal(true);
-            DCreaCiudad.setTitle("Crear nova ciutat");
-            DCreaCiudad.setSize(400, 200);
-            DCreaCiudad.setLocationByPlatform(true);
-            DCreaCiudad.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            DCreaCiudad.add(PanelCreaCiudad);
-            DCreaCiudad.pack();
-            DCreaCiudad.setVisible(true);
+            coordenaday.setText(numy.toString());            
         }
     }
 
@@ -1662,10 +1653,9 @@ public class Ventana extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         btAboutSortir = new javax.swing.JButton();
-        PanelVuelos = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        TablaVuelos = new javax.swing.JTable();
-        btPanellVolsSortir = new javax.swing.JButton();
+        popupMenu = new javax.swing.JPopupMenu();
+        popupMenuItemCrearCiutat = new javax.swing.JMenuItem();
+        popupMenuItemCrearVol = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextoSalida = new javax.swing.JTextArea();
         PanelBusquedas = new javax.swing.JPanel();
@@ -2273,8 +2263,8 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(labelpretoti))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(campoPretoti, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                            .addComponent(campoPretoti, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -2402,108 +2392,21 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        TablaVuelos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Codi", "Companyia", "Hora sortida", "Hora arribada", "Origen", "Destí", "Preu"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(TablaVuelos);
-
-        btPanellVolsSortir.setText("Sortir");
-        btPanellVolsSortir.setSelected(true);
-        btPanellVolsSortir.addActionListener(new java.awt.event.ActionListener() {
+        popupMenuItemCrearCiutat.setText("Crear ciutat");
+        popupMenuItemCrearCiutat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPanellVolsSortirActionPerformed(evt);
+                MenucreaciudadActionPerformed(evt);
             }
         });
+        popupMenu.add(popupMenuItemCrearCiutat);
 
-        javax.swing.GroupLayout PanelVuelosLayout = new javax.swing.GroupLayout(PanelVuelos);
-        PanelVuelos.setLayout(PanelVuelosLayout);
-        PanelVuelosLayout.setHorizontalGroup(
-            PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVuelosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btPanellVolsSortir)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        PanelVuelosLayout.setVerticalGroup(
-            PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelVuelosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btPanellVolsSortir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        popupMenuItemCrearVol.setText("Crear vol");
+        popupMenuItemCrearVol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenucreavueloActionPerformed(evt);
+            }
+        });
+        popupMenu.add(popupMenuItemCrearVol);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pràctica IA. UIB 2011/12. Rutes aèries.");
@@ -3046,6 +2949,10 @@ public class Ventana extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(PanelCreaVuelo);
         DCreaVuelo.setTitle("Crea nou vol");
         DCreaVuelo.setModal(true);
+        nombre_compañia.setText("");
+        HoraLlegada.setText("01:00");
+        HoraSalida.setText("00:00");
+        PrecioVuelo.setText("0");
         DCreaVuelo.getRootPane().setDefaultButton(BotonCreavuelo);
         DCreaVuelo.setSize(PanelCreaVuelo.getPreferredSize());
         DCreaVuelo.setLocationByPlatform(true);
@@ -3277,11 +3184,6 @@ public class Ventana extends javax.swing.JFrame {
         DAbout.setVisible(false);
     }//GEN-LAST:event_btAboutSortirActionPerformed
 
-    private void btPanellVolsSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanellVolsSortirActionPerformed
-//        DVeureVols.dispose();
-        DVeureVols.setVisible(false);
-    }//GEN-LAST:event_btPanellVolsSortirActionPerformed
-
     private void btPanelSalidaTiempoSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanelSalidaTiempoSortirActionPerformed
 //        DSalidaCosteTiempo.dispose();
         DSalidaCosteTiempo.setVisible(false);
@@ -3370,14 +3272,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel PanelGenAle;
     private javax.swing.JPanel PanelSalidaCoste;
     private javax.swing.JPanel PanelSalidaTiempo;
-    private javax.swing.JPanel PanelVuelos;
     private javax.swing.JPanel Paneldatoscoste;
     private javax.swing.JPanel Paneldatostiempo;
     private javax.swing.JTextField PrecioVuelo;
     private javax.swing.JTable ResultadosCoste;
     private javax.swing.JTable ResultadosTiempo;
     private javax.swing.JScrollPane ScrollMundo;
-    private javax.swing.JTable TablaVuelos;
     private javax.swing.JTextArea TextoSalida;
     private javax.swing.JRadioButton a_estrella;
     private javax.swing.JRadioButton a_estrella2;
@@ -3386,7 +3286,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btCrearCiutatCancelar;
     private javax.swing.JButton btGenAleCancelar;
     private javax.swing.JButton btPanelSalidaTiempoSortir;
-    private javax.swing.JButton btPanellVolsSortir;
     private javax.swing.JButton btTbCrearCiutat;
     private javax.swing.JLabel busqueda_tipo;
     private javax.swing.JTextField campoCostetotal;
@@ -3421,7 +3320,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -3451,6 +3349,9 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField nombre_ciudad;
     private javax.swing.JTextField nombre_compañia;
     private javax.swing.JRadioButton personalizado;
+    private javax.swing.JPopupMenu popupMenu;
+    private javax.swing.JMenuItem popupMenuItemCrearCiutat;
+    private javax.swing.JMenuItem popupMenuItemCrearVol;
     private javax.swing.JRadioButton precio_minimo;
     private javax.swing.JRadioButton profundidad;
     private javax.swing.JRadioButton profundidad_poda;
