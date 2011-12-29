@@ -48,6 +48,7 @@ public class Ventana extends javax.swing.JFrame {
         initComponents();
         initLookAndFeel();
         SwingUtilities.updateComponentTreeUI(this);
+        SwingUtilities.updateComponentTreeUI(popupMenu);
         inicializar_matriz_vuelos();
         init();
         inicializar_matriz_distancias();
@@ -1541,23 +1542,13 @@ public class Ventana extends javax.swing.JFrame {
             Integer numx = evt.getX();
             Integer numy = evt.getY();
             coordenadax.setText(numx.toString());
-            coordenaday.setText(numy.toString());      
+            coordenaday.setText(numy.toString());
+            popupMenu.show(PanelMundo2, evt.getX(), evt.getY());
         } else {
             Integer numx = evt.getX();
             Integer numy = evt.getY();
             coordenadax.setText(numx.toString());
-            coordenaday.setText(numy.toString());                  
-            nombre_ciudad.setText("");
-            DCreaCiudad = new JDialog();
-            SwingUtilities.updateComponentTreeUI(PanelCreaCiudad);
-            DCreaCiudad.setModal(true);
-            DCreaCiudad.setTitle("Crear nova ciutat");
-            DCreaCiudad.setSize(400, 200);
-            DCreaCiudad.setLocationByPlatform(true);
-            DCreaCiudad.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            DCreaCiudad.add(PanelCreaCiudad);
-            DCreaCiudad.pack();
-            DCreaCiudad.setVisible(true);
+            coordenaday.setText(numy.toString());            
         }
     }
 
@@ -1666,6 +1657,9 @@ public class Ventana extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaVuelos = new javax.swing.JTable();
         btPanellVolsSortir = new javax.swing.JButton();
+        popupMenu = new javax.swing.JPopupMenu();
+        popupMenuItemCrearCiutat = new javax.swing.JMenuItem();
+        popupMenuItemCrearVol = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextoSalida = new javax.swing.JTextArea();
         PanelBusquedas = new javax.swing.JPanel();
@@ -2505,6 +2499,22 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        popupMenuItemCrearCiutat.setText("Crear ciutat");
+        popupMenuItemCrearCiutat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenucreaciudadActionPerformed(evt);
+            }
+        });
+        popupMenu.add(popupMenuItemCrearCiutat);
+
+        popupMenuItemCrearVol.setText("Crear vol");
+        popupMenuItemCrearVol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenucreavueloActionPerformed(evt);
+            }
+        });
+        popupMenu.add(popupMenuItemCrearVol);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pràctica IA. UIB 2011/12. Rutes aèries.");
         setLocationByPlatform(true);
@@ -3046,6 +3056,10 @@ public class Ventana extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(PanelCreaVuelo);
         DCreaVuelo.setTitle("Crea nou vol");
         DCreaVuelo.setModal(true);
+        nombre_compañia.setText("");
+        HoraLlegada.setText("01:00");
+        HoraSalida.setText("00:00");
+        PrecioVuelo.setText("0");
         DCreaVuelo.getRootPane().setDefaultButton(BotonCreavuelo);
         DCreaVuelo.setSize(PanelCreaVuelo.getPreferredSize());
         DCreaVuelo.setLocationByPlatform(true);
@@ -3451,6 +3465,9 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField nombre_ciudad;
     private javax.swing.JTextField nombre_compañia;
     private javax.swing.JRadioButton personalizado;
+    private javax.swing.JPopupMenu popupMenu;
+    private javax.swing.JMenuItem popupMenuItemCrearCiutat;
+    private javax.swing.JMenuItem popupMenuItemCrearVol;
     private javax.swing.JRadioButton precio_minimo;
     private javax.swing.JRadioButton profundidad;
     private javax.swing.JRadioButton profundidad_poda;

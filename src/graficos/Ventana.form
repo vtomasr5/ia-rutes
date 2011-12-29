@@ -698,8 +698,8 @@
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="campoPretoti" pref="136" max="32767" attributes="1"/>
-                                  <Component id="campoTiempotoTi" alignment="1" pref="136" max="32767" attributes="1"/>
+                                  <Component id="campoPretoti" pref="158" max="32767" attributes="1"/>
+                                  <Component id="campoTiempotoTi" alignment="1" pref="158" max="32767" attributes="1"/>
                               </Group>
                           </Group>
                           <Component id="jScrollPane3" alignment="0" pref="694" max="32767" attributes="0"/>
@@ -1067,6 +1067,30 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPanellVolsSortirActionPerformed"/>
           </Events>
         </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPopupMenu" name="popupMenu">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="popupMenuItemCrearCiutat">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Crear ciutat"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenucreaciudadActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="popupMenuItemCrearVol">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Crear vol"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenucreavueloActionPerformed"/>
+          </Events>
+        </MenuItem>
       </SubComponents>
     </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
