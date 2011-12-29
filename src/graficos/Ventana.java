@@ -1653,10 +1653,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         btAboutSortir = new javax.swing.JButton();
-        PanelVuelos = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        TablaVuelos = new javax.swing.JTable();
-        btPanellVolsSortir = new javax.swing.JButton();
         popupMenu = new javax.swing.JPopupMenu();
         popupMenuItemCrearCiutat = new javax.swing.JMenuItem();
         popupMenuItemCrearVol = new javax.swing.JMenuItem();
@@ -2267,8 +2263,8 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(labelpretoti))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(campoPretoti, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                            .addComponent(campoPretoti, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -2393,109 +2389,6 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btAboutSortir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        TablaVuelos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Codi", "Companyia", "Hora sortida", "Hora arribada", "Origen", "Destí", "Preu"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(TablaVuelos);
-
-        btPanellVolsSortir.setText("Sortir");
-        btPanellVolsSortir.setSelected(true);
-        btPanellVolsSortir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPanellVolsSortirActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout PanelVuelosLayout = new javax.swing.GroupLayout(PanelVuelos);
-        PanelVuelos.setLayout(PanelVuelosLayout);
-        PanelVuelosLayout.setHorizontalGroup(
-            PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVuelosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btPanellVolsSortir)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        PanelVuelosLayout.setVerticalGroup(
-            PanelVuelosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelVuelosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btPanellVolsSortir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -3291,11 +3184,6 @@ public class Ventana extends javax.swing.JFrame {
         DAbout.setVisible(false);
     }//GEN-LAST:event_btAboutSortirActionPerformed
 
-    private void btPanellVolsSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanellVolsSortirActionPerformed
-//        DVeureVols.dispose();
-        DVeureVols.setVisible(false);
-    }//GEN-LAST:event_btPanellVolsSortirActionPerformed
-
     private void btPanelSalidaTiempoSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPanelSalidaTiempoSortirActionPerformed
 //        DSalidaCosteTiempo.dispose();
         DSalidaCosteTiempo.setVisible(false);
@@ -3384,14 +3272,12 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel PanelGenAle;
     private javax.swing.JPanel PanelSalidaCoste;
     private javax.swing.JPanel PanelSalidaTiempo;
-    private javax.swing.JPanel PanelVuelos;
     private javax.swing.JPanel Paneldatoscoste;
     private javax.swing.JPanel Paneldatostiempo;
     private javax.swing.JTextField PrecioVuelo;
     private javax.swing.JTable ResultadosCoste;
     private javax.swing.JTable ResultadosTiempo;
     private javax.swing.JScrollPane ScrollMundo;
-    private javax.swing.JTable TablaVuelos;
     private javax.swing.JTextArea TextoSalida;
     private javax.swing.JRadioButton a_estrella;
     private javax.swing.JRadioButton a_estrella2;
@@ -3400,7 +3286,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btCrearCiutatCancelar;
     private javax.swing.JButton btGenAleCancelar;
     private javax.swing.JButton btPanelSalidaTiempoSortir;
-    private javax.swing.JButton btPanellVolsSortir;
     private javax.swing.JButton btTbCrearCiutat;
     private javax.swing.JLabel busqueda_tipo;
     private javax.swing.JTextField campoCostetotal;
@@ -3435,7 +3320,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

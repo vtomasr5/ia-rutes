@@ -27,7 +27,6 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
     Date hora_salida;
     Date hora_llegada;
     Vuelo siguiente;
-    Ciudad ciudad;
     int o_x, o_y, d_x, d_y; 
     
     public Vuelo() {
@@ -50,16 +49,6 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
         this.o_y = oy;
         this.d_x = dx;
         this.d_y = dy;
-    }
-    
-    public Vuelo(int cod, String comp, float precio, Date salida, Date llegada, Ciudad ciu) {
-        set_codigo(cod);
-        set_compañia(comp);
-        set_precio(precio);
-        set_horasal(salida);
-        set_horalleg(llegada);
-        set_sig(null);
-        set_ciudad(ciu);
     }
     
     /**
@@ -179,13 +168,5 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
 
     public Vuelo get_sig() {
         return (siguiente);
-    }
-
-    private void set_ciudad(Ciudad ciu) {
-        ciudad = ciu;
-    }
-    
-    private Ciudad get_ciudad() {
-        return ciudad;
     }
 }
