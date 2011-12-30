@@ -1184,11 +1184,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="toobar" alignment="0" pref="1042" max="32767" attributes="0"/>
+          <Component id="toobar" alignment="0" pref="1102" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="1030" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" pref="1062" max="32767" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="BotonBuscar" max="32767" attributes="1"/>
@@ -1213,7 +1213,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BotonBuscar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="ScrollMundo" pref="490" max="32767" attributes="1"/>
+                  <Component id="ScrollMundo" pref="528" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="123" max="-2" attributes="0"/>
