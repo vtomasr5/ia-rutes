@@ -3083,6 +3083,11 @@ public class Ventana extends javax.swing.JFrame {
         DGenAle.setSize(425, 200);
         SwingUtilities.updateComponentTreeUI(PanelGenAle);
         DGenAle.setModal(true);
+        personalizado.setSelected(true);
+        texto_numvuelos.setEnabled(true);
+        todos_con_todos.setSelected(false);
+        CiuGen.setText("2");
+        texto_numvuelos.setText("1");
         DGenAle.setTitle("Generar aleatoris");
         DGenAle.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         DGenAle.setLocationByPlatform(true);
@@ -3195,6 +3200,7 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void todos_con_todosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todos_con_todosActionPerformed
+        texto_numvuelos.setText("1");
         texto_numvuelos.setEnabled(false);
     }//GEN-LAST:event_todos_con_todosActionPerformed
 
