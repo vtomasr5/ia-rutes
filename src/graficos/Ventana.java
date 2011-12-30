@@ -47,6 +47,7 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         initLookAndFeel();
+        SwingUtilities.updateComponentTreeUI(this);
         SwingUtilities.updateComponentTreeUI(popupMenu);
         inicializar_matriz_vuelos();
         init();
