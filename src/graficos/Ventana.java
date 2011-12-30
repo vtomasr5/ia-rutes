@@ -47,7 +47,6 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         initLookAndFeel();
-        SwingUtilities.updateComponentTreeUI(this);
         SwingUtilities.updateComponentTreeUI(popupMenu);
         inicializar_matriz_vuelos();
         init();
@@ -69,7 +68,6 @@ public class Ventana extends javax.swing.JFrame {
     private JDialog DAbout;
     private JDialog DSalidaCosteTiempo;
     private JDialog DGenAle;
-    private JDialog DVeureVols;
     
     public static void mostrarMissatgeError(JComponent parent, Exception e) {
         final JTextArea textArea = new JTextArea();
