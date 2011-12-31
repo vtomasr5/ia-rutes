@@ -49,6 +49,8 @@ public class MapaMundo extends JLabel {
         for (int i = 0; i < ciu_creadas; i++) {
             ciu[i].pintar(g);
         }
+        // modoRuta = 1 -> ruta escogida
+        // modoRuta = 2 -> ruta seleccionada
         if (modoRuta == 1 || modoRuta == 2) {
             for (int i = 1; i <= numCiu; i++) {
                 vuelos[i].pintaRuta(g);

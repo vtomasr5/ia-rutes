@@ -72,7 +72,7 @@ public class Lista_vuelos implements java.io.Serializable {
     public Vuelo mejor_vuelo_coste(Date hora_llegada) {
         Vuelo q = primero();
         Vuelo vuelo_elegido = null;
-        float coste = 100000000;
+        float coste = Float.MAX_VALUE;
         while (q != null) {
             if (q.get_horasal().after(hora_llegada) && q.get_precio() < coste) {
                 coste = q.get_precio();

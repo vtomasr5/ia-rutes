@@ -1184,18 +1184,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="toobar" alignment="0" pref="1102" max="32767" attributes="0"/>
+          <Component id="toobar" alignment="0" pref="1040" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="1090" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" pref="1028" max="32767" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="BotonBuscar" max="32767" attributes="1"/>
                           <Component id="PanelBusquedas" alignment="0" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="ScrollMundo" pref="864" max="32767" attributes="1"/>
+                      <Component id="ScrollMundo" pref="802" max="32767" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -1213,7 +1213,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BotonBuscar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="ScrollMundo" pref="528" max="32767" attributes="1"/>
+                  <Component id="ScrollMundo" pref="495" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="123" max="-2" attributes="0"/>
@@ -1549,6 +1549,10 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenugenaleActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator6">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCoord">
         </Component>
       </SubComponents>
     </Container>

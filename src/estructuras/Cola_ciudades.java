@@ -60,7 +60,7 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_costee(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos) {//nuevo
+    public void añadir_cola_costee(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos) {
         Elemento q, nuevo;
         q = primero();
         nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
@@ -76,7 +76,7 @@ public class Cola_ciudades {
         r = null;
         if (q == null) {
             nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
-            nuevo.set_dist(dist);//nuevo
+            nuevo.set_dist(dist);
             nuevo.set_sig(q);
             Cap = nuevo;
         } else {
@@ -86,12 +86,12 @@ public class Cola_ciudades {
             }
             if (q.get_dist() < dist) {
                 nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
-                nuevo.set_dist(dist);//nuevo
+                nuevo.set_dist(dist);
                 nuevo.set_sig(null);
                 q.set_sig(nuevo);
             } else {
                 nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
-                nuevo.set_dist(dist);//nuevo
+                nuevo.set_dist(dist);
                 nuevo.set_sig(q);
                 if (r == null) {
                     Cap = nuevo;
@@ -102,7 +102,7 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_distanciaa(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, double distancia) {//nuevo
+    public void añadir_cola_distanciaa(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, double distancia) {
         Elemento q, nuevo;
         q = primero();
         nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
@@ -119,7 +119,7 @@ public class Cola_ciudades {
         r = null;
         if (q == null) {
             nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) dist);
-            nuevo.set_dist(dist);//nuevo
+            nuevo.set_dist(dist);
             nuevo.set_sig(q);
             Cap = nuevo;
         } else {
@@ -145,7 +145,7 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_distanciaa2(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date h_s, double distancia) {//nuevo
+    public void añadir_cola_distanciaa2(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date h_s, double distancia) {
         Elemento q, nuevo;
         q = primero();
         nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) distancia);
@@ -194,7 +194,7 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_tiempoo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date t, long l) {//nuevo
+    public void añadir_cola_tiempoo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date t, long l) {
         Elemento q, nuevo;
         q = primero();
         nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
@@ -213,7 +213,7 @@ public class Cola_ciudades {
     public Elemento quitar_cola_coste() { //quita el primero de la cola
         Elemento q, r, sel = null;
         q = primero();
-        float coste = 10000000;
+        float coste = Float.MAX_VALUE;
         while (q != null) {
             if (q.get_precio() < coste) {
                 coste = q.get_precio();
@@ -246,7 +246,7 @@ public class Cola_ciudades {
     public Elemento quitar_cola_tiempo() {//quita el primero de la cola
         Elemento q, r, sel = null;
         q = primero();
-        float tiempo = 2000000000;
+        float tiempo = Float.MAX_VALUE;
         while (q != null) {
             if (q.get_tiempo_acum() < tiempo) {
                 tiempo = q.get_tiempo_acum();
@@ -279,7 +279,7 @@ public class Cola_ciudades {
     public Elemento quitar_cola_dist() {//quita el primero de la cola
         Elemento q, r, sel = null;
         q = primero();
-        double dist = 2000000000;
+        double dist = Double.MAX_VALUE;
         while (q != null) {
             if (q.get_dist() < dist) {
                 dist = q.get_dist();
