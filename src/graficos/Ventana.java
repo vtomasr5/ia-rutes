@@ -111,7 +111,7 @@ public class Ventana extends javax.swing.JFrame {
     }    
     
     private void print(String str) {
-        TextoSalida.append(str);
+        //TextoSalida.append(str);
     }
 
     private void pinta_mapa() {
@@ -1739,8 +1739,6 @@ public class Ventana extends javax.swing.JFrame {
         popupMenu = new javax.swing.JPopupMenu();
         popupMenuItemCrearCiutat = new javax.swing.JMenuItem();
         popupMenuItemCrearVol = new javax.swing.JMenuItem();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TextoSalida = new javax.swing.JTextArea();
         PanelBusquedas = new javax.swing.JPanel();
         profundidad_poda = new javax.swing.JRadioButton();
         precio_minimo = new javax.swing.JRadioButton();
@@ -2497,11 +2495,6 @@ public class Ventana extends javax.swing.JFrame {
         setTitle("Pràctica IA. UIB 2011/12. Rutes aèries.");
         setLocationByPlatform(true);
 
-        TextoSalida.setColumns(20);
-        TextoSalida.setEditable(false);
-        TextoSalida.setRows(5);
-        jScrollPane1.setViewportView(TextoSalida);
-
         PanelBusquedas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tipo_busqueda.add(profundidad_poda);
@@ -2795,17 +2788,14 @@ public class Ventana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(toobar, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
+            .addComponent(toobar, javax.swing.GroupLayout.DEFAULT_SIZE, 1031, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1028, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PanelBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 802, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -2819,8 +2809,6 @@ public class Ventana extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BotonBuscar))
                     .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -3217,7 +3205,7 @@ public class Ventana extends javax.swing.JFrame {
         ciudades = new Ciudad[max_ciudades];        
         ciudades_creadas = 0;
         codigo = 1;
-        TextoSalida.setText("");
+        //TextoSalida.setText("");
         inicializar_matriz_vuelos();
         init();
         inicializar_matriz_distancias();
@@ -3371,7 +3359,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTable ResultadosCoste;
     private javax.swing.JTable ResultadosTiempo;
     private javax.swing.JScrollPane ScrollMundo;
-    private javax.swing.JTextArea TextoSalida;
     private javax.swing.JRadioButton a_estrella;
     private javax.swing.JRadioButton a_estrella2;
     private javax.swing.JButton btAboutSortir;
@@ -3410,7 +3397,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
