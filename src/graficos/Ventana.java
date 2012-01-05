@@ -13,7 +13,19 @@
  */
 package graficos;
 
+import elementos.Ciudad;
+import elementos.Elemento;
+import elementos.MapaMundo;
+import elementos.Vuelo;
+import estructuras.Cola_ciudades;
+import estructuras.Fichero;
+import estructuras.Lista_vuelos;
+import estructuras.Pila_ciudades;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,28 +33,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import estructuras.Lista_vuelos;
-import elementos.Ciudad;
-import estructuras.Cola_ciudades;
-import elementos.Elemento;
-import elementos.MapaMundo;
-import estructuras.Pila_ciudades;
-import elementos.Vuelo;
-import estructuras.Fichero;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Ventana extends javax.swing.JFrame {
 
@@ -90,7 +81,7 @@ public class Ventana extends javax.swing.JFrame {
     }
     
     private void initLookAndFeel() {
-        String lookAndFeel = null;
+        String lookAndFeel;
         String osname = System.getProperty("os.name").toLowerCase();
         
         if (osname.equals("linux")) {
@@ -244,6 +235,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void AbrirFichero() throws IOException, ClassNotFoundException {
         JFileChooser FC = new JFileChooser();
+        FC.setFileFilter(new FileNameExtensionFilter("Binaris", "bin"));
         FC.showOpenDialog(null);
         File selFile = FC.getSelectedFile();
         if (selFile != null) {
@@ -2391,7 +2383,7 @@ public class Ventana extends javax.swing.JFrame {
 
         PanelAbout.setName("PanelAbout"); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 18));
+        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Cerques: Rutes Aèries");
 
@@ -2510,14 +2502,14 @@ public class Ventana extends javax.swing.JFrame {
         Criterio.add(tiempo_minimo);
         tiempo_minimo.setText("Temps mínim");
 
-        busqueda_tipo.setFont(new java.awt.Font("DejaVu Sans", 1, 14));
+        busqueda_tipo.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         busqueda_tipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         busqueda_tipo.setText("Tipus de cerques");
 
         tipo_busqueda.add(coste_uniforme);
         coste_uniforme.setText("Cost uniforme");
 
-        criterio_busqueda.setFont(new java.awt.Font("DejaVu Sans", 1, 14));
+        criterio_busqueda.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         criterio_busqueda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         criterio_busqueda.setText("Criteri de cerca");
 
@@ -2536,7 +2528,7 @@ public class Ventana extends javax.swing.JFrame {
         profundidad.setSelected(true);
         profundidad.setText("Profunditat");
 
-        Busqueda.setFont(new java.awt.Font("DejaVu Sans", 1, 14));
+        Busqueda.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         Busqueda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Busqueda.setText("Rutes");
 
@@ -2691,8 +2683,6 @@ public class Ventana extends javax.swing.JFrame {
         toobar.add(jButton4);
         toobar.add(jSeparator6);
         toobar.add(lblCoord);
-
-        jMenuBar1.setBackground(new java.awt.Color(238, 238, 238));
 
         Menubusquedas.setBackground(new java.awt.Color(238, 238, 238));
         Menubusquedas.setText("Arxiu");
@@ -3074,10 +3064,10 @@ public class Ventana extends javax.swing.JFrame {
                             DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm");
                             DateFormat df2 = new SimpleDateFormat("hh:mm");
                             Date fechaActual = new Date();
-                            Date fecha_salida = null;
-                            Date fecha_llegada = null;
+                            Date fecha_salida;
+                            Date fecha_llegada;
                             
-                            String dia2 = null;
+                            String dia2;
                             mundo.setModoRuta(0);
                             
                             SimpleDateFormat formato = new SimpleDateFormat("dd");
