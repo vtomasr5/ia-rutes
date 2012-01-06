@@ -123,7 +123,7 @@ public class Lista_vuelos implements java.io.Serializable {
     }
 
     public void imprimir() {
-        Vuelo tmp = new Vuelo();
+        Vuelo tmp;
         tmp = Cap;
         System.out.print("--- LLISTA ---\n");
         while (tmp != null) {
