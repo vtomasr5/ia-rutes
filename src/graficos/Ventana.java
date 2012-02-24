@@ -34,7 +34,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Ventana extends javax.swing.JFrame {
 
@@ -1947,7 +1946,7 @@ public class Ventana extends javax.swing.JFrame {
 
         campoNodovis.setPreferredSize(new java.awt.Dimension(70, 27));
 
-        campoTiempoeje.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        campoTiempoeje.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         campoTiempoeje.setPreferredSize(new java.awt.Dimension(90, 27));
 
         campoNodoexp.setPreferredSize(new java.awt.Dimension(70, 27));
@@ -2803,8 +2802,8 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PanelBusquedas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BotonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScrollMundo, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2817,8 +2816,9 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelBusquedas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BotonBuscar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BotonBuscar)
+                        .addGap(0, 12, Short.MAX_VALUE))
                     .addComponent(ScrollMundo))
                 .addContainerGap())
         );
@@ -2978,17 +2978,9 @@ public class Ventana extends javax.swing.JFrame {
                 DSalidaCosteTiempo.setVisible(true);
             }
         }
-
     }//GEN-LAST:event_BotonBuscarActionPerformed
 
     private void CreaCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreaCiudadActionPerformed
-        int i = 0;
-        for (i = 0; i < ciudades_creadas; i++) {
-            if (ciudades[i].getnombre().equals(nombre_ciudad.getText())) {
-                JOptionPane.showMessageDialog(DCreaCiudad, "No hi pot haver ciutats amb el mateix nom.", "Alerta", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-        }
         if (nombre_ciudad.getText().equals("") || coordenadax.getText().equals("") || coordenaday.getText().equals("")) {
             JOptionPane.showMessageDialog(DCreaCiudad, "Falten dades per omplir.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -2998,6 +2990,12 @@ public class Ventana extends javax.swing.JFrame {
                 if ((Integer.parseInt(coordenadax.getText()) > 795) || (Integer.parseInt(coordenaday.getText()) > 430)) {
                     JOptionPane.showMessageDialog(DCreaCiudad, "Els valors de X i Y no poden sortir del mapa. Maxim: X:795 i Y:430", "Alerta", JOptionPane.WARNING_MESSAGE);    
                 } else {
+                    for (int i = 0; i < ciudades_creadas; i++) {
+                        if ((ciudades[i].getnombre().equals(nombre_ciudad.getText())) || ((String.valueOf(ciudades[i].getcx()).equals(coordenadax.getText())) && (String.valueOf(ciudades[i].getcy()).equals(coordenaday.getText())))) {
+                            JOptionPane.showMessageDialog(DCreaCiudad, "No hi pot haver ciutats amb el mateix nom,\nni amb les mateixes coordenades.", "Alerta", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+                    }
                     Integer x = Integer.parseInt(coordenadax.getText());
                     Integer y = Integer.parseInt(coordenaday.getText());
                     mundo.setModoRuta(0);
@@ -3332,11 +3330,11 @@ public class Ventana extends javax.swing.JFrame {
 
     private void lblCoordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCoordMouseClicked
         // PROVES!!!!
-        System.out.println("Llista de vols");
         int pos_ciu_origen = posicion_ciudad("1"); //origen
         int pos_ciu_desti = posicion_ciudad("2"); //desti
         
         try {
+            System.out.println("Llista de vols");
             if ((pos_ciu_origen > 0) && (pos_ciu_desti > 0)) {
                 if (listaVuelos[pos_ciu_origen][pos_ciu_desti] != null) {
                     System.out.println("Vols: "+listaVuelos[pos_ciu_origen][pos_ciu_desti].numero_vuelos());
