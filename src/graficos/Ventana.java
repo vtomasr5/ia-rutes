@@ -232,21 +232,22 @@ public class Ventana extends javax.swing.JFrame {
     }
     
     private void GuardarFichero() throws FileNotFoundException, IOException {
-        String nom = JOptionPane.showInputDialog(this, "Nom del fitxer (~.bin):", "Guardar", JOptionPane.QUESTION_MESSAGE);
-        if ((nom != null) && (nom.length() > 0)) {
-            if (!nom.endsWith(".bin")) {
-                nom = nom + ".bin";
+        JFileChooser FC = new JFileChooser();
+        int res = FC.showSaveDialog(null);
+        if (res == JFileChooser.APPROVE_OPTION) {
+            File nom = FC.getSelectedFile();
+            if (nom != null) {
+                FileOutputStream fos = new FileOutputStream(nom);
+                ObjectOutputStream out = new ObjectOutputStream(fos);
+                Fichero fi = new Fichero(ciudades, listaVuelos, ciudades_creadas);
+                out.writeObject(fi);
             }
-            FileOutputStream fos = new FileOutputStream(nom);
-            ObjectOutputStream out = new ObjectOutputStream(fos);
-            Fichero fi = new Fichero(ciudades, listaVuelos, ciudades_creadas);
-            out.writeObject(fi);
         }
     }
 
     private void AbrirFichero() throws IOException, ClassNotFoundException {
         JFileChooser FC = new JFileChooser();
-        FC.setFileFilter(new FileNameExtensionFilter("Binaris", "bin"));
+//        FC.setFileFilter(new FileNameExtensionFilter("Binaris", "bin"));
         FC.showOpenDialog(null);
         File selFile = FC.getSelectedFile();
         if (selFile != null) {
@@ -1612,7 +1613,6 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void mundoMouseClicked(java.awt.event.MouseEvent evt) {
-        lblCoord.setForeground(Color.red);
         if (evt.getButton() == MouseEvent.BUTTON3) {
             Integer numx = evt.getX();
             Integer numy = evt.getY();
@@ -1620,6 +1620,7 @@ public class Ventana extends javax.swing.JFrame {
             coordenaday.setText(numy.toString());
             popupMenu.show(PanelMundo, evt.getX(), evt.getY());
         } else {
+            lblCoord.setForeground(Color.red);
             Integer numx = evt.getX();
             Integer numy = evt.getY();
             coordenadax.setText(numx.toString());
@@ -3335,13 +3336,19 @@ public class Ventana extends javax.swing.JFrame {
         int pos_ciu_origen = posicion_ciudad("1"); //origen
         int pos_ciu_desti = posicion_ciudad("2"); //desti
         
-        if (listaVuelos[pos_ciu_origen][pos_ciu_desti] != null) {
-            System.out.println(listaVuelos[pos_ciu_origen][pos_ciu_desti].numero_vuelos());
-            Vuelo v = listaVuelos[pos_ciu_origen][pos_ciu_desti].primero();
-            listaVuelos[pos_ciu_origen][pos_ciu_desti].imprimir(v);
-        } else {
-            System.out.println(listaVuelos[pos_ciu_origen][pos_ciu_desti].numero_vuelos());
-            System.out.println("No hi ha vols!");
+        try {
+            if ((pos_ciu_origen > 0) && (pos_ciu_desti > 0)) {
+                if (listaVuelos[pos_ciu_origen][pos_ciu_desti] != null) {
+                    System.out.println("Vols: "+listaVuelos[pos_ciu_origen][pos_ciu_desti].numero_vuelos());
+                    Vuelo v = listaVuelos[pos_ciu_origen][pos_ciu_desti].primero();
+                    listaVuelos[pos_ciu_origen][pos_ciu_desti].imprimir(v);
+                } else {
+                    System.out.println(listaVuelos[pos_ciu_origen][pos_ciu_desti].numero_vuelos());
+                    System.out.println("No hi ha vols!");
+                }
+            }
+        } catch (Exception e) {
+            mostrarMissatgeError(mundo, e);
         }
     }//GEN-LAST:event_lblCoordMouseClicked
 
