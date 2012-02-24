@@ -18,7 +18,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JLabel;
 
 public class Lista_vuelos implements java.io.Serializable {
 
@@ -41,7 +40,7 @@ public class Lista_vuelos implements java.io.Serializable {
         Cap = nuevo;
     }
 
-    public void pinta_vuelo(JLabel mundo) {
+    public void pinta_vuelo() {
         Vuelo vue = Cap;
         while (vue != null) {
             vue = siguiente_vuelo(vue);

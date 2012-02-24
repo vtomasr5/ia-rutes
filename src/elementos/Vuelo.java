@@ -61,7 +61,7 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
      * @param yy The y location of the "head" of the arrow
      */
     private void drawArrow(Graphics2D g, int x, int y, int xx, int yy) {
-        float arrowWidth = 6.0f;
+        float arrowWidth = 6.0f; //tamany punta fletxa
         float theta = 0.423f;
         int[] xPoints = new int[3];
         int[] yPoints = new int[3];
@@ -105,21 +105,18 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
     public void pintaVuelo(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.darkGray);
-//        g2d.drawLine(o_x, o_y, d_x, d_y);
         drawArrow(g2d, o_x, o_y, d_x, d_y);
     }
 
     public void pintaRuta(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.green);
-//        g2d.drawLine(o_x, o_y, d_x, d_y);
         drawArrow(g2d, o_x, o_y, d_x, d_y);
     }
 
     public void pintaSeleccionada(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.magenta);
-//        g2d.drawLine(o_x, o_y, d_x, d_y);
         drawArrow(g2d, o_x, o_y, d_x, d_y);
     }
 

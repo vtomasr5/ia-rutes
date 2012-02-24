@@ -108,7 +108,7 @@ public class Ventana extends javax.swing.JFrame {
     private void pinta_mapa() {
         for (int i = 0; i < ciudades_creadas; i++) {
             for (int j = 0; j < ciudades_creadas; j++) {
-                listaVuelos[i][j].pinta_vuelo(mundo);
+                listaVuelos[i][j].pinta_vuelo();
             }
         }
     }
@@ -1619,6 +1619,7 @@ public class Ventana extends javax.swing.JFrame {
             coordenaday.setText(numy.toString());
             popupMenu.show(PanelMundo, evt.getX(), evt.getY());
         } else {
+            lblCoord.setFont(new Font("Lucida Grande", Font.BOLD, 14));
             lblCoord.setForeground(Color.red);
             Integer numx = evt.getX();
             Integer numy = evt.getY();
@@ -1653,6 +1654,7 @@ public class Ventana extends javax.swing.JFrame {
 
             @Override
             public void mouseMoved(MouseEvent e) {
+                lblCoord.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
                 lblCoord.setForeground(Color.black);
                 lblCoord.setText("X: " + e.getX() + " Y: " + e.getY());
             }
@@ -2842,7 +2844,7 @@ public class Ventana extends javax.swing.JFrame {
 //        if (OrigenComboBox.getItemCount() == 0 || DestinoComboBox.getItemCount() == 0) {
         if (ciudades_creadas < 2) {
             JOptionPane.showMessageDialog(this, "No hi ha ciutats suficients per cercar.", "Alerta", JOptionPane.WARNING_MESSAGE);
-        } else {    
+        } else {
             int elemd = DestinoComboBox.getSelectedIndex();
             String lugard = (String) DestinoComboBox.getItemAt(elemd);
             int elemo = OrigenComboBox.getSelectedIndex();

@@ -30,7 +30,7 @@ public class Ciudad implements java.io.Serializable {
     }
 
     public Ciudad() {
-        this.nombre = "";
+        this.nombre = null;
         coord_x = -1;
         coord_y = -1;
 
