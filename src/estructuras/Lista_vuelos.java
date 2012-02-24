@@ -122,23 +122,23 @@ public class Lista_vuelos implements java.io.Serializable {
         return (p.get_horalleg());
     }
 
-    public void imprimir() {
-        Vuelo tmp;
-        tmp = Cap;
-        System.out.print("--- LLISTA ---\n");
-        while (tmp != null) {
-            System.out.print("     Companyia: ");
-            System.out.print(recuperar_compañia(tmp) + "\n");
+    public void imprimir(Vuelo p) {
+//        Vuelo p;
+        p = Cap;
+        System.out.print("--- LLISTA DE VOLS ---\n");
+        while (p != null) {
             System.out.print("     Codi: ");
-            System.out.print(recuperar_cod(tmp) + "\n");
+            System.out.print(recuperar_cod(p) + "\n");
             System.out.print("     Preu: ");
-            System.out.print(recuperar_precio(tmp) + "\n");
+            System.out.print(recuperar_precio(p) + "\n");
+            System.out.print("     Companyia: ");
+            System.out.print(recuperar_compañia(p) + "\n");
             System.out.print("     Hora sortida: ");
-            System.out.print(recuperar_hora_salida(tmp) + "\n");
+            System.out.print(recuperar_hora_salida(p) + "\n");
             System.out.print("     Hora arribada: ");
-            System.out.print(recuperar_hora_llegada(tmp) + "\n");
+            System.out.print(recuperar_hora_llegada(p) + "\n");
             System.out.print("-----------------------------\n");
-            tmp = tmp.get_sig();
+            p = p.get_sig();
         }
         System.out.println("");
     }

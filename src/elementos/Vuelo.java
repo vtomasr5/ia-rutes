@@ -52,6 +52,7 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
     }
     
     /**
+     * Link: http://www.bytemycode.com/snippets/snippet/82/
      * Draws an arrow on the given Graphics2D context
      * @param g The Graphics2D context to draw on
      * @param x The x location of the "tail" of the arrow
@@ -60,7 +61,7 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
      * @param yy The y location of the "head" of the arrow
      */
     private void drawArrow(Graphics2D g, int x, int y, int xx, int yy) {
-        float arrowWidth = 5.0f;
+        float arrowWidth = 6.0f;
         float theta = 0.423f;
         int[] xPoints = new int[3];
         int[] yPoints = new int[3];
