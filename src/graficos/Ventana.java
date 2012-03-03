@@ -13,19 +13,21 @@
  */
 package graficos;
 
-import elementos.Ciudad;
-import elementos.Elemento;
-import elementos.MapaMundo;
-import elementos.Vuelo;
-import estructuras.Cola_ciudades;
-import estructuras.Fichero;
-import estructuras.Lista_vuelos;
-import estructuras.Pila_ciudades;
+import elementos.Ciutat;
+import elementos.Element;
+import elementos.Mapa_mon;
+import elementos.Vol;
+import estructuras.Coa_ciutats;
+import estructuras.Fitxer;
+import estructuras.LlistaVols;
+import estructuras.Pila_ciutats;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -53,18 +55,19 @@ public class Ventana extends javax.swing.JFrame {
     private String origen, destino = "";
     private int codigo = 1;
     private static final int max_ciudades = 100;
-    private int ciudades_creadas = 0;
-    private Ciudad[] ciudades = new Ciudad[max_ciudades];
-//    private Vuelo[] vuelos;
-    private Lista_vuelos[][] listaVuelos = new Lista_vuelos[max_ciudades][max_ciudades];
-    private MapaMundo mundo;
+    private int ciutats_creades = 0;
+    private Ciutat[] ciutats = new Ciutat[max_ciudades];
+//    private Vol[] vuelos;
+    private LlistaVols[][] llistaVols = new LlistaVols[max_ciudades][max_ciudades];
+    private Mapa_mon mundo;
     private JPanel PanelMundo;
-    private double[][] distancias = new double[max_ciudades][max_ciudades];
+    private double[][] distancies = new double[max_ciudades][max_ciudades];
     private JDialog DCreaVuelo;
     private JDialog DCreaCiudad;
     private JDialog DAbout;
     private JDialog DSalidaCosteTiempo;
     private JDialog DGenAle;
+    private JDialog DLlistarVols;
     
     public static void mostrarMissatgeError(JComponent parent, Exception e) {
         final JTextArea textArea = new JTextArea();
@@ -106,20 +109,20 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void pinta_mapa() {
-        for (int i = 0; i < ciudades_creadas; i++) {
-            for (int j = 0; j < ciudades_creadas; j++) {
-                listaVuelos[i][j].pinta_vuelo();
+        for (int i = 0; i < ciutats_creades; i++) {
+            for (int j = 0; j < ciutats_creades; j++) {
+                llistaVols[i][j].pinta_vuelo();
             }
         }
     }
 
-//    private void muestra_vuelos() {
-//        for (int i = 0; i < ciudades_creadas; i++) {
-//            for (int j = 0; j < ciudades_creadas; j++) {
-//                listaVuelos[i][j].imprimir();
-//            }
-//        }
-//    }
+    private void mostra_vols() {
+        for (int i = 0; i < ciutats_creades; i++) {
+            for (int j = 0; j < ciutats_creades; j++) {
+                llistaVols[i][j].imprimir();
+            }
+        }
+    }
 
     public void reiniciarTabla() {
         for (int j = 0; j < ResultadosCoste.getRowCount(); j++) {
@@ -146,8 +149,8 @@ public class Ventana extends javax.swing.JFrame {
     private int posicion_ciudad_str(String nombre_ciudad) {
         boolean encontrada = false;
         int posicion = 0;
-        while (encontrada == false && posicion <= ciudades_creadas) {
-            if (ciudades[posicion].getnombre().equals(nombre_ciudad)) {
+        while (encontrada == false && posicion <= ciutats_creades) {
+            if (ciutats[posicion].getnombre().equals(nombre_ciudad)) {
                 encontrada = true;
             } else {
                 posicion++;
@@ -174,8 +177,8 @@ public class Ventana extends javax.swing.JFrame {
             nombre_ciudad = destino;
         }
         if (!destino.equals("")) {
-            while (encontrada == false && posicion <= ciudades_creadas) {
-                if (ciudades[posicion].getnombre().equals(nombre_ciudad)) {
+            while (encontrada == false && posicion <= ciutats_creades) {
+                if (ciutats[posicion].getnombre().equals(nombre_ciudad)) {
                     encontrada = true;
                 } else {
                     posicion++;
@@ -194,7 +197,7 @@ public class Ventana extends javax.swing.JFrame {
     private void inicializar_matriz_vuelos() {
         for (int i = 0; i < max_ciudades; i++) {
             for (int j = 0; j < max_ciudades; j++) {
-                listaVuelos[i][j] = new Lista_vuelos();
+                llistaVols[i][j] = new LlistaVols();
             }
         }
     }
@@ -202,7 +205,7 @@ public class Ventana extends javax.swing.JFrame {
     private void inicializar_matriz_distancias() {
         for (int i = 0; i < max_ciudades; i++) {
             for (int j = 0; j < max_ciudades; j++) {
-                distancias[i][j] = 0;
+                distancies[i][j] = 0;
             }
         }
     }
@@ -210,12 +213,12 @@ public class Ventana extends javax.swing.JFrame {
     private void actualizar_matriz_distancias() {
         int x1, x2, y1, y2;
         double distancia;
-        for (int i = 0; i < ciudades_creadas; i++) {
-            x1 = ciudades[i].getcx();
-            y1 = ciudades[i].getcy();
-            for (int j = 0; j < ciudades_creadas; j++) {
-                x2 = ciudades[j].getcx();
-                y2 = ciudades[j].getcy();
+        for (int i = 0; i < ciutats_creades; i++) {
+            x1 = ciutats[i].getcx();
+            y1 = ciutats[i].getcy();
+            for (int j = 0; j < ciutats_creades; j++) {
+                x2 = ciutats[j].getcx();
+                y2 = ciutats[j].getcy();
                 if (x1 > x2 && y1 > y2) {
                     distancia = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
                 } else if (x1 > x2 && y1 < y2) {
@@ -225,7 +228,7 @@ public class Ventana extends javax.swing.JFrame {
                 } else {
                     distancia = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
                 }
-                distancias[i][j] = distancia;
+                distancies[i][j] = distancia;
             }
         }
     }
@@ -238,7 +241,7 @@ public class Ventana extends javax.swing.JFrame {
             if (nom != null) {
                 FileOutputStream fos = new FileOutputStream(nom);
                 ObjectOutputStream out = new ObjectOutputStream(fos);
-                Fichero fi = new Fichero(ciudades, listaVuelos, ciudades_creadas);
+                Fitxer fi = new Fitxer(ciutats, llistaVols, ciutats_creades);
                 out.writeObject(fi);
             }
         }
@@ -252,58 +255,55 @@ public class Ventana extends javax.swing.JFrame {
         if (selFile != null) {
             FileInputStream fis = new FileInputStream(selFile);
             ObjectInputStream in = new ObjectInputStream(fis);
-            Fichero fi = (Fichero) in.readObject();
-            ciudades = fi.getCiudad();
-            listaVuelos = fi.getVuelos();
-            ciudades_creadas = fi.getCiudadescreadas();
-            mundo.setCiudad(ciudades);
-            mundo.setVuelos(listaVuelos);
-            mundo.setNumciudades(ciudades_creadas);
-            for (int i = 0; i < ciudades_creadas; i++) {
-                OrigenComboBox.addItem(ciudades[i].getnombre());
-                OvueloComboBox.addItem(ciudades[i].getnombre());
+            Fitxer fi = (Fitxer) in.readObject();
+            ciutats = fi.getCiudad();
+            llistaVols = fi.getVuelos();
+            ciutats_creades = fi.getCiudadescreadas();
+            mundo.setCiudad(ciutats);
+            mundo.setVuelos(llistaVols);
+            mundo.setNumciudades(ciutats_creades);
+            for (int i = 0; i < ciutats_creades; i++) {
+                OrigenComboBox.addItem(ciutats[i].getnombre());
+                OvueloComboBox.addItem(ciutats[i].getnombre());
             }
             repaint();
         }
     }
 
-//    private void mostrar_ciudades() {
-////       for (int i=0; i<ciudades_creadas; i++){
-////            print(ciudades [i].getnombre() + "\n");
-////            print(ciudades [i].getcx() + "\n");
-////            print(ciudades [i].getcy() + "\n");
-////        }
-//        for (int i = 0; i < ciudades_creadas; i++) {
-//            print(ciudades[i].getnombre() + "\n"
-//                    + ciudades[i].getcx() + "\n"
-//                    + ciudades[i].getcy() + "\n");
-//        }
-//    }
+    private void mostrar_ciutats() {
+        int pos = 0;
+        for (int i = 0; i < ciutats_creades; i++) {
+            pos = posicion_ciudad_str(ciutats[i].getnombre());
+            textAreaLlistaVols.append(ciutats[i].getnombre() + ", " + ciutats[i].getcx() + ", " + ciutats[i].getcy() + "\n");
+            textAreaLlistaVols.append(Integer.toString(pos));
+
+        }
+    }
 
     private void busqueda_prof(String ciudad_origen, String ciudad_destino, int tipus) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Pila_ciudades p = new Pila_ciudades();
+        Pila_ciutats p = new Pila_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         int nodos_visitados = 0, nodos_expandidos = 0;
-        Date hora_llegada_origen = new Date();
+        Date hora_llegada_origen = new Date(); 
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad origen1 = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat origen1 = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -319,16 +319,16 @@ public class Ventana extends javax.swing.JFrame {
                 // obtenemos la posicion de la ciudad actual
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
                 // recorremos todas las ciudades creadas en el mapa
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
                     // si no hay vuelo entre esas dos ciudades...
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
                         //... comprovamos que no sea la misma ciudad.
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
                             // miramos el siguiente vuelo
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
                             // para los vuelos desde la ciudad de origen a las demas ciudades del mapa...
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 // ... si la hora salida del vuelo > hora llegada de la ciudad actual
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;
@@ -339,22 +339,22 @@ public class Ventana extends javax.swing.JFrame {
                                         posicion_array++;
                                     }
                                     // encontramos la ciudad
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     nodos_expandidos++;
                                     if (tipus == 0) { // tipus = 0 -> busqueda por precio, si tipus = 1 -> busqueda por tiempo
                                         // la añadirmos a la pila
-                                        p.añadir_pila(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
+                                        p.añadir_pila(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
                                     } else {
                                         if (iteraciones == 1) { // si solo ha hecho una iteración solo hay un vuelo.
-                                            p.añadir_pila_tiempo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
+                                            p.añadir_pila_tiempo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
                                         } else {
-                                            p.añadir_pila_tiempo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
+                                            p.añadir_pila_tiempo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
                                         }
                                     }
                                 }
                                 // pasamos al siguiente vuelo y así vamos buscando los vuelos segun el criterio de busqueda.
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -411,8 +411,8 @@ public class Ventana extends javax.swing.JFrame {
 
     }
 
-    private void elegir_mejor_alternativa_coste(Elemento vuelos_candidatos) {
-        Elemento vuelo_elegido = vuelos_candidatos;
+    private void elegir_mejor_alternativa_coste(Element vuelos_candidatos) {
+        Element vuelo_elegido = vuelos_candidatos;
         if (vuelo_elegido != null) {
             print(vuelo_elegido.get_precio() + "\n");
             print("Preu total: " + vuelo_elegido.get_precio() + "\n");
@@ -455,8 +455,8 @@ public class Ventana extends javax.swing.JFrame {
         print("\n");
     }
 
-    private void elegir_mejor_alternativa_tiempo_nueva(Elemento vuelos_candidatos) throws ParseException {
-        Elemento vuelo_elegido = vuelos_candidatos;
+    private void elegir_mejor_alternativa_tiempo_nueva(Element vuelos_candidatos) throws ParseException {
+        Element vuelo_elegido = vuelos_candidatos;
         if (vuelo_elegido != null) {
             print(vuelo_elegido.get_precio() + "\n");
             print("MINIM TEMPS" + "\n");
@@ -509,29 +509,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_prof_poda_coste(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Pila_ciudades p = new Pila_ciudades();
+        Pila_ciutats p = new Pila_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
         float mejor_coste = Float.MAX_VALUE;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         int nodos_visitados = 0, nodos_expandidos = 0;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad origen2 = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat origen2 = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -548,15 +548,15 @@ public class Ventana extends javax.swing.JFrame {
                 // buscamos su posición en la lista
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
                 // para todas la ciudades creadas en el mapa
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
                     // si hay vuelo entre la ciudad de origen i alguna ciudad del mapa
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
                         // comprovamos que el vuelo vuelva a la misma ciudad de partida
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
                             // para todos los vuelos
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 // miramos si la hora salida > hora llegada de la ciudad i que el precio sea el mas barato
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg()) && (ciudad_actual.get_precio()) < mejor_coste) {
                                     int posicion_array = 0;                                                                       
@@ -567,14 +567,14 @@ public class Ventana extends javax.swing.JFrame {
                                         posicion_array++;
                                     }
                                     // agregamos la ciudad a la lista de ciudades y sus vuelos
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     nodos_expandidos++;
                                     // lo guardamos a la pila
-                                    p.añadir_pila(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
+                                    p.añadir_pila(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
                                 }
                                 // vamos a mirar el siguiente vuelo
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -622,30 +622,30 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_prof_poda_tiempo(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Pila_ciudades p = new Pila_ciudades();
+        Pila_ciutats p = new Pila_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
         long mejor_tiempo = Long.MAX_VALUE;
         boolean pasar;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         int nodos_visitados = 0, nodos_expandidos = 0;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad origen3 = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat origen3 = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         // inicio del calculo del tiempo de ejecución del algoritmo
@@ -662,16 +662,16 @@ public class Ventana extends javax.swing.JFrame {
                 // obtenemos su posición en la lista de ciudades
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
                 // para todas las ciudades creadas en el mapa
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
                     // si hay vuelos creados entre la ciudad actual y otras ciudades
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
                         // comprovamos que no haya ciclo
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
                             // obtenemos el vuelo que sale de la ciudad actual
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
                             // para todos los vuelos de esa ciudad
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 pasar = false;
                                 if (iteraciones == 1) {
                                     pasar = true;
@@ -691,17 +691,17 @@ public class Ventana extends javax.swing.JFrame {
                                         posicion_array++;
                                     }
                                     // guardamos la ciudad y los vuelos
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     nodos_expandidos++;
                                     if (iteraciones == 1) {
-                                        p.añadir_pila_tiempo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
+                                        p.añadir_pila_tiempo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
                                     } else {
-                                        p.añadir_pila_tiempo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
+                                        p.añadir_pila_tiempo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
                                     }
                                 }
                                 // miramos el siguiente vuelo
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -749,29 +749,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_costo_uniforme_coste(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Cola_ciudades c = new Cola_ciudades();
+        Coa_ciutats c = new Coa_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
         boolean acabar = false;
         int nodos_visitados = 0, nodos_expandidos = 0;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad origen4 = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat origen4 = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         // inicio del tiempo de ejecución del algoritmo
@@ -788,16 +788,16 @@ public class Ventana extends javax.swing.JFrame {
                 // obtenemos la posición de la ciudad actual dentro del vector de ciudades
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
                 // para cada ciudad creada del mapa
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
                     // si hay vuelos entre la ciudad actual y las demás ciudades
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
                         // comprovamos que no haya ciclo
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
                             // cogemos el primer vuelo
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
                             // para todos los vuelos entre la ciudad actual y las demás ciudades
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 // si la hora salida del vuelo > hora llegada de la ciudad actual
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;
@@ -808,14 +808,14 @@ public class Ventana extends javax.swing.JFrame {
                                         posicion_array++;
                                     }
                                     // guardamos la ciudad y el vuelo
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     nodos_expandidos++;
                                     // añadimos los resultados a la cola
-                                    c.añadir_cola_costee(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
+                                    c.añadir_cola_costee(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
                                 }
                                 // vamos a por el siguiente vuelo
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -861,29 +861,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_costo_uniforme_tiempo(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Cola_ciudades c = new Cola_ciudades();
+        Coa_ciutats c = new Coa_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
         boolean acabar = false;
         int nodos_visitados = 0, nodos_expandidos = 0;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad ciu_origen = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat ciu_origen = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -896,12 +896,12 @@ public class Ventana extends javax.swing.JFrame {
             nodos_visitados++;
             if (!ciudad_actual.getnombre().equals(ciudad_destino)) {
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;
                                     System.arraycopy(ciudad_actual.get_vuelos(), 0, lista_vuelos_obtenida, 0, ciudad_actual.get_vuelos().length);
@@ -909,16 +909,16 @@ public class Ventana extends javax.swing.JFrame {
                                     while (!lista_ciudades_obtenida[posicion_array].equals("")) {
                                         posicion_array++;
                                     }
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     nodos_expandidos++;
                                     if (iteraciones == 1) {
-                                        c.añadir_cola_tiempoo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
+                                        c.añadir_cola_tiempoo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
                                     } else {
-                                        c.añadir_cola_tiempoo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
+                                        c.añadir_cola_tiempoo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
                                     }
                                 }
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -963,31 +963,31 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_vecino_mas_proximo(String ciudad_origen, String ciudad_destino, int tipus) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Pila_ciudades p = new Pila_ciudades();
-        Cola_ciudades cola_ordenacion_local;
+        Pila_ciutats p = new Pila_ciutats();
+        Coa_ciutats cola_ordenacion_local;
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
         int nodos_visitados = 0, nodos_expandidos = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
         boolean acabar = false;
-        Elemento ciudad_actual;
-        Elemento proxima_ciudad;
+        Element ciudad_actual;
+        Element proxima_ciudad;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad origen6 = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat origen6 = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -999,13 +999,13 @@ public class Ventana extends javax.swing.JFrame {
             nodos_visitados++;
             if (!ciudad_actual.getnombre().equals(ciudad_destino)) {
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
-                cola_ordenacion_local = new Cola_ciudades();
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                cola_ordenacion_local = new Coa_ciutats();
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;                                    
                                     System.arraycopy(ciudad_actual.get_vuelos(), 0, lista_vuelos_obtenida, 0, ciudad_actual.get_vuelos().length);
@@ -1014,19 +1014,19 @@ public class Ventana extends javax.swing.JFrame {
                                     while (!lista_ciudades_obtenida[posicion_array].equals("")) {
                                         posicion_array++;
                                     }
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     if (tipus == 0) {
-                                        cola_ordenacion_local.añadir_cola_coste(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
+                                        cola_ordenacion_local.añadir_cola_coste(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida);
                                     } else {
                                         if (iteraciones == 1) {
-                                            cola_ordenacion_local.añadir_cola_tiempo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
+                                            cola_ordenacion_local.añadir_cola_tiempo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), sig_vuelo.get_horalleg().getTime() - sig_vuelo.get_horasal().getTime());
                                         } else {
-                                            cola_ordenacion_local.añadir_cola_tiempo(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
+                                            cola_ordenacion_local.añadir_cola_tiempo(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), sig_vuelo.get_horalleg().getTime() - ciudad_actual.get_primer_vuelo().getTime());
                                         }
                                     }
                                 }
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -1094,8 +1094,8 @@ public class Ventana extends javax.swing.JFrame {
             return 1000;
         } else {
             int num_vuelos = 0;
-            for (int j = 0; j < ciudades_creadas; j++) {
-                num_vuelos = num_vuelos + listaVuelos[posicion_ciudad(ciudad_actual)][j].numero_vuelos();
+            for (int j = 0; j < ciutats_creades; j++) {
+                num_vuelos = num_vuelos + llistaVols[posicion_ciudad(ciudad_actual)][j].numero_vuelos();
             }
             return num_vuelos;
         }
@@ -1103,28 +1103,28 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_a_estrella_cost(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Cola_ciudades c = new Cola_ciudades();
+        Coa_ciutats c = new Coa_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
         int nodos_visitados = 0, nodos_expandidos = 0;
         boolean acabar = false;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad ciu_origen = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat ciu_origen = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -1136,12 +1136,12 @@ public class Ventana extends javax.swing.JFrame {
             nodos_visitados++;
             if (!ciudad_actual.getnombre().equals(ciudad_destino)) {
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;
                                     System.arraycopy(ciudad_actual.get_vuelos(), 0, lista_vuelos_obtenida, 0, ciudad_actual.get_vuelos().length);
@@ -1149,12 +1149,12 @@ public class Ventana extends javax.swing.JFrame {
                                     while (!lista_ciudades_obtenida[posicion_array].equals("")) {
                                         posicion_array++;
                                     }
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     nodos_expandidos++;
-                                    c.añadir_cola_distanciaa(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_precio() + ((float) distancias[pos_ciudad_or][posicion_ciudad(ciudad_destino)] * 2));
+                                    c.añadir_cola_distanciaa(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_precio() + ((float) distancies[pos_ciudad_or][posicion_ciudad(ciudad_destino)] * 2));
                                 }
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -1192,29 +1192,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_a_estrella_temps(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Cola_ciudades c = new Cola_ciudades();
+        Coa_ciutats c = new Coa_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
         int nodos_visitados = 0, nodos_expandidos = 0;
         boolean acabar = false;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad ciu_origen = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat ciu_origen = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -1226,12 +1226,12 @@ public class Ventana extends javax.swing.JFrame {
             nodos_visitados++;
             if (!ciudad_actual.getnombre().equals(ciudad_destino)) {
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;
                                     System.arraycopy(ciudad_actual.get_vuelos(), 0, lista_vuelos_obtenida, 0, ciudad_actual.get_vuelos().length);
@@ -1239,17 +1239,17 @@ public class Ventana extends javax.swing.JFrame {
                                     while (!lista_ciudades_obtenida[posicion_array].equals("")) {
                                         posicion_array++;
                                     }
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     if (iteraciones == 1) {
                                         nodos_expandidos++;
-                                        c.añadir_cola_distanciaa2(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), distancias[pos_ciudad_or][posicion_ciudad(ciudad_destino)] * 120000);
+                                        c.añadir_cola_distanciaa2(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), distancies[pos_ciudad_or][posicion_ciudad(ciudad_destino)] * 120000);
                                     } else {
                                         nodos_expandidos++;
-                                        c.añadir_cola_distanciaa2(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), (sig_vuelo.get_horasal().getTime() - ciudad_actual.get_primer_vuelo().getTime()) + (distancias[pos_ciudad_or][posicion_ciudad(ciudad_destino)] * 120000));
+                                        c.añadir_cola_distanciaa2(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), (sig_vuelo.get_horasal().getTime() - ciudad_actual.get_primer_vuelo().getTime()) + (distancies[pos_ciudad_or][posicion_ciudad(ciudad_destino)] * 120000));
                                     }
                                 }
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -1294,29 +1294,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private void busqueda_a_estrella2_cost(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Cola_ciudades c = new Cola_ciudades();
+        Coa_ciutats c = new Coa_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
         int nodos_visitados = 0, nodos_expandidos = 0;
         boolean acabar = false;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad ciu_origen = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat ciu_origen = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -1328,12 +1328,12 @@ public class Ventana extends javax.swing.JFrame {
             nodos_visitados++;
             if (!ciudad_actual.getnombre().equals(ciudad_destino)) {
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;
                                     System.arraycopy(ciudad_actual.get_vuelos(), 0, lista_vuelos_obtenida, 0, ciudad_actual.get_vuelos().length);
@@ -1341,12 +1341,12 @@ public class Ventana extends javax.swing.JFrame {
                                     while (!lista_ciudades_obtenida[posicion_array].equals("")) {
                                         posicion_array++;
                                     }
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     nodos_expandidos++;
-                                    c.añadir_cola_distanciaa(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_precio() + sig_vuelo.get_precio() - (vuelos_desde_ciudad(ciudades[i].getnombre(), ciudad_destino) * 0.14));
+                                    c.añadir_cola_distanciaa(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_precio() + sig_vuelo.get_precio() - (vuelos_desde_ciudad(ciutats[i].getnombre(), ciudad_destino) * 0.14));
                                 }
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -1391,29 +1391,29 @@ public class Ventana extends javax.swing.JFrame {
 
     private  void busqueda_a_estrella2_temps(String ciudad_origen, String ciudad_destino) throws ParseException {
         double tiempo, tiempo2, tiempo3;
-        Cola_ciudades c = new Cola_ciudades();
+        Coa_ciutats c = new Coa_ciutats();
         int pos_ciudad_or;
         int iteraciones = 0;
         int num_vuelos_candidatos = 0;
-        Vuelo sig_vuelo;
+        Vol sig_vuelo;
         boolean ciclo;
         int nodos_visitados = 0, nodos_expandidos = 0;
         boolean acabar = false;
-        Elemento ciudad_actual;
+        Element ciudad_actual;
         Date hora_llegada_origen = new Date();
         String[] lista_ciudades = new String[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_ciudades[i] = "";
         }
-        Vuelo[] lista_vuelos = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos = new Vol[max_ciudades];
         for (int i = 0; i < max_ciudades; i++) {
             lista_vuelos[i] = null;
         }
-        Elemento vuelos_candidatos = null;
-        Ciudad origen12 = ciudades[posicion_ciudad_str(ciudad_origen)];
+        Element vuelos_candidatos = null;
+        Ciutat origen12 = ciutats[posicion_ciudad_str(ciudad_origen)];
         lista_ciudades[0] = ciudad_origen;
         lista_vuelos[0] = null;
-        Vuelo[] lista_vuelos_obtenida = new Vuelo[max_ciudades];
+        Vol[] lista_vuelos_obtenida = new Vol[max_ciudades];
         String[] lista_ciudades_obtenida = new String[max_ciudades];
         nodos_expandidos++;
         
@@ -1425,12 +1425,12 @@ public class Ventana extends javax.swing.JFrame {
             nodos_visitados++;
             if (!ciudad_actual.getnombre().equals(ciudad_destino)) {
                 pos_ciudad_or = posicion_ciudad_str(ciudad_actual.getnombre());
-                for (int i = ciudades_creadas - 1; i >= 0; i--) {
-                    if (listaVuelos[pos_ciudad_or][i].Vacia() == false) {
-                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciudades[i].getnombre());
+                for (int i = ciutats_creades - 1; i >= 0; i--) {
+                    if (llistaVols[pos_ciudad_or][i].Vacia() == false) {
+                        ciclo = hay_ciclo(ciudad_actual.get_ciudades(), ciutats[i].getnombre());
                         if (ciclo == false) {
-                            sig_vuelo = listaVuelos[pos_ciudad_or][i].primero();
-                            for (int z = 0; z < listaVuelos[pos_ciudad_or][i].numero_vuelos(); z++) {
+                            sig_vuelo = llistaVols[pos_ciudad_or][i].primero();
+                            for (int z = 0; z < llistaVols[pos_ciudad_or][i].numero_vuelos(); z++) {
                                 if (sig_vuelo.get_horasal().after(ciudad_actual.get_horalleg())) {
                                     int posicion_array = 0;
                                     System.arraycopy(ciudad_actual.get_vuelos(), 0, lista_vuelos_obtenida, 0, ciudad_actual.get_vuelos().length);
@@ -1438,17 +1438,17 @@ public class Ventana extends javax.swing.JFrame {
                                     while (!lista_ciudades_obtenida[posicion_array].equals("")) {
                                         posicion_array++;
                                     }
-                                    lista_ciudades_obtenida[posicion_array] = ciudades[i].getnombre();
+                                    lista_ciudades_obtenida[posicion_array] = ciutats[i].getnombre();
                                     lista_vuelos_obtenida[posicion_array] = sig_vuelo;
                                     if (iteraciones == 1) {
                                         nodos_expandidos++;
-                                        c.añadir_cola_distanciaa2(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), -vuelos_desde_ciudad(ciudades[i].getnombre(), ciudad_destino) * 3000);
+                                        c.añadir_cola_distanciaa2(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, sig_vuelo.get_horasal(), -vuelos_desde_ciudad(ciutats[i].getnombre(), ciudad_destino) * 3000);
                                     } else {
                                         nodos_expandidos++;
-                                        c.añadir_cola_distanciaa2(ciudades[i].getnombre(), ciudades[i].getcx(), ciudades[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), (sig_vuelo.get_horasal().getTime() - ciudad_actual.get_primer_vuelo().getTime()) - (vuelos_desde_ciudad(ciudades[i].getnombre(), ciudad_destino) * 3000));//120000*0,07
+                                        c.añadir_cola_distanciaa2(ciutats[i].getnombre(), ciutats[i].getcx(), ciutats[i].getcy(), sig_vuelo.get_horalleg(), ciudad_actual.get_precio() + sig_vuelo.get_precio(), lista_ciudades_obtenida, lista_vuelos_obtenida, ciudad_actual.get_primer_vuelo(), (sig_vuelo.get_horasal().getTime() - ciudad_actual.get_primer_vuelo().getTime()) - (vuelos_desde_ciudad(ciutats[i].getnombre(), ciudad_destino) * 3000));//120000*0,07
                                     }
                                 }
-                                sig_vuelo = listaVuelos[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
+                                sig_vuelo = llistaVols[pos_ciudad_or][i].siguiente_vuelo(sig_vuelo);
                             }
                         }
                     }
@@ -1509,15 +1509,15 @@ public class Ventana extends javax.swing.JFrame {
             coord_x = (int) (Math.random() * max_coord_x);
             coord_y = (int) (Math.random() * max_coord_y);
             String nombre_ciudad1 = "Ciutat-" + String.valueOf(j);
-            ciudades[ciudades_creadas] = new Ciudad(nombre_ciudad1, coord_x, coord_y);
-            ciudades_creadas = ciudades_creadas + 1;
-            OrigenComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
-            OvueloComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
-            if (ciudades_creadas - 1 != 0) {
-                DestinoComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
+            ciutats[ciutats_creades] = new Ciutat(nombre_ciudad1, coord_x, coord_y);
+            ciutats_creades = ciutats_creades + 1;
+            OrigenComboBox.addItem(ciutats[ciutats_creades - 1].getnombre());
+            OvueloComboBox.addItem(ciutats[ciutats_creades - 1].getnombre());
+            if (ciutats_creades - 1 != 0) {
+                DestinoComboBox.addItem(ciutats[ciutats_creades - 1].getnombre());
             }
         }
-        mundo.setNumciudades(ciudades_creadas);
+        mundo.setNumciudades(ciutats_creades);
         repaint();
     }
 
@@ -1547,22 +1547,22 @@ public class Ventana extends javax.swing.JFrame {
             posicion_x = 0;
             posicion_y = 0;
             while (posicion_x == posicion_y) {
-                posicion_x = (int) (Math.random() * ciudades_creadas);
-                posicion_y = (int) (Math.random() * ciudades_creadas);
+                posicion_x = (int) (Math.random() * ciutats_creades);
+                posicion_y = (int) (Math.random() * ciutats_creades);
             }
             minuto = Integer.toString(Integer.valueOf(minuto) + (int) (Math.random() * 60));
-            distancia = distancias[posicion_x][posicion_y];
+            distancia = distancies[posicion_x][posicion_y];
             minuto2 = String.valueOf(Integer.parseInt(minuto) + (int) (distancia * 2));
             precio = (int) (distancia * 2);
             hora_salida = Fecha + hora + ":" + minuto;
             hora_llegada = Fecha + hora + ":" + minuto2;
-            for (int i = 0; i < 5; i++) {
-                listaVuelos[posicion_x][posicion_y].insertarnuevo(j, compañia, precio, df.parse(hora_salida), df.parse(hora_llegada), ciudades[posicion_x].getcx(), ciudades[posicion_x].getcy(), ciudades[posicion_y].getcx(), ciudades[posicion_y].getcy());
-                minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
-                minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
-                hora_salida = Fecha + hora + ":" + minuto;
-                hora_llegada = Fecha + hora + ":" + minuto2;
-            }
+//            for (int i = 0; i < 5; i++) {
+                llistaVols[posicion_x][posicion_y].insertarnuevo(j, compañia, precio, df.parse(hora_salida), df.parse(hora_llegada), ciutats[posicion_x].getcx(), ciutats[posicion_x].getcy(), ciutats[posicion_y].getcx(), ciutats[posicion_y].getcy());
+//                minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
+//                minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
+//                hora_salida = Fecha + hora + ":" + minuto;
+//                hora_llegada = Fecha + hora + ":" + minuto2;
+//            }
         }
     }
 
@@ -1580,8 +1580,8 @@ public class Ventana extends javax.swing.JFrame {
         double distancia;
         int posicion_x;
         int posicion_y;
-        for (int j = 0; j < ciudades_creadas; j++) {
-            for (int k = 0; k < ciudades_creadas; k++) {
+        for (int j = 0; j < ciutats_creades; j++) {
+            for (int k = 0; k < ciutats_creades; k++) {
                 if (j != k) {
                     String compañia = "Companyia-" + String.valueOf(j);
                     hora = String.valueOf((int) (Math.random() * 24) + 720);
@@ -1594,18 +1594,18 @@ public class Ventana extends javax.swing.JFrame {
                     posicion_x = j;
                     posicion_y = k;
                     minuto = Integer.toString(Integer.valueOf(minuto) + (int) (Math.random() * 60));
-                    distancia = distancias[posicion_x][posicion_y];
+                    distancia = distancies[posicion_x][posicion_y];
                     minuto2 = String.valueOf(Integer.parseInt(minuto) + (int) (distancia * 2));
                     precio = (int) (distancia * 2);
                     hora_salida = Fecha + hora + ":" + minuto;
                     hora_llegada = Fecha + hora + ":" + minuto2;
-                    for (int i = 0; i < 5; i++) {
-                        listaVuelos[posicion_x][posicion_y].insertarnuevo(j, compañia, precio, df.parse(hora_salida), df.parse(hora_llegada), ciudades[posicion_x].getcx(), ciudades[posicion_x].getcy(), ciudades[posicion_y].getcx(), ciudades[posicion_y].getcy());
-                        minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
-                        minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
-                        hora_salida = Fecha + hora + ":" + minuto;
-                        hora_llegada = Fecha + hora + ":" + minuto2;
-                    }
+//                    for (int i = 0; i < 5; i++) {
+                        llistaVols[posicion_x][posicion_y].insertarnuevo(j, compañia, precio, df.parse(hora_salida), df.parse(hora_llegada), ciutats[posicion_x].getcx(), ciutats[posicion_x].getcy(), ciutats[posicion_y].getcx(), ciutats[posicion_y].getcy());
+//                        minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
+//                        minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
+//                        hora_salida = Fecha + hora + ":" + minuto;
+//                        hora_llegada = Fecha + hora + ":" + minuto2;
+//                    }
                 }
             }
         }
@@ -1629,7 +1629,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void init() {
-        mundo = new MapaMundo(ciudades, listaVuelos);
+        mundo = new Mapa_mon(ciutats, llistaVols);
         PanelMundo = new JPanel();
         javax.swing.GroupLayout PanelMundoLayout = new javax.swing.GroupLayout(PanelMundo);
         PanelMundo.setLayout(PanelMundoLayout);
@@ -1746,6 +1746,10 @@ public class Ventana extends javax.swing.JFrame {
         popupMenu = new javax.swing.JPopupMenu();
         popupMenuItemCrearCiutat = new javax.swing.JMenuItem();
         popupMenuItemCrearVol = new javax.swing.JMenuItem();
+        PanellLlistarVols = new javax.swing.JPanel();
+        btLlistarVols = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textAreaLlistaVols = new javax.swing.JTextArea();
         PanelBusquedas = new javax.swing.JPanel();
         profundidad_poda = new javax.swing.JRadioButton();
         precio_minimo = new javax.swing.JRadioButton();
@@ -1786,6 +1790,7 @@ public class Ventana extends javax.swing.JFrame {
         Menucreaciudad = new javax.swing.JMenuItem();
         Menucreavuelo = new javax.swing.JMenuItem();
         Menugenale = new javax.swing.JMenuItem();
+        MenuLlistarVols = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -1946,13 +1951,17 @@ public class Ventana extends javax.swing.JFrame {
 
         labelTiempoeje.setText("Temps d'exeució:");
 
+        campoNodovis.setEditable(false);
         campoNodovis.setPreferredSize(new java.awt.Dimension(70, 27));
 
+        campoTiempoeje.setEditable(false);
         campoTiempoeje.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         campoTiempoeje.setPreferredSize(new java.awt.Dimension(90, 27));
 
+        campoNodoexp.setEditable(false);
         campoNodoexp.setPreferredSize(new java.awt.Dimension(70, 27));
 
+        campoCostetotal.setEditable(false);
         campoCostetotal.setPreferredSize(new java.awt.Dimension(60, 27));
 
         labelCosteTotal.setText("Cost total:");
@@ -1976,7 +1985,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(labelCosteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoNodoexp, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(campoNodoexp, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                     .addComponent(campoCostetotal, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -2235,10 +2244,13 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        campoNodovisTi.setEditable(false);
         campoNodovisTi.setPreferredSize(new java.awt.Dimension(70, 27));
 
+        campoNodoexTi.setEditable(false);
         campoNodoexTi.setPreferredSize(new java.awt.Dimension(70, 27));
 
+        campoTiempoejeTi.setEditable(false);
         campoTiempoejeTi.setPreferredSize(new java.awt.Dimension(80, 27));
 
         labelNodogen1.setText("Nodes visitats:");
@@ -2249,9 +2261,12 @@ public class Ventana extends javax.swing.JFrame {
 
         labelTiempototalTi.setText("Temps total:");
 
+        campoTiempotoTi.setEditable(false);
         campoTiempotoTi.setPreferredSize(new java.awt.Dimension(90, 27));
 
         labelpretoti.setText("Preu total:");
+
+        campoPretoti.setEditable(false);
 
         ResultadosTiempo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2498,6 +2513,39 @@ public class Ventana extends javax.swing.JFrame {
         });
         popupMenu.add(popupMenuItemCrearVol);
 
+        btLlistarVols.setText("Llistar tots els vols");
+        btLlistarVols.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLlistarVolsActionPerformed(evt);
+            }
+        });
+
+        textAreaLlistaVols.setColumns(20);
+        textAreaLlistaVols.setEditable(false);
+        textAreaLlistaVols.setRows(5);
+        jScrollPane4.setViewportView(textAreaLlistaVols);
+
+        javax.swing.GroupLayout PanellLlistarVolsLayout = new javax.swing.GroupLayout(PanellLlistarVols);
+        PanellLlistarVols.setLayout(PanellLlistarVolsLayout);
+        PanellLlistarVolsLayout.setHorizontalGroup(
+            PanellLlistarVolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanellLlistarVolsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanellLlistarVolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btLlistarVols, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        PanellLlistarVolsLayout.setVerticalGroup(
+            PanellLlistarVolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanellLlistarVolsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btLlistarVols)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pràctica IA. UIB 2011/12. Rutes aèries.");
         setLocationByPlatform(true);
@@ -2699,11 +2747,6 @@ public class Ventana extends javax.swing.JFrame {
         toobar.add(jSeparator6);
 
         lblCoord.setText("X: 0 Y: 0");
-        lblCoord.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCoordMouseClicked(evt);
-            }
-        });
         toobar.add(lblCoord);
 
         Menubusquedas.setBackground(new java.awt.Color(238, 238, 238));
@@ -2778,6 +2821,15 @@ public class Ventana extends javax.swing.JFrame {
         });
         Menucrear.add(Menugenale);
 
+        MenuLlistarVols.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        MenuLlistarVols.setText("Llistar vols");
+        MenuLlistarVols.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuLlistarVolsActionPerformed(evt);
+            }
+        });
+        Menucrear.add(MenuLlistarVols);
+
         jMenuBar1.add(Menucrear);
 
         jMenu1.setBackground(new java.awt.Color(238, 238, 238));
@@ -2833,16 +2885,16 @@ public class Ventana extends javax.swing.JFrame {
         JComboBox combo = (JComboBox) evt.getSource();
         String nombre = (String) combo.getSelectedItem();
         origen = nombre;
-        for (int i = 0; i < ciudades_creadas; i++) {
-            if (!ciudades[i].getnombre().equals(nombre)) {
-                DestinoComboBox.addItem(ciudades[i].getnombre());
+        for (int i = 0; i < ciutats_creades; i++) {
+            if (!ciutats[i].getnombre().equals(nombre)) {
+                DestinoComboBox.addItem(ciutats[i].getnombre());
             }
         }
     }//GEN-LAST:event_OrigenComboBoxActionPerformed
 
     private void BotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarActionPerformed
 //        if (OrigenComboBox.getItemCount() == 0 || DestinoComboBox.getItemCount() == 0) {
-        if (ciudades_creadas < 2) {
+        if (ciutats_creades < 2) {
             JOptionPane.showMessageDialog(this, "No hi ha ciutats suficients per cercar.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             int elemd = DestinoComboBox.getSelectedIndex();
@@ -2992,8 +3044,8 @@ public class Ventana extends javax.swing.JFrame {
                 if ((Integer.parseInt(coordenadax.getText()) > 795) || (Integer.parseInt(coordenaday.getText()) > 430)) {
                     JOptionPane.showMessageDialog(DCreaCiudad, "Els valors de X i Y no poden sortir del mapa. Maxim: X:795 i Y:430", "Alerta", JOptionPane.WARNING_MESSAGE);    
                 } else {
-                    for (int i = 0; i < ciudades_creadas; i++) {
-                        if ((ciudades[i].getnombre().equals(nombre_ciudad.getText())) || ((String.valueOf(ciudades[i].getcx()).equals(coordenadax.getText())) && (String.valueOf(ciudades[i].getcy()).equals(coordenaday.getText())))) {
+                    for (int i = 0; i < ciutats_creades; i++) {
+                        if ((ciutats[i].getnombre().equals(nombre_ciudad.getText())) || ((String.valueOf(ciutats[i].getcx()).equals(coordenadax.getText())) && (String.valueOf(ciutats[i].getcy()).equals(coordenaday.getText())))) {
                             JOptionPane.showMessageDialog(DCreaCiudad, "No hi pot haver ciutats amb el mateix nom,\nni amb les mateixes coordenades.", "Alerta", JOptionPane.WARNING_MESSAGE);
                             return;
                         }
@@ -3002,15 +3054,15 @@ public class Ventana extends javax.swing.JFrame {
                     Integer y = Integer.parseInt(coordenaday.getText());
                     mundo.setModoRuta(0);
                     if (nombre_ciudad.getText() != null) {
-                        ciudades[ciudades_creadas] = new Ciudad(nombre_ciudad.getText(), x, y);
-                        ciudades_creadas += 1;
-                        mundo.setNumciudades(ciudades_creadas);
+                        ciutats[ciutats_creades] = new Ciutat(nombre_ciudad.getText(), x, y);
+                        ciutats_creades += 1;
+                        mundo.setNumciudades(ciutats_creades);
                         repaint();
                     }
-                    OrigenComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
-                    OvueloComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
-                    if (ciudades_creadas - 1 != 0) {
-                        DestinoComboBox.addItem(ciudades[ciudades_creadas - 1].getnombre());
+                    OrigenComboBox.addItem(ciutats[ciutats_creades - 1].getnombre());
+                    OvueloComboBox.addItem(ciutats[ciutats_creades - 1].getnombre());
+                    if (ciutats_creades - 1 != 0) {
+                        DestinoComboBox.addItem(ciutats[ciutats_creades - 1].getnombre());
                     }
                     nombre_ciudad.setText("");
 //                    DCreaCiudad.dispose();
@@ -3031,15 +3083,15 @@ public class Ventana extends javax.swing.JFrame {
         JComboBox combo = (JComboBox) evt.getSource();
         String nombre = (String) combo.getSelectedItem();
         origen = nombre;
-        for (int i = 0; i < ciudades_creadas; i++) {
-            if (!ciudades[i].getnombre().equals(nombre)) {
-                DvueloComboBox.addItem(ciudades[i].getnombre());
+        for (int i = 0; i < ciutats_creades; i++) {
+            if (!ciutats[i].getnombre().equals(nombre)) {
+                DvueloComboBox.addItem(ciutats[i].getnombre());
             }
         }
     }//GEN-LAST:event_OvueloComboBoxActionPerformed
 
     private void MenucreavueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenucreavueloActionPerformed
-        if (ciudades_creadas < 2) {
+        if (ciutats_creades < 2) {
             JOptionPane.showMessageDialog(DCreaVuelo, "No hi ha ciutats creades. No se poden crear vols.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
             DCreaVuelo = new JDialog();
@@ -3054,8 +3106,8 @@ public class Ventana extends javax.swing.JFrame {
             DCreaVuelo.setSize(PanelCreaVuelo.getPreferredSize());
             DCreaVuelo.setLocationByPlatform(true);
             if (DvueloComboBox.getSelectedIndex() == -1) {
-                for (int i = 1; i < ciudades_creadas; i++) {
-                    DvueloComboBox.addItem(ciudades[i].getnombre());
+                for (int i = 1; i < ciutats_creades; i++) {
+                    DvueloComboBox.addItem(ciutats[i].getnombre());
                 }
             }
             DCreaVuelo.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -3127,18 +3179,18 @@ public class Ventana extends javax.swing.JFrame {
                             fecha_llegada = df.parse(dia + "/" + mes + "/" + año + " " + hora_lleg);
                             
                             if (posicion_y != -1) {
-                                int posox = ciudades[posicion_x].getcx();
-                                int posoy = ciudades[posicion_x].getcy();
-                                int posdx = ciudades[posicion_y].getcx();
-                                int posdy = ciudades[posicion_y].getcy();
+                                int posox = ciutats[posicion_x].getcx();
+                                int posoy = ciutats[posicion_x].getcy();
+                                int posdx = ciutats[posicion_y].getcx();
+                                int posdy = ciutats[posicion_y].getcy();
 //                                print("O: " + ciudades[posicion_x].getnombre() + " D: " + ciudades[posicion_y].getnombre());
-                                for (int i = 0; i < 6; i++) {
-                                    listaVuelos[posicion_x][posicion_y].insertarnuevo(codigo, nombre_compañia.getText(), Float.parseFloat(PrecioVuelo.getText()), fecha_salida, fecha_llegada, posox, posoy, posdx, posdy);
-                                    dia = Integer.toString(Integer.valueOf(dia) + 1);
-                                    dia2 = Integer.toString(Integer.valueOf(dia2) + 1);
-                                    fecha_salida = df.parse(dia2 + "/" + mes + "/" + año + " " + hora_sal);
-                                    fecha_llegada = df.parse(dia + "/" + mes + "/" + año + " " + hora_lleg);
-                                }
+//                                for (int i = 0; i < 6; i++) {
+                                      llistaVols[posicion_x][posicion_y].insertarnuevo(codigo, nombre_compañia.getText(), Float.parseFloat(PrecioVuelo.getText()), fecha_salida, fecha_llegada, posox, posoy, posdx, posdy);
+//                                    dia = Integer.toString(Integer.valueOf(dia) + 1);
+//                                    dia2 = Integer.toString(Integer.valueOf(dia2) + 1);
+//                                    fecha_salida = df.parse(dia2 + "/" + mes + "/" + año + " " + hora_sal);
+//                                    fecha_llegada = df.parse(dia + "/" + mes + "/" + año + " " + hora_lleg);
+//                                }
                                 codigo++;
                                 repaint();
                             }
@@ -3195,28 +3247,32 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_MenugenaleActionPerformed
 
     private void CreaGenAleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreaGenAleActionPerformed
-        if (Integer.parseInt(CiuGen.getText()) < 2 || Integer.parseInt(texto_numvuelos.getText()) < 1) {
-            JOptionPane.showMessageDialog(DGenAle, "Has d'introduir almenys dues ciutats i un vol", "Alerta", JOptionPane.WARNING_MESSAGE);
+        if (CiuGen.getText().equals("") || texto_numvuelos.getText().equals("")) {
+            JOptionPane.showMessageDialog(DGenAle, "Faltes dades per omplir.", "Alerta", JOptionPane.WARNING_MESSAGE);
         } else {
-            añadir_ciudad_auto(Integer.parseInt(CiuGen.getText()));
-            actualizar_matriz_distancias();
-            if (personalizado.isSelected()) {
-                try {
-                    añadir_vuelo_auto(Integer.parseInt(texto_numvuelos.getText()));
-                } catch (ParseException ex) {
-                    mostrarMissatgeError(null, ex);
-                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            if (Integer.parseInt(CiuGen.getText()) < 2 || Integer.parseInt(texto_numvuelos.getText()) < 1) {
+                JOptionPane.showMessageDialog(DGenAle, "Has d'introduir almenys dues ciutats i un vol", "Alerta", JOptionPane.WARNING_MESSAGE);
             } else {
-                try {
-                    conectar_todas_ciudades();
-                } catch (ParseException ex) {
-                    mostrarMissatgeError(null, ex);
-                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                añadir_ciudad_auto(Integer.parseInt(CiuGen.getText()));
+                actualizar_matriz_distancias();
+                if (personalizado.isSelected()) {
+                    try {
+                        añadir_vuelo_auto(Integer.parseInt(texto_numvuelos.getText()));
+                    } catch (ParseException ex) {
+                        mostrarMissatgeError(null, ex);
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    try {
+                        conectar_todas_ciudades();
+                    } catch (ParseException ex) {
+                        mostrarMissatgeError(null, ex);
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+    //            DGenAle.dispose();
+                DGenAle.setVisible(false);
             }
-//            DGenAle.dispose();
-            DGenAle.setVisible(false);
         }
     }//GEN-LAST:event_CreaGenAleActionPerformed
 
@@ -3225,8 +3281,8 @@ public class Ventana extends javax.swing.JFrame {
         DestinoComboBox.removeAllItems();
         OvueloComboBox.removeAllItems();
         DvueloComboBox.removeAllItems();
-        ciudades = new Ciudad[max_ciudades];        
-        ciudades_creadas = 0;
+        ciutats = new Ciutat[max_ciudades];        
+        ciutats_creades = 0;
         codigo = 1;
         //TextoSalida.setText("");
         inicializar_matriz_vuelos();
@@ -3330,27 +3386,61 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuItemGuardarActionPerformed
 
-    private void lblCoordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCoordMouseClicked
-        // PROVES!!!!
-        int pos_ciu_origen = posicion_ciudad("1"); //origen
-        int pos_ciu_desti = posicion_ciudad("2"); //desti
-        
-        try {
-            System.out.println("Llista de vols");
-            if ((pos_ciu_origen > 0) && (pos_ciu_desti > 0)) {
-                if (listaVuelos[pos_ciu_origen][pos_ciu_desti] != null) {
-                    System.out.println("Vols: "+listaVuelos[pos_ciu_origen][pos_ciu_desti].numero_vuelos());
-                    Vuelo v = listaVuelos[pos_ciu_origen][pos_ciu_desti].primero();
-                    listaVuelos[pos_ciu_origen][pos_ciu_desti].imprimir(v);
-                } else {
-                    System.out.println(listaVuelos[pos_ciu_origen][pos_ciu_desti].numero_vuelos());
-                    System.out.println("No hi ha vols!");
-                }
-            }
-        } catch (Exception e) {
-            mostrarMissatgeError(mundo, e);
+    private void MenuLlistarVolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuLlistarVolsActionPerformed
+        if (ciutats_creades < 2) {
+            JOptionPane.showMessageDialog(this, "No hi ha ciutats suficients.", "Alerta", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }//GEN-LAST:event_lblCoordMouseClicked
+        
+        DLlistarVols = new JDialog();
+        DLlistarVols.setSize(588, 364);
+        SwingUtilities.updateComponentTreeUI(PanellLlistarVols);
+        DLlistarVols.setModal(true);
+        DLlistarVols.setTitle("Llistat de tots els vols");
+        DLlistarVols.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        DLlistarVols.setLocationByPlatform(true);
+        DLlistarVols.addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowOpened(WindowEvent we) {
+                mostra_vols();
+            }
+
+            @Override
+            public void windowClosing(WindowEvent we) {
+            }
+
+            @Override
+            public void windowClosed(WindowEvent we) {
+                textAreaLlistaVols.setText("");
+            }
+
+            @Override
+            public void windowIconified(WindowEvent we) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent we) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent we) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+            }
+        });
+        
+        DLlistarVols.add(PanellLlistarVols);
+        DLlistarVols.pack();
+        DLlistarVols.setVisible(true);
+    }//GEN-LAST:event_MenuLlistarVolsActionPerformed
+
+    private void btLlistarVolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLlistarVolsActionPerformed
+        textAreaLlistaVols.setText("");
+        mostra_vols();
+  }//GEN-LAST:event_btLlistarVolsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3381,6 +3471,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JComboBox DvueloComboBox;
     private javax.swing.JTextField HoraLlegada;
     private javax.swing.JTextField HoraSalida;
+    private javax.swing.JMenuItem MenuLlistarVols;
     private javax.swing.JMenuItem MenuNuevo;
     private javax.swing.JMenuItem MenuSotirItem;
     private javax.swing.JMenu Menubusquedas;
@@ -3400,6 +3491,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel PanelSalidaTiempo;
     private javax.swing.JPanel Paneldatoscoste;
     private javax.swing.JPanel Paneldatostiempo;
+    private javax.swing.JPanel PanellLlistarVols;
     private javax.swing.JTextField PrecioVuelo;
     private javax.swing.JTable ResultadosCoste;
     private javax.swing.JTable ResultadosTiempo;
@@ -3410,6 +3502,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btCreaVueloCancelar;
     private javax.swing.JButton btCrearCiutatCancelar;
     private javax.swing.JButton btGenAleCancelar;
+    private javax.swing.JButton btLlistarVols;
     private javax.swing.JButton btPanelSalidaTiempoSortir;
     private javax.swing.JButton btTbCrearCiutat;
     private javax.swing.JLabel busqueda_tipo;
@@ -3444,6 +3537,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -3483,6 +3577,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JRadioButton profundidad_poda;
     private javax.swing.JButton tbGuardar;
     private javax.swing.JButton tbObrir;
+    public static javax.swing.JTextArea textAreaLlistaVols;
     private javax.swing.JTextField texto_numvuelos;
     private javax.swing.JRadioButton tiempo_minimo;
     private javax.swing.ButtonGroup tipo_busqueda;

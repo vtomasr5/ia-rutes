@@ -1,5 +1,5 @@
 /*
- * Elemento.java
+ * Element.java
  * 
  * Copyright (C) 2011 Vicenç Juan Tomàs Monserrat
  * 
@@ -15,21 +15,21 @@ package elementos;
 
 import java.util.Date;
 
-public class Elemento {
+public class Element {
 
     String nombre;
     int coord_x;
     int coord_y;
     float precio;
     Date hora_llegada;
-    Elemento sig;
+    Element sig;
     String[] ciudades = new String[100];
-    Vuelo[] vuelos = new Vuelo[100];
+    Vol[] vuelos = new Vol[100];
     double distancia;
     Date primer_vuelo;
     long tiempo_acumulado;
 
-    public Elemento(String nombre, int cx, int cy, Date hora_lleg, float precio, String[] ciudades, Vuelo[] vuelos) {
+    public Element(String nombre, int cx, int cy, Date hora_lleg, float precio, String[] ciudades, Vol[] vuelos) {
         this.nombre = nombre;
         coord_x = cx;
         coord_y = cy;
@@ -43,7 +43,7 @@ public class Elemento {
         tiempo_acumulado = 0;
     }
 
-    public Elemento(String nombre, int cx, int cy, Date hora_lleg, float precio, String[] ciudades, Vuelo[] vuelos, Date pr_vuelo, long t_acum) {
+    public Element(String nombre, int cx, int cy, Date hora_lleg, float precio, String[] ciudades, Vol[] vuelos, Date pr_vuelo, long t_acum) {
         this.nombre = nombre;
         coord_x = cx;
         coord_y = cy;
@@ -65,7 +65,7 @@ public class Elemento {
         this.ciudades = ciudades;
     }
 
-    public void set_vuelos(Vuelo[] vuelos) {
+    public void set_vuelos(Vol[] vuelos) {
         this.vuelos = vuelos;
     }
 
@@ -73,7 +73,7 @@ public class Elemento {
         nombre = nombre_ciudad;
     }
 
-    public void set_sig(Elemento sig_ciudad) {
+    public void set_sig(Element sig_ciudad) {
         sig = sig_ciudad;
     }
 
@@ -113,7 +113,7 @@ public class Elemento {
         return (hora_llegada);
     }
 
-    public Elemento get_sig() {
+    public Element get_sig() {
         return (sig);
     }
 
@@ -121,7 +121,7 @@ public class Elemento {
         return ciudades;
     }
 
-    public Vuelo[] get_vuelos() {
+    public Vol[] get_vuelos() {
         return vuelos;
     }
 

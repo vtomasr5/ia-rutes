@@ -1,5 +1,5 @@
 /*
- * Cola_ciudades.java
+ * Coa_ciutats.java
  * 
  * Copyright (C) 2011 Vicenç Juan Tomàs Monserrat
  * 
@@ -13,30 +13,30 @@
  */
 package estructuras;
 
-import elementos.Elemento;
-import elementos.Vuelo;
+import elementos.Element;
+import elementos.Vol;
 import java.util.Date;
 
-public class Cola_ciudades {
+public class Coa_ciutats {
 
-    private Elemento Cap;
+    private Element Cap;
 
-    public Cola_ciudades() {
+    public Coa_ciutats() {
         Cap = null;
     }
 
-    public Elemento primero() {
+    public Element primero() {
         return Cap;
     }
 
-    public void añadir_cola_coste(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos) {
-        Elemento q, r;
+    public void añadir_cola_coste(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos) {
+        Element q, r;
         float coste = p;
-        Elemento nuevo;
+        Element nuevo;
         q = primero();
         r = null;
         if (q == null) {
-            nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+            nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
             nuevo.set_sig(q);
             Cap = nuevo;
         } else {
@@ -45,11 +45,11 @@ public class Cola_ciudades {
                 q = q.get_sig();
             }
             if (q.get_precio() < coste) {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
                 nuevo.set_sig(null);
                 q.set_sig(nuevo);
             } else {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
                 nuevo.set_sig(q);
                 if (r == null) {
                     Cap = nuevo;
@@ -60,22 +60,22 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_costee(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos) {
-        Elemento q, nuevo;
+    public void añadir_cola_costee(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos) {
+        Element q, nuevo;
         q = primero();
-        nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+        nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
         nuevo.set_sig(q);
         Cap = nuevo;
     }
 
-    public void añadir_cola_distancia(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, double distancia) {
-        Elemento q, r;
+    public void añadir_cola_distancia(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos, double distancia) {
+        Element q, r;
         double dist = distancia;
-        Elemento nuevo;
+        Element nuevo;
         q = primero();
         r = null;
         if (q == null) {
-            nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+            nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
             nuevo.set_dist(dist);
             nuevo.set_sig(q);
             Cap = nuevo;
@@ -85,12 +85,12 @@ public class Cola_ciudades {
                 q = q.get_sig();
             }
             if (q.get_dist() < dist) {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
                 nuevo.set_dist(dist);
                 nuevo.set_sig(null);
                 q.set_sig(nuevo);
             } else {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
                 nuevo.set_dist(dist);
                 nuevo.set_sig(q);
                 if (r == null) {
@@ -102,23 +102,23 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_distanciaa(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, double distancia) {
-        Elemento q, nuevo;
+    public void añadir_cola_distanciaa(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos, double distancia) {
+        Element q, nuevo;
         q = primero();
-        nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+        nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
         nuevo.set_dist(distancia);
         nuevo.set_sig(q);
         Cap = nuevo;
     }
 
-    public void añadir_cola_distancia2(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date h_s, double distancia) {
-        Elemento q, r;
+    public void añadir_cola_distancia2(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos, Date h_s, double distancia) {
+        Element q, r;
         double dist = distancia;
-        Elemento nuevo;
+        Element nuevo;
         q = primero();
         r = null;
         if (q == null) {
-            nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) dist);
+            nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) dist);
             nuevo.set_dist(dist);
             nuevo.set_sig(q);
             Cap = nuevo;
@@ -128,12 +128,12 @@ public class Cola_ciudades {
                 q = q.get_sig();
             }
             if (q.get_dist() < dist) {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) dist);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) dist);
                 nuevo.set_dist(dist);
                 nuevo.set_sig(null);
                 q.set_sig(nuevo);
             } else {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) dist);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) dist);
                 nuevo.set_dist(dist);
                 nuevo.set_sig(q);
                 if (r == null) {
@@ -145,10 +145,10 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_distanciaa2(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date h_s, double distancia) {
-        Elemento q, nuevo;
+    public void añadir_cola_distanciaa2(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos, Date h_s, double distancia) {
+        Element q, nuevo;
         q = primero();
-        nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) distancia);
+        nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, h_s, (long) distancia);
         nuevo.set_dist(distancia);
         nuevo.set_sig(q);
         Cap = nuevo;
@@ -156,7 +156,7 @@ public class Cola_ciudades {
 
     public int numero_vuelos() {
         int j = 0;
-        Elemento q = primero();
+        Element q = primero();
         while (q != null) {
             j = j + 1;
             q = q.get_sig();
@@ -164,13 +164,13 @@ public class Cola_ciudades {
         return j;
     }
 
-    public void añadir_cola_tiempo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date t, long l) {
-        Elemento q, r;
-        Elemento nuevo;
+    public void añadir_cola_tiempo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos, Date t, long l) {
+        Element q, r;
+        Element nuevo;
         q = primero();
         r = null;
         if (q == null) {
-            nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
+            nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
             nuevo.set_sig(q);
             Cap = nuevo;
         } else {
@@ -179,11 +179,11 @@ public class Cola_ciudades {
                 q = q.get_sig();
             }
             if (q.get_tiempo_acum() < l) {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
                 nuevo.set_sig(null);
                 q.set_sig(nuevo);
             } else {
-                nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
+                nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
                 nuevo.set_sig(q);
                 if (r == null) {
                     Cap = nuevo;
@@ -194,24 +194,24 @@ public class Cola_ciudades {
         }
     }
 
-    public void añadir_cola_tiempoo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date t, long l) {
-        Elemento q, nuevo;
+    public void añadir_cola_tiempoo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos, Date t, long l) {
+        Element q, nuevo;
         q = primero();
-        nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
+        nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
         nuevo.set_sig(q);
         Cap = nuevo;
     }
 
-    public Elemento quitar_cola() { //quita el primero de la cola
-        Elemento q, r;
+    public Element quitar_cola() { //quita el primero de la cola
+        Element q, r;
         q = primero();
         r = primero().get_sig();
         Cap = r;
         return q;
     }
 
-    public Elemento quitar_cola_coste() { //quita el primero de la cola
-        Elemento q, r, sel = null;
+    public Element quitar_cola_coste() { //quita el primero de la cola
+        Element q, r, sel = null;
         q = primero();
         float coste = Float.MAX_VALUE;
         while (q != null) {
@@ -243,8 +243,8 @@ public class Cola_ciudades {
         return sel;
     }
 
-    public Elemento quitar_cola_tiempo() {//quita el primero de la cola
-        Elemento q, r, sel = null;
+    public Element quitar_cola_tiempo() {//quita el primero de la cola
+        Element q, r, sel = null;
         q = primero();
         float tiempo = Float.MAX_VALUE;
         while (q != null) {
@@ -276,8 +276,8 @@ public class Cola_ciudades {
         return sel;
     }
 
-    public Elemento quitar_cola_dist() {//quita el primero de la cola
-        Elemento q, r, sel = null;
+    public Element quitar_cola_dist() {//quita el primero de la cola
+        Element q, r, sel = null;
         q = primero();
         double dist = Double.MAX_VALUE;
         while (q != null) {
@@ -309,8 +309,8 @@ public class Cola_ciudades {
         return sel;
     }
 
-    public Elemento quitar_cola_ultimo() { //quita el último de la cola
-        Elemento q, r = null;
+    public Element quitar_cola_ultimo() { //quita el último de la cola
+        Element q, r = null;
         q = primero();
         if (q == null) {
             return null;
@@ -337,7 +337,7 @@ public class Cola_ciudades {
     }
 
     public void mostrar_cola_coste() {
-        Elemento q = primero();
+        Element q = primero();
         while (q != null) {
             System.out.print("Preu: " + q.get_precio() + "\n");
             q = q.get_sig();
@@ -345,7 +345,7 @@ public class Cola_ciudades {
     }
 
     public void mostrar_cola_tiempo() {
-        Elemento q = primero();
+        Element q = primero();
         while (q != null) {
             System.out.print("Temps: " + q.get_horalleg() + "\n");
             q = q.get_sig();

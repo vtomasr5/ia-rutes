@@ -1,5 +1,5 @@
 /*
- * MapaMundo.java
+ * Mapa_mon.java
  * 
  * Copyright (C) 2011 Vicenç Juan Tomàs Monserrat
  * 
@@ -13,20 +13,20 @@
  */
 package elementos;
 
-import estructuras.Lista_vuelos;
+import estructuras.LlistaVols;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class MapaMundo extends JLabel {
+public class Mapa_mon extends JLabel {
 
-    Ciudad[] ciu;
-    Lista_vuelos[][] listaVuelos;
-    Vuelo[] vuelos;
+    Ciutat[] ciu;
+    LlistaVols[][] listaVuelos;
+    Vol[] vuelos;
     int ciu_creadas = 0, ori = -1, des = -1, modoRuta = 0, numCiu = 0, seleccionado = 0;
     ImageIcon img;
 
-    public MapaMundo(Ciudad[] ciu, Lista_vuelos[][] matriz) {
+    public Mapa_mon(Ciutat[] ciu, LlistaVols[][] matriz) {
         this.listaVuelos = matriz;
         this.ciu = ciu;
         img = new ImageIcon("src/imagenes/mapa.jpg");
@@ -61,11 +61,11 @@ public class MapaMundo extends JLabel {
         }
     }
 
-    public void setVuelos(Lista_vuelos[][] vuelos) {
+    public void setVuelos(LlistaVols[][] vuelos) {
         this.listaVuelos = vuelos;
     }
 
-    public void setCiudad(Ciudad[] ciudad) {
+    public void setCiudad(Ciutat[] ciudad) {
         this.ciu = ciudad;
     }
 
@@ -73,7 +73,7 @@ public class MapaMundo extends JLabel {
         this.ciu_creadas = num;
     }
 
-    public void setVuelosRuta(Vuelo[] vuelo, int numvuelos) {
+    public void setVuelosRuta(Vol[] vuelo, int numvuelos) {
         this.vuelos = vuelo;
         this.numCiu = numvuelos;
     }

@@ -242,7 +242,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="campoNodoexp" pref="223" max="32767" attributes="1"/>
+                          <Component id="campoNodoexp" pref="257" max="32767" attributes="1"/>
                           <Component id="campoCostetotal" alignment="0" pref="223" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -298,6 +298,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoNodovis">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 27]"/>
                 </Property>
@@ -305,6 +306,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoTiempoeje">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor predeterminado"/>
                 </Property>
@@ -315,6 +317,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoNodoexp">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 27]"/>
                 </Property>
@@ -322,6 +325,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoCostetotal">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[60, 27]"/>
                 </Property>
@@ -745,6 +749,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="campoNodovisTi">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 27]"/>
                 </Property>
@@ -752,6 +757,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoNodoexTi">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 27]"/>
                 </Property>
@@ -759,6 +765,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoTiempoejeTi">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[80, 27]"/>
                 </Property>
@@ -786,6 +793,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoTiempotoTi">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[90, 27]"/>
                 </Property>
@@ -797,6 +805,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoPretoti">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
               <AuxValues>
@@ -1030,6 +1041,63 @@
         </MenuItem>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JPanel" name="PanellLlistarVols">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane4" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btLlistarVols" alignment="0" pref="533" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btLlistarVols" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane4" pref="354" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btLlistarVols">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Llistar tots els vols"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btLlistarVolsActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="textAreaLlistaVols">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="Menubusquedas">
@@ -1127,6 +1195,17 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenugenaleActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MenuLlistarVols">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+L"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Llistar vols"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuLlistarVolsActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -1529,9 +1608,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="X: 0 Y: 0"/>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCoordMouseClicked"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

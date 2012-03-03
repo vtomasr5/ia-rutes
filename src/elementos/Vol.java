@@ -1,5 +1,5 @@
 /*
- * Vuelo.java
+ * Vol.java
  * 
  * Copyright (C) 2011 Vicenç Juan Tomàs Monserrat
  * 
@@ -19,17 +19,20 @@ import java.awt.Graphics2D;
 import java.util.Date;
 import javax.swing.JLabel;
 
-public final class Vuelo extends JLabel implements java.io.Serializable {
+public final class Vol extends JLabel implements java.io.Serializable {
 
-    int codigo_vuelo;
-    String compañia;
-    float precio;
-    Date hora_salida;
-    Date hora_llegada;
-    Vuelo siguiente;
-    int o_x, o_y, d_x, d_y; 
+    private int codigo_vuelo;
+    private String compañia;
+    private float precio;
+    private Date hora_salida;
+    private Date hora_llegada;
+    private Vol siguiente;
+    private int o_x;
+    private int o_y;
+    private int d_x;
+    private int d_y;
     
-    public Vuelo() {
+    public Vol() {
         set_codigo(-1);
         set_compañia(null);
         set_precio(0);
@@ -38,7 +41,7 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
         set_sig(null);
     }
 
-    public Vuelo(int cod, String comp, float precio, Date salida, Date llegada, int ox, int oy, int dx, int dy) {
+    public Vol(int cod, String comp, float precio, Date salida, Date llegada, int ox, int oy, int dx, int dy) {
         set_codigo(cod);
         set_compañia(comp);
         set_precio(precio);
@@ -105,19 +108,19 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
     public void pintaVuelo(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.darkGray);
-        drawArrow(g2d, o_x, o_y, d_x, d_y);
+        drawArrow(g2d, getO_x(), getO_y(), getD_x(), getD_y());
     }
 
     public void pintaRuta(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.green);
-        drawArrow(g2d, o_x, o_y, d_x, d_y);
+        drawArrow(g2d, getO_x(), getO_y(), getD_x(), getD_y());
     }
 
     public void pintaSeleccionada(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.magenta);
-        drawArrow(g2d, o_x, o_y, d_x, d_y);
+        drawArrow(g2d, getO_x(), getO_y(), getD_x(), getD_y());
     }
 
     public void set_codigo(int cod) {
@@ -140,7 +143,7 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
         hora_llegada = hora;
     }
 
-    public void set_sig(Vuelo sig) {
+    public void set_sig(Vol sig) {
         siguiente = sig;
     }
 
@@ -164,7 +167,63 @@ public final class Vuelo extends JLabel implements java.io.Serializable {
         return (hora_llegada);
     }
 
-    public Vuelo get_sig() {
+    public Vol get_sig() {
         return (siguiente);
+    }
+
+    /**
+     * @return the o_x
+     */
+    public int getO_x() {
+        return o_x;
+    }
+
+    /**
+     * @param o_x the o_x to set
+     */
+    public void setO_x(int o_x) {
+        this.o_x = o_x;
+    }
+
+    /**
+     * @return the o_y
+     */
+    public int getO_y() {
+        return o_y;
+    }
+
+    /**
+     * @param o_y the o_y to set
+     */
+    public void setO_y(int o_y) {
+        this.o_y = o_y;
+    }
+
+    /**
+     * @return the d_x
+     */
+    public int getD_x() {
+        return d_x;
+    }
+
+    /**
+     * @param d_x the d_x to set
+     */
+    public void setD_x(int d_x) {
+        this.d_x = d_x;
+    }
+
+    /**
+     * @return the d_y
+     */
+    public int getD_y() {
+        return d_y;
+    }
+
+    /**
+     * @param d_y the d_y to set
+     */
+    public void setD_y(int d_y) {
+        this.d_y = d_y;
     }
 }

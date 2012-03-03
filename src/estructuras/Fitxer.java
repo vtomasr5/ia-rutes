@@ -1,24 +1,24 @@
 package estructuras;
 
-import elementos.Ciudad;
+import elementos.Ciutat;
 
-public class Fichero implements java.io.Serializable {
+public class Fitxer implements java.io.Serializable {
 
-    Ciudad[] ciudades;
-    Lista_vuelos[][] vuelos;
+    Ciutat[] ciudades;
+    LlistaVols[][] vuelos;
     int ciudades_creadas;
 
-    public Fichero(Ciudad[] ciu, Lista_vuelos[][] vuelos, int ciu_crea) {
+    public Fitxer(Ciutat[] ciu, LlistaVols[][] vuelos, int ciu_crea) {
         this.ciudades = ciu;
         this.vuelos = vuelos;
         this.ciudades_creadas = ciu_crea;
     }
 
-    public Ciudad[] getCiudad() {
+    public Ciutat[] getCiudad() {
         return ciudades;
     }
 
-    public Lista_vuelos[][] getVuelos() {
+    public LlistaVols[][] getVuelos() {
         return vuelos;
     }
 

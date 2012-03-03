@@ -1,5 +1,5 @@
 /*
- * Pila_ciudades.java
+ * Pila_ciutats.java
  * 
  * Copyright (C) 2011 Vicenç Juan Tomàs Monserrat
  * 
@@ -13,42 +13,42 @@
  */
 package estructuras;
 
-import elementos.Elemento;
-import elementos.Vuelo;
+import elementos.Element;
+import elementos.Vol;
 import java.util.Date;
 
-public class Pila_ciudades {
+public class Pila_ciutats {
 
-    private Elemento Cap;
+    private Element Cap;
 
-    public Pila_ciudades() {
+    public Pila_ciutats() {
         Cap = null;
     }
 
-    public Elemento primero() {
+    public Element primero() {
         return Cap;
     }
 
-    public void añadir_pila(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos) {
-        Elemento q;
-        Elemento nuevo;
+    public void añadir_pila(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos) {
+        Element q;
+        Element nuevo;
         q = primero();
-        nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos);
+        nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos);
         nuevo.set_sig(q);
         Cap = nuevo;
     }
 
-    public void añadir_pila_tiempo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vuelo[] vuelos, Date t, long l) {
-        Elemento q;
-        Elemento nuevo;
+    public void añadir_pila_tiempo(String nombre, int cx, int cy, Date h_l, float p, String[] ciudades, Vol[] vuelos, Date t, long l) {
+        Element q;
+        Element nuevo;
         q = primero();
-        nuevo = new Elemento(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
+        nuevo = new Element(nombre, cx, cy, h_l, p, ciudades, vuelos, t, l);
         nuevo.set_sig(q);
         Cap = nuevo;
     }
 
-    public Elemento quitar_pila() {
-        Elemento q, r;
+    public Element quitar_pila() {
+        Element q, r;
         q = primero();
         r = primero().get_sig();
         Cap = r;

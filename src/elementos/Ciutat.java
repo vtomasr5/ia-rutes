@@ -1,5 +1,5 @@
 /*
- * Elemento_pila.java
+ * Ciutat.java
  * 
  * Copyright (C) 2011 Vicenç Juan Tomàs Monserrat
  * 
@@ -11,34 +11,41 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package estructuras;
+package elementos;
 
-import java.util.Date;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-public class Elemento_pila {
+public class Ciutat implements java.io.Serializable {
 
     String nombre;
     int coord_x;
     int coord_y;
-    float precio;
-    Date hora_llegada;
-    Elemento_pila sig;
 
-    public Elemento_pila(String nombre, int cx, int cy, Date hora_lleg, float precio) {
+    public Ciutat(String nombre, int cx, int cy) {
         this.nombre = nombre;
         coord_x = cx;
         coord_y = cy;
-        this.precio = precio;
-        hora_llegada = hora_lleg;
-        sig = null;
+    }
+
+    public Ciutat() {
+        this.nombre = null;
+        coord_x = -1;
+        coord_y = -1;
+
+    }
+
+    public void pintar(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(Color.red);
+        g2d.fillOval(coord_x, coord_y, 7, 7);
+        g2d.setColor(Color.black);
+        g2d.drawString(this.nombre, coord_x - (this.nombre.length() / 2), coord_y - 2);
     }
 
     public void set_nombre(String nombre_ciudad) {
         nombre = nombre_ciudad;
-    }
-
-    public void set_sig(Elemento_pila sig_ciudad) {
-        sig = sig_ciudad;
     }
 
     public void set_coordx(int cx) {
@@ -47,14 +54,6 @@ public class Elemento_pila {
 
     public void set_coordy(int cy) {
         coord_y = cy;
-    }
-
-    public void set_precio(float precio) {
-        this.precio = precio;
-    }
-
-    public void set_horalleg(Date hora) {
-        hora_llegada = hora;
     }
 
     public String getnombre() {
@@ -67,17 +66,5 @@ public class Elemento_pila {
 
     public int getcy() {
         return (coord_y);
-    }
-
-    public float get_precio() {
-        return (precio);
-    }
-
-    public Date get_horalleg() {
-        return (hora_llegada);
-    }
-
-    public Elemento_pila get_sig() {
-        return (sig);
     }
 }
