@@ -1556,13 +1556,13 @@ public class Ventana extends javax.swing.JFrame {
             precio = (int) (distancia * 2);
             hora_salida = Fecha + hora + ":" + minuto;
             hora_llegada = Fecha + hora + ":" + minuto2;
-//            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
                 llistaVols[posicion_x][posicion_y].insertarnuevo(j, compañia, precio, df.parse(hora_salida), df.parse(hora_llegada), ciutats[posicion_x].getcx(), ciutats[posicion_x].getcy(), ciutats[posicion_y].getcx(), ciutats[posicion_y].getcy());
-//                minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
-//                minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
-//                hora_salida = Fecha + hora + ":" + minuto;
-//                hora_llegada = Fecha + hora + ":" + minuto2;
-//            }
+                minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
+                minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
+                hora_salida = Fecha + hora + ":" + minuto;
+                hora_llegada = Fecha + hora + ":" + minuto2;
+            }
         }
     }
 
@@ -1599,13 +1599,13 @@ public class Ventana extends javax.swing.JFrame {
                     precio = (int) (distancia * 2);
                     hora_salida = Fecha + hora + ":" + minuto;
                     hora_llegada = Fecha + hora + ":" + minuto2;
-//                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 5; i++) {
                         llistaVols[posicion_x][posicion_y].insertarnuevo(j, compañia, precio, df.parse(hora_salida), df.parse(hora_llegada), ciutats[posicion_x].getcx(), ciutats[posicion_x].getcy(), ciutats[posicion_y].getcx(), ciutats[posicion_y].getcy());
-//                        minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
-//                        minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
-//                        hora_salida = Fecha + hora + ":" + minuto;
-//                        hora_llegada = Fecha + hora + ":" + minuto2;
-//                    }
+                        minuto = Integer.toString(Integer.parseInt(minuto) + 1440);
+                        minuto2 = Integer.toString(Integer.parseInt(minuto2) + 1440);
+                        hora_salida = Fecha + hora + ":" + minuto;
+                        hora_llegada = Fecha + hora + ":" + minuto2;
+                    }
                 }
             }
         }
@@ -3184,13 +3184,13 @@ public class Ventana extends javax.swing.JFrame {
                                 int posdx = ciutats[posicion_y].getcx();
                                 int posdy = ciutats[posicion_y].getcy();
 //                                print("O: " + ciudades[posicion_x].getnombre() + " D: " + ciudades[posicion_y].getnombre());
-//                                for (int i = 0; i < 6; i++) {
+                                for (int i = 0; i < 6; i++) {
                                       llistaVols[posicion_x][posicion_y].insertarnuevo(codigo, nombre_compañia.getText(), Float.parseFloat(PrecioVuelo.getText()), fecha_salida, fecha_llegada, posox, posoy, posdx, posdy);
-//                                    dia = Integer.toString(Integer.valueOf(dia) + 1);
-//                                    dia2 = Integer.toString(Integer.valueOf(dia2) + 1);
-//                                    fecha_salida = df.parse(dia2 + "/" + mes + "/" + año + " " + hora_sal);
-//                                    fecha_llegada = df.parse(dia + "/" + mes + "/" + año + " " + hora_lleg);
-//                                }
+                                    dia = Integer.toString(Integer.valueOf(dia) + 1);
+                                    dia2 = Integer.toString(Integer.valueOf(dia2) + 1);
+                                    fecha_salida = df.parse(dia2 + "/" + mes + "/" + año + " " + hora_sal);
+                                    fecha_llegada = df.parse(dia + "/" + mes + "/" + año + " " + hora_lleg);
+                                }
                                 codigo++;
                                 repaint();
                             }

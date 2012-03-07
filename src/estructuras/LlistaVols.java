@@ -143,18 +143,22 @@ public class LlistaVols implements java.io.Serializable {
     
     public void imprimir() {
         Vol p = Cap;
-        while (p != null) {
-            Ventana.textAreaLlistaVols.append("Codi: ");
-            Ventana.textAreaLlistaVols.append(recuperar_cod(p)+"\n");
-            Ventana.textAreaLlistaVols.append("Preu: ");
-            Ventana.textAreaLlistaVols.append(recuperar_precio(p)+"\n");
-            Ventana.textAreaLlistaVols.append("Companyia: ");
-            Ventana.textAreaLlistaVols.append(recuperar_compañia(p)+"\n");
-            Ventana.textAreaLlistaVols.append("Hora sortida: ");
-            Ventana.textAreaLlistaVols.append(recuperar_hora_salida(p)+"\n");
-            Ventana.textAreaLlistaVols.append("Hora arribada: ");
-            Ventana.textAreaLlistaVols.append(recuperar_hora_llegada(p)+"\n");
-            Ventana.textAreaLlistaVols.append("-------------------------------------\n");
+        int cod = -2; 
+        while (p != null) { 
+            if (recuperar_cod(p) != cod) {
+                Ventana.textAreaLlistaVols.append("Codi: ");
+                Ventana.textAreaLlistaVols.append(recuperar_cod(p)+"\n");
+                Ventana.textAreaLlistaVols.append("Preu: ");
+                Ventana.textAreaLlistaVols.append(recuperar_precio(p)+"\n");
+                Ventana.textAreaLlistaVols.append("Companyia: ");
+                Ventana.textAreaLlistaVols.append(recuperar_compañia(p)+"\n");
+                Ventana.textAreaLlistaVols.append("Hora sortida: ");
+                Ventana.textAreaLlistaVols.append(recuperar_hora_salida(p)+"\n");
+                Ventana.textAreaLlistaVols.append("Hora arribada: ");
+                Ventana.textAreaLlistaVols.append(recuperar_hora_llegada(p)+"\n");
+                Ventana.textAreaLlistaVols.append("-------------------------------------\n");
+            }
+            cod = recuperar_cod(p);
             p = p.get_sig();
         }
     }
