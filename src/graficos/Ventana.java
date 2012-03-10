@@ -270,15 +270,15 @@ public class Ventana extends javax.swing.JFrame {
         }
     }
 
-    private void mostrar_ciutats() {
-        int pos = 0;
-        for (int i = 0; i < ciutats_creades; i++) {
-            pos = posicion_ciudad_str(ciutats[i].getnombre());
-            textAreaLlistaVols.append(ciutats[i].getnombre() + ", " + ciutats[i].getcx() + ", " + ciutats[i].getcy() + "\n");
-            textAreaLlistaVols.append(Integer.toString(pos));
-
-        }
-    }
+//    private void mostrar_ciutats() {
+//        int pos = 0;
+//        for (int i = 0; i < ciutats_creades; i++) {
+//            pos = posicion_ciudad_str(ciutats[i].getnombre());
+//            textAreaLlistaVols.append(ciutats[i].getnombre() + ", " + ciutats[i].getcx() + ", " + ciutats[i].getcy() + "\n");
+//            textAreaLlistaVols.append(Integer.toString(pos));
+//
+//        }
+//    }
 
     private void busqueda_prof(String ciudad_origen, String ciudad_destino, int tipus) throws ParseException {
         double tiempo, tiempo2, tiempo3;
@@ -1949,7 +1949,7 @@ public class Ventana extends javax.swing.JFrame {
 
         labelNodoexp.setText("Nodes expandits:");
 
-        labelTiempoeje.setText("Temps d'exeució:");
+        labelTiempoeje.setText("Temps d'execució:");
 
         campoNodovis.setEditable(false);
         campoNodovis.setPreferredSize(new java.awt.Dimension(70, 27));
@@ -1960,6 +1960,11 @@ public class Ventana extends javax.swing.JFrame {
 
         campoNodoexp.setEditable(false);
         campoNodoexp.setPreferredSize(new java.awt.Dimension(70, 27));
+        campoNodoexp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNodoexpActionPerformed(evt);
+            }
+        });
 
         campoCostetotal.setEditable(false);
         campoCostetotal.setPreferredSize(new java.awt.Dimension(60, 27));
@@ -1977,38 +1982,33 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(labelNodovis))
                 .addGap(18, 18, 18)
                 .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(campoTiempoeje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(campoNodovis, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(campoNodovis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(campoTiempoeje, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelNodoexp, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCosteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoNodoexp, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addComponent(campoCostetotal, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                    .addComponent(campoNodoexp, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(campoCostetotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PaneldatoscosteLayout.setVerticalGroup(
             PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaneldatoscosteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PaneldatoscosteLayout.createSequentialGroup()
-                        .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelNodoexp)
-                            .addComponent(campoNodoexp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45))
-                    .addGroup(PaneldatoscosteLayout.createSequentialGroup()
-                        .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoNodovis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelNodovis))
-                        .addGap(18, 18, 18)
-                        .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelTiempoeje)
-                            .addComponent(campoTiempoeje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelCosteTotal)
-                            .addComponent(campoCostetotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoNodovis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNodovis)
+                    .addComponent(labelNodoexp)
+                    .addComponent(campoNodoexp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PaneldatoscosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelTiempoeje)
+                    .addComponent(campoTiempoeje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCosteTotal)
+                    .addComponent(campoCostetotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2027,7 +2027,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelSalidaCosteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Paneldatoscoste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -2045,7 +2045,7 @@ public class Ventana extends javax.swing.JFrame {
 
         label_x.setText("X:");
 
-        label_coordenadas.setText("Coordenades:");
+        label_coordenadas.setText("Coordenades en el mapa:");
 
         label_nombre_ciudad.setText("Nom ciutat:");
 
@@ -2083,7 +2083,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(PanelCreaCiudadLayout.createSequentialGroup()
                         .addComponent(label_nombre_ciudad)
                         .addGap(18, 18, 18)
-                        .addComponent(nombre_ciudad, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                        .addComponent(nombre_ciudad))
                     .addGroup(PanelCreaCiudadLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(label_x, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2092,7 +2092,7 @@ public class Ventana extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label_y)
                         .addGap(8, 8, 8)
-                        .addComponent(coordenaday, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                        .addComponent(coordenaday, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCreaCiudadLayout.createSequentialGroup()
                         .addComponent(btCrearCiutatCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2255,7 +2255,7 @@ public class Ventana extends javax.swing.JFrame {
 
         labelNodogen1.setText("Nodes visitats:");
 
-        labelNodoexp1.setText("Nodes expandits");
+        labelNodoexp1.setText("Nodes expandits:");
 
         labelTiempoeje1.setText("Temps d'execució:");
 
@@ -2368,9 +2368,9 @@ public class Ventana extends javax.swing.JFrame {
                             .addComponent(labelpretoti))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneldatostiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(campoPretoti, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
+                            .addComponent(campoPretoti)
+                            .addComponent(campoTiempotoTi, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
         );
         PaneldatostiempoLayout.setVerticalGroup(
@@ -2404,7 +2404,7 @@ public class Ventana extends javax.swing.JFrame {
         PanelSalidaTiempo.setLayout(PanelSalidaTiempoLayout);
         PanelSalidaTiempoLayout.setHorizontalGroup(
             PanelSalidaTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Paneldatostiempo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Paneldatostiempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PanelSalidaTiempoLayout.setVerticalGroup(
             PanelSalidaTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3441,6 +3441,10 @@ public class Ventana extends javax.swing.JFrame {
         textAreaLlistaVols.setText("");
         mostra_vols();
   }//GEN-LAST:event_btLlistarVolsActionPerformed
+
+    private void campoNodoexpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNodoexpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNodoexpActionPerformed
 
     /**
      * @param args the command line arguments
