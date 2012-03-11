@@ -29,7 +29,7 @@ public class Mapa_mon extends JLabel {
     public Mapa_mon(Ciutat[] ciu, LlistaVols[][] matriz) {
         this.listaVuelos = matriz;
         this.ciu = ciu;
-        img = new ImageIcon("src/imagenes/mapa.jpg");
+        img = new ImageIcon("src/imagenes/mapa2.jpg");
         this.setIcon(img);
         this.repaint();
     }

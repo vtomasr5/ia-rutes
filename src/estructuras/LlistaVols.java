@@ -14,7 +14,7 @@
 package estructuras;
 
 import elementos.Vol;
-import graficos.Ventana;
+import graficos.Finestra;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -146,17 +146,17 @@ public class LlistaVols implements java.io.Serializable {
         int cod = -2; 
         while (p != null) { 
             if (recuperar_cod(p) != cod) {
-                Ventana.textAreaLlistaVols.append("Codi: ");
-                Ventana.textAreaLlistaVols.append(recuperar_cod(p)+"\n");
-                Ventana.textAreaLlistaVols.append("Preu: ");
-                Ventana.textAreaLlistaVols.append(recuperar_precio(p)+"\n");
-                Ventana.textAreaLlistaVols.append("Companyia: ");
-                Ventana.textAreaLlistaVols.append(recuperar_compañia(p)+"\n");
-                Ventana.textAreaLlistaVols.append("Hora sortida: ");
-                Ventana.textAreaLlistaVols.append(recuperar_hora_salida(p)+"\n");
-                Ventana.textAreaLlistaVols.append("Hora arribada: ");
-                Ventana.textAreaLlistaVols.append(recuperar_hora_llegada(p)+"\n");
-                Ventana.textAreaLlistaVols.append("-------------------------------------\n");
+                Finestra.textAreaLlistaVols.append("Codi: ");
+                Finestra.textAreaLlistaVols.append(recuperar_cod(p)+"\n");
+                Finestra.textAreaLlistaVols.append("Preu: ");
+                Finestra.textAreaLlistaVols.append(recuperar_precio(p)+"\n");
+                Finestra.textAreaLlistaVols.append("Companyia: ");
+                Finestra.textAreaLlistaVols.append(recuperar_compañia(p)+"\n");
+                Finestra.textAreaLlistaVols.append("Hora sortida: ");
+                Finestra.textAreaLlistaVols.append(recuperar_hora_salida(p)+"\n");
+                Finestra.textAreaLlistaVols.append("Hora arribada: ");
+                Finestra.textAreaLlistaVols.append(recuperar_hora_llegada(p)+"\n");
+                Finestra.textAreaLlistaVols.append("-------------------------------------\n");
             }
             cod = recuperar_cod(p);
             p = p.get_sig();
